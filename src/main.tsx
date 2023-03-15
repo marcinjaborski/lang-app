@@ -6,8 +6,13 @@ import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { ThemeProvider } from "@mui/material";
+import { theme } from "./util/theme";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 const queryClient = new QueryClient();
+
+const isDevelopment = import.meta.env.DEV;
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -15,8 +20,11 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
-          <App />
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
         </Provider>
+        {isDevelopment ? <ReactQueryDevtools position="bottom-right" /> : null}
       </QueryClientProvider>
     </BrowserRouter>
   </React.StrictMode>,
