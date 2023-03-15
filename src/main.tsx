@@ -9,6 +9,7 @@ import store from "./redux/store";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./util/theme";
 import { ReactQueryDevtools } from "react-query/devtools";
+import "./i18n/i18n";
 
 const queryClient = new QueryClient();
 

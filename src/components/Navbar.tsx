@@ -4,8 +4,10 @@ import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
+  const { t } = useTranslation("translation", { keyPrefix: "navbar" });
   const location = useLocation();
   const navigate = useNavigate();
   const [userMenuAnchorEl, setUserMenuAnchorEl] = useState<null | HTMLElement>(null);
@@ -43,7 +45,7 @@ const Navbar = () => {
               horizontal: "left",
             }}
           >
-            <MenuItem onClick={onLogout}>Log out</MenuItem>
+            <MenuItem onClick={onLogout}>{t("logout")}</MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>
