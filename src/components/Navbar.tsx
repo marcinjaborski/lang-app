@@ -17,7 +17,7 @@ const Navbar = () => {
 
   return (
     <NavbarStyled>
-      <AppBar position="fixed">
+      <AppBar position="static">
         <Toolbar>
           <ToggleButtonGroup
             exclusive

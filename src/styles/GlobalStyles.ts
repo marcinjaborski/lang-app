@@ -21,4 +21,12 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0;
     background: #F0EBE3;
   }
+  
+  #root {
+    display: flex;
+  }
+  
+  #root > main {
+    width: 100%;
+  }
 `;
