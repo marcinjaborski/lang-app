@@ -1,4 +1,3 @@
-import { useForm } from "react-hook-form";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -8,31 +7,16 @@ import Button from "@mui/material/Button";
 import React from "react";
 import { TabProps } from "../pages/Login";
 import { Slide } from "@mui/material";
-import { useTranslation } from "react-i18next";
-import { confirmPasswordValidator, emailValidator } from "../util/validators";
-
-type RegisterTabFormData = {
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
+import { confirmPasswordValidator, emailValidator, usernameValidator } from "../util/validators";
+import { useRegisterTab } from "../hooks/useRegisterTab";
 
 const RegisterTab = (props: TabProps) => {
-  const { t } = useTranslation("translation", { keyPrefix: "login" });
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-  } = useForm<RegisterTabFormData>();
-
-  const onSubmit = (data: RegisterTabFormData) => {};
+  const { t, register, watch, errors, onSubmit } = useRegisterTab();
 
   return (
     <div role="tabpanel" hidden={props.selected !== props.tabIndex}>
       <Slide in={props.selected === props.tabIndex} direction="left">
-        <Container maxWidth="xs" component="form" onSubmit={handleSubmit(onSubmit)}>
+        <Container maxWidth="xs" component="form" onSubmit={onSubmit}>
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
@@ -45,7 +29,9 @@ const RegisterTab = (props: TabProps) => {
             label={t("usernameLabel")}
             autoFocus
             margin="normal"
-            {...register("username")}
+            {...register("username", {
+              validate: (value) => usernameValidator(value, t("usernameInvalid")),
+            })}
           />
           <TextField
             required
@@ -84,9 +70,9 @@ const RegisterTab = (props: TabProps) => {
             type="password"
             autoComplete="confirm-password"
             margin="normal"
-            error={!!errors.confirmPassword}
-            helperText={errors.confirmPassword ? (errors.confirmPassword.message as string) : null}
-            {...register("confirmPassword", {
+            error={!!errors.passwordConfirm}
+            helperText={errors.passwordConfirm?.message}
+            {...register("passwordConfirm", {
               required: t("confirmPasswordRequired")!,
               minLength: {
                 value: 8,

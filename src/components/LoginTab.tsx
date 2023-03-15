@@ -1,4 +1,3 @@
-import { useForm } from "react-hook-form";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -10,28 +9,15 @@ import Button from "@mui/material/Button";
 import React from "react";
 import { TabProps } from "../pages/Login";
 import { Slide } from "@mui/material";
-import { useTranslation } from "react-i18next";
-
-type LoginTabFormData = {
-  username: string;
-  password: string;
-  rememberMe: boolean;
-};
+import { useLoginTab } from "../hooks/useLoginTab";
 
 const LoginTab = (props: TabProps) => {
-  const { t } = useTranslation("translation", { keyPrefix: "login" });
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<LoginTabFormData>();
-
-  const onSubmit = (data: LoginTabFormData) => {};
+  const { t, register, errors, onSubmit } = useLoginTab();
 
   return (
     <div role="tabpanel" hidden={props.selected !== props.tabIndex}>
       <Slide in={props.selected === props.tabIndex} direction="right">
-        <Container maxWidth="xs" component="form" onSubmit={handleSubmit(onSubmit)}>
+        <Container maxWidth="xs" component="form" onSubmit={onSubmit}>
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>

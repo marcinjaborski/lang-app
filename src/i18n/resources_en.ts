@@ -1,6 +1,7 @@
 export const resources_en = {
   translation: {
     navbar: {
+      login: "Log in",
       logout: "Log out",
     },
     login: {
@@ -14,6 +15,7 @@ export const resources_en = {
       rememberMe: "Remember me",
       loginButton: "Sign in",
       usernameLabel: "Username",
+      usernameInvalid: "Username cannot have spaces",
       emailLabel: "Email address",
       emailRequired: "Address email is required",
       emailInvalid: "Enter a valid email",
