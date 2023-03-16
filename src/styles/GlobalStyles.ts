@@ -1,5 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
+export const backgroundColor = "#F0EBE3";
+
 export const GlobalStyles = createGlobalStyle`
   :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -14,12 +16,14 @@ export const GlobalStyles = createGlobalStyle`
 
     margin: 0;
     padding: 0;
+
+    --background: ${backgroundColor};
   }
    
   body {
     margin: 0;
     padding: 0;
-    background: #F0EBE3;
+    background: var(--background);
   }
   
   #root {

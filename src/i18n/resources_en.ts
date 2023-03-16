@@ -26,5 +26,10 @@ export const resources_en = {
       "Failed to authenticate.": "Credentials invalid",
       "Failed to create record.": "Email or username is already in use",
     },
+    notFound: {
+      title: "Oops! Page not found",
+      notLoggedText: "Try logging in",
+      login: "Login",
+    },
   },
 };

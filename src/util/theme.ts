@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material";
+import { backgroundColor } from "../styles/GlobalStyles";
 
 export const theme = createTheme({
   palette: {
@@ -9,7 +10,7 @@ export const theme = createTheme({
       main: "#FDA769",
     },
     background: {
-      default: "#F0EBE3",
+      default: backgroundColor,
       paper: "#dce5d3",
     },
     white: {
