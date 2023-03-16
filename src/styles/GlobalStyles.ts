@@ -29,4 +29,8 @@ export const GlobalStyles = createGlobalStyle`
   #root > main {
     width: 100%;
   }
+  
+  .MuiBackdrop-root > .MuiCircularProgress-root {
+    margin-left: 80px;
+  }
 `;

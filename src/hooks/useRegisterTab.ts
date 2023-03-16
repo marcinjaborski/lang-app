@@ -1,7 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import pb from "../util/pocketbase";
+import pb, { pbError } from "../util/pocketbase";
+import { useLoginTab } from "./useLoginTab";
 
 type RegisterTabFormData = {
   username: string;
@@ -18,14 +19,22 @@ export const useRegisterTab = () => {
     formState: { errors },
     watch,
   } = useForm<RegisterTabFormData>();
+  const { mutate: login } = useLoginTab();
 
-  const mutation = useMutation((data: RegisterTabFormData) => {
-    return pb.collection("users").create(data);
-  });
+  const mutation = useMutation(
+    (data: RegisterTabFormData) => {
+      return pb.collection("users").create(data);
+    },
+    {
+      onSuccess: (_data, variables) => {
+        login({ username: variables.email, password: variables.password, rememberMe: false });
+      },
+    },
+  );
 
   const onSubmit = handleSubmit((data: RegisterTabFormData) => {
     mutation.mutate(data);
   });
 
-  return { t, register, watch, errors, onSubmit, ...mutation };
+  return { t, register, watch, errors, onSubmit, ...mutation, error: mutation.error as pbError };
 };

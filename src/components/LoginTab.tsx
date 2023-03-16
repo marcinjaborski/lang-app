@@ -8,11 +8,11 @@ import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import React from "react";
 import { TabProps } from "../pages/Login";
-import { Slide } from "@mui/material";
+import { Alert, Backdrop, CircularProgress, Slide } from "@mui/material";
 import { useLoginTab } from "../hooks/useLoginTab";
 
 const LoginTab = (props: TabProps) => {
-  const { t, register, errors, onSubmit } = useLoginTab();
+  const { t, register, errors, onSubmit, isError, error, isLoading } = useLoginTab();
 
   return (
     <div role="tabpanel" hidden={props.selected !== props.tabIndex}>
@@ -58,9 +58,13 @@ const LoginTab = (props: TabProps) => {
             control={<Checkbox color="primary" {...register("rememberMe")} />}
             label={t("rememberMe")}
           />
+          {isError ? <Alert severity="error">{t(error.message)}</Alert> : null}
           <Button type="submit" variant="contained">
             {t("loginButton")}
           </Button>
+          <Backdrop open={isLoading}>
+            <CircularProgress />
+          </Backdrop>
         </Container>
       </Slide>
     </div>

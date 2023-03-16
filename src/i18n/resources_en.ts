@@ -23,6 +23,8 @@ export const resources_en = {
       confirmPasswordRequired: "Please confirm the password",
       confirmPasswordNoMatch: "Password do not match",
       registerButton: "Sign up",
+      "Failed to authenticate.": "Credentials invalid",
+      "Failed to create record.": "Email or username is already in use",
     },
   },
 };

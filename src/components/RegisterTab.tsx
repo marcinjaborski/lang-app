@@ -6,12 +6,12 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import React from "react";
 import { TabProps } from "../pages/Login";
-import { Slide } from "@mui/material";
+import { Alert, Backdrop, CircularProgress, Slide } from "@mui/material";
 import { confirmPasswordValidator, emailValidator, usernameValidator } from "../util/validators";
 import { useRegisterTab } from "../hooks/useRegisterTab";
 
 const RegisterTab = (props: TabProps) => {
-  const { t, register, watch, errors, onSubmit } = useRegisterTab();
+  const { t, register, watch, errors, onSubmit, isLoading, isError, error } = useRegisterTab();
 
   return (
     <div role="tabpanel" hidden={props.selected !== props.tabIndex}>
@@ -29,6 +29,8 @@ const RegisterTab = (props: TabProps) => {
             label={t("usernameLabel")}
             autoFocus
             margin="normal"
+            error={!!errors.username}
+            helperText={errors.username?.message}
             {...register("username", {
               validate: (value) => usernameValidator(value, t("usernameInvalid")),
             })}
@@ -81,9 +83,13 @@ const RegisterTab = (props: TabProps) => {
               validate: (value) => confirmPasswordValidator(value, watch("password"), t("confirmPasswordNoMatch")),
             })}
           />
+          {isError ? <Alert severity="error">{t(error.message)}</Alert> : null}
           <Button type="submit" variant="contained">
             {t("registerButton")}
           </Button>
+          <Backdrop open={isLoading}>
+            <CircularProgress />
+          </Backdrop>
         </Container>
       </Slide>
     </div>
