@@ -4,6 +4,12 @@ export const resources_en = {
       login: "Log in",
       logout: "Log out",
     },
+    home: {
+      hello: "Hello",
+      emptyText: "There are no modules yet, try creating one!",
+      createButton: "Create",
+      delete: "Delete",
+    },
     login: {
       loginTabTitle: "Login",
       registerTabTitle: "Register",
