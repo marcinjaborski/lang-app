@@ -20,7 +20,7 @@ type NoteCardProps = {
 
 const NoteCard = (props: NoteCardProps) => {
   const { note } = props;
-  const { t, anchorEl, openedMenu, onMenuOpen, onMenuClose, navigate } = useNoteCard();
+  const { t, anchorEl, openedMenu, onMenuOpen, onMenuClose, navigate, onDelete } = useNoteCard();
 
   return (
     <NoteCardStyled>
@@ -32,7 +32,7 @@ const NoteCard = (props: NoteCardProps) => {
           <MoreVertIcon fontSize="inherit" />
         </IconButton>
         <Menu anchorEl={anchorEl} open={openedMenu} onClose={onMenuClose}>
-          <MenuItem>{t("delete")}</MenuItem>
+          <MenuItem onClick={() => onDelete(note.id)}>{t("delete")}</MenuItem>
         </Menu>
         <LinearProgress variant="determinate" value={50} color="secondary" />
         <Typography className="excerpt">{note.excerpt}</Typography>

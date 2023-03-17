@@ -9,7 +9,7 @@ export const useHome = () => {
 
   const query = useQuery("list-modules", () => {
     return pb.collection("modules").getFullList({
-      expand: "notes",
+      expand: "notes(module)",
     }) as Promise<Module[]>;
   });
 

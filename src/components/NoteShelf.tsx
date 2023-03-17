@@ -11,7 +11,7 @@ type NoteShelfProps = {
 
 const NoteShelf = (props: NoteShelfProps) => {
   const { module } = props;
-  const { t, anchorEl, openedMenu, onMenuOpen, onMenuClose } = useNoteShelf();
+  const { t, anchorEl, openedMenu, onMenuOpen, onMenuClose, onDelete } = useNoteShelf();
 
   return (
     <NoteShelfStyled>
@@ -21,11 +21,11 @@ const NoteShelf = (props: NoteShelfProps) => {
           <MoreVertIcon fontSize="inherit" />
         </IconButton>
         <Menu anchorEl={anchorEl} open={openedMenu} onClose={onMenuClose}>
-          <MenuItem>{t("delete")}</MenuItem>
+          <MenuItem onClick={() => onDelete(module)}>{t("delete")}</MenuItem>
         </Menu>
       </Typography>
       <Box className="notes">
-        {module.expand.notes.map((note) => (
+        {module.expand["notes(module)"]?.map((note) => (
           <NoteCard key={note.id} note={note} />
         ))}
       </Box>

@@ -7,13 +7,16 @@ export type Note = Record & {
   owner: string;
   baseLang: string;
   targetLang: string;
+  expand: {
+    module?: Module;
+  };
 };
 
 export type Module = Record & {
   name: string;
   owner: string;
   notes: string[];
-  expand?: {
-    notes: Note[];
+  expand: {
+    "notes(module)"?: Note[];
   };
 };
