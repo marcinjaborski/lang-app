@@ -37,5 +37,12 @@ export const resources_en = {
       notLoggedText: "Try logging in",
       login: "Login",
     },
+    createModuleDialog: {
+      title: "Create new module",
+      textFieldLabel: "Name",
+      cancel: "Cancel",
+      create: "Create",
+      "Failed to create record.": "Name cannot be empty",
+    },
   },
 };

@@ -37,4 +37,10 @@ export const GlobalStyles = createGlobalStyle`
   .MuiBackdrop-root > .MuiCircularProgress-root {
     margin-left: 80px;
   }
+
+  .MuiFab-root {
+    position: fixed !important;
+    right: 1em;
+    bottom: 1em;
+  }
 `;

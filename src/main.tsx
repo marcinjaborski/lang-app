@@ -25,7 +25,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
             <App />
           </ThemeProvider>
         </Provider>
-        {isDevelopment ? <ReactQueryDevtools position="bottom-right" /> : null}
+        {isDevelopment ? <ReactQueryDevtools position="top-right" /> : null}
       </QueryClientProvider>
     </BrowserRouter>
   </React.StrictMode>,

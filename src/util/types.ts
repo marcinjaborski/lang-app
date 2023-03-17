@@ -20,3 +20,18 @@ export type Module = Record & {
     "notes(module)"?: Note[];
   };
 };
+
+export type NoteToCreate = {
+  title: string;
+  owner: string;
+  module?: string;
+  content?: string;
+  excerpt?: string;
+  baseLang?: string;
+  targetLang?: string;
+};
+
+export type ModuleToCreate = {
+  name: string;
+  owner: string;
+};

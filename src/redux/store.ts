@@ -1,10 +1,11 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-
-const rootReducer = combineReducers({});
+import createModuleDialogReducer from "./createModuleDialogSlice";
 
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: combineReducers({
+    createModuleDialog: createModuleDialogReducer,
+  }),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
