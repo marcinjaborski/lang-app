@@ -64,3 +64,6 @@ declare module "slate" {
     Text: TextElement;
   }
 }
+
+export const shortcuts = ["q", "b", "i", "u", "t", "l", "e", "r", "j"] as const;
+export type Shortcut = (typeof shortcuts)[number];
