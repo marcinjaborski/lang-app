@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "../redux/store";
-import { closeDialog, changeNameValue } from "../redux/createModuleDialogSlice";
+import { changeNameValue, closeDialog } from "../redux/createModuleDialogSlice";
 import { useMutation, useQueryClient } from "react-query";
 import pb, { pbError } from "../util/pocketbase";
 import { ModuleToCreate } from "../util/types";
