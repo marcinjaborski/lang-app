@@ -1,5 +1,4 @@
 import { Editor, Node, Text, Transforms } from "slate";
-import { ParagraphElement } from "./types";
 
 const format = (editor: Editor, option: string) => {
   const [match] = Editor.nodes(editor, {
@@ -25,7 +24,5 @@ export const markAsWord = (editor: Editor) => {
 };
 
 export const align = (editor: Editor, alignment: "left" | "right" | "center" | "justify") => {
-  Transforms.setNodes(editor, { textAlign: alignment } as Partial<Node>, {
-    match: (n) => Editor.isBlock(editor, <ParagraphElement>n),
-  });
+  Transforms.setNodes(editor, { textAlign: alignment } as Partial<Node>);
 };
