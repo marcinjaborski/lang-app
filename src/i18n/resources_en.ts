@@ -44,5 +44,12 @@ export const resources_en = {
       create: "Create",
       "Failed to create record.": "Name cannot be empty",
     },
+    noteDrawer: {
+      baseLang: "Base",
+      targetLang: "Target",
+      module: "Module",
+      excerpt: "Excerpt",
+      save: "Save",
+    },
   },
 };

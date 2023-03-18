@@ -35,3 +35,6 @@ export type ModuleToCreate = {
   name: string;
   owner: string;
 };
+
+export const languages = ["pl", "gb", "fr", "es", "it", "de"] as const;
+export type Language = (typeof languages)[number];

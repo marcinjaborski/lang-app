@@ -38,7 +38,7 @@ const NoteCard = (props: NoteCardProps) => {
         <Typography className="excerpt">{note.excerpt}</Typography>
       </CardContent>
       <CardActions>
-        <Button fullWidth size="small" onClick={() => navigate(`/editor/${note.id}`)}>
+        <Button fullWidth size="small" onClick={() => navigate(`/note/${note.id}`)}>
           <ExpandMoreIcon htmlColor="black" />
         </Button>
       </CardActions>

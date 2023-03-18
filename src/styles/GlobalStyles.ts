@@ -31,7 +31,7 @@ export const GlobalStyles = createGlobalStyle`
   }
   
   #root > main {
-    width: 100%;
+    flex-grow: 1;
   }
   
   .MuiBackdrop-root > .MuiCircularProgress-root {

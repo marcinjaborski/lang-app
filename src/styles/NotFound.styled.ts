@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import { backgroundColor } from "./GlobalStyles";
 
-export const NotFoundStyled = styled.div`
+export const NotFoundStyled = styled.main`
   display: grid;
   place-items: center;
-  width: 100%;
 
   .bottom {
     display: flex;

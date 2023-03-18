@@ -2,6 +2,7 @@ import { NavbarStyled } from "../styles/Navbar.styled";
 import { AppBar, IconButton, Menu, MenuItem, ToggleButton, ToggleButtonGroup, Toolbar } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
+import CreateIcon from "@mui/icons-material/Create";
 import { useNavbar } from "../hooks/useNavbar";
 
 const Navbar = () => {
@@ -30,6 +31,9 @@ const Navbar = () => {
           >
             <ToggleButton value="/" selected={pathname === "/"}>
               <HomeIcon />
+            </ToggleButton>
+            <ToggleButton value="/note" selected={pathname === "/note"}>
+              <CreateIcon />
             </ToggleButton>
           </ToggleButtonGroup>
           <IconButton onClick={onUserMenuOpen}>

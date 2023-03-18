@@ -1,10 +1,9 @@
 import styled from "styled-components";
 
-export const HomeStyled = styled.div`
+export const HomeStyled = styled.main`
   padding: 1em;
   display: flex;
   flex-direction: column;
-  width: 100%;
 
   .empty-message {
     flex-grow: 1;

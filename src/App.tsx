@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import pb from "./util/pocketbase";
 import NotFound from "./pages/NotFound";
+import NotePage from "./pages/NotePage";
 
 const App = () => {
   const isLogged = pb.authStore.isValid;
@@ -13,6 +14,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={isLogged ? <Home /> : <Login />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/note" element={<NotePage />} />
+        <Route path="/note/:id" element={<NotePage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
