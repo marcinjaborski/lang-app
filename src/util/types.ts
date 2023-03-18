@@ -7,8 +7,9 @@ export type Note = Record & {
   content: string;
   excerpt: string;
   owner: string;
-  baseLang: string;
-  targetLang: string;
+  baseLang: Language;
+  targetLang: Language;
+  module: string;
   expand: {
     module?: Module;
   };
@@ -17,7 +18,6 @@ export type Note = Record & {
 export type Module = Record & {
   name: string;
   owner: string;
-  notes: string[];
   expand: {
     "notes(module)"?: Note[];
   };
@@ -29,8 +29,8 @@ export type NoteToCreate = {
   module?: string;
   content?: string;
   excerpt?: string;
-  baseLang?: string;
-  targetLang?: string;
+  baseLang?: Language;
+  targetLang?: Language;
 };
 
 export type ModuleToCreate = {

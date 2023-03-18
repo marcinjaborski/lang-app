@@ -1,12 +1,13 @@
 import { useAppDispatch, useAppSelector } from "../redux/store";
-import { openDrawer } from "../redux/noteDrawerSlice";
+import { clearState, openDrawer, updateStateFromNote } from "../redux/noteDrawerSlice";
 import { useParams } from "react-router-dom";
-import { NoteToCreate } from "../util/types";
+import { Note, NoteToCreate } from "../util/types";
 import pb from "../util/pocketbase";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { withReact } from "slate-react";
-import { createEditor, Node } from "slate";
-import { useMutation, useQueryClient } from "react-query";
+import { createEditor } from "slate";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { changeTitle } from "../redux/noteEditorSlice";
 
 export const useNotePage = () => {
   const [editor] = useState(() => withReact(createEditor()));
@@ -16,6 +17,32 @@ export const useNotePage = () => {
   const title = useAppSelector((state) => state.noteEditor.title);
   const drawerState = useAppSelector((state) => state.noteDrawer);
   const queryClient = useQueryClient();
+
+  const noteQuery = useQuery(
+    ["view-note", params.id],
+    () => {
+      return pb.collection("notes").getOne(params.id!) as Promise<Note>;
+    },
+    {
+      enabled: false,
+    },
+  );
+
+  useEffect(() => {
+    if (!params.id) {
+      dispatch(changeTitle(""));
+      dispatch(clearState());
+      return;
+    }
+    noteQuery.refetch().then(({ data: note }) => {
+      if (!note) {
+        return;
+      }
+      editor.children = JSON.parse(note.content);
+      dispatch(changeTitle(note.title));
+      dispatch(updateStateFromNote(note));
+    });
+  }, []);
 
   const { mutate: create } = useMutation(
     (note: NoteToCreate) => {
@@ -42,7 +69,7 @@ export const useNotePage = () => {
   const onSave = () => {
     const newNote: NoteToCreate = {
       title,
-      content: editor.children.map((n) => Node.string(n)).join(" "),
+      content: JSON.stringify(editor.children),
       owner: pb.authStore.model!.id,
       module: drawerState.module,
       excerpt: drawerState.excerpt,

@@ -10,18 +10,6 @@ import { useNotePage } from "../hooks/useNotePage";
 const NotePage = () => {
   const { editor, onOpenDrawer, onSave } = useNotePage();
   //
-  // useEffect(() => {
-  //   if (!note) {
-  //     return;
-  //   }
-  //   title!.current = note.title;
-  //   setBaseLang(note.baseLang);
-  //   setTargetLang(note.targetLang);
-  //   setExcerpt(note.excerpt);
-  //   editor.children = JSON.parse(note.content);
-  // }, [note, editor]);
-
-  //
   // const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
   //   if (!event.ctrlKey) {
   //     return;
@@ -55,24 +43,6 @@ const NotePage = () => {
   //   };
   //
   //   (formatters as any)[event.key]?.();
-  // };
-
-  // const saveNote = () => {
-  //   const newNote: Note = {
-  //     title: title.current,
-  //     content: JSON.stringify(editor.children),
-  //     excerpt: editor.children.map((n) => Node.string(n)).join(" "),
-  //     words: 0,
-  //     progress: 0,
-  //     baseLang: baseLang,
-  //     targetLang: targetLang,
-  //   };
-  //   if (note) {
-  //     newNote.id = note.id;
-  //     dispatch(editNote(newNote));
-  //     return;
-  //   }
-  //   dispatch(postNote(newNote));
   // };
 
   return (

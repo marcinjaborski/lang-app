@@ -10,6 +10,7 @@ const store = configureStore({
     noteDrawer: noteDrawerReducer,
     noteEditor: noteEditorReducer,
   }),
+  middleware: (gdM) => gdM({ serializableCheck: { ignoredActions: ["noteDrawerSlice/updateStateFromNote"] } }),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

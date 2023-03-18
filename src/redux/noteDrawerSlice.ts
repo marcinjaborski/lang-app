@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Language } from "../util/types";
+import { Language, Note } from "../util/types";
 
-export type noteDrawerState = {
+export type NoteDrawerState = {
   open: boolean;
   baseLang: Language;
   targetLang: Language;
@@ -9,7 +9,7 @@ export type noteDrawerState = {
   excerpt: string;
 };
 
-const initialState: noteDrawerState = {
+const initialState: NoteDrawerState = {
   open: false,
   baseLang: "gb",
   targetLang: "es",
@@ -39,9 +39,26 @@ const noteDrawerSlice = createSlice({
     changeExcerpt(state, { payload }: PayloadAction<string>) {
       state.excerpt = payload;
     },
+    updateStateFromNote(state, { payload }: PayloadAction<Note>) {
+      state.baseLang = payload.baseLang;
+      state.targetLang = payload.targetLang;
+      state.module = payload.module;
+      state.excerpt = payload.excerpt;
+    },
+    clearState() {
+      return initialState;
+    },
   },
 });
 
-export const { openDrawer, closeDrawer, changeBaseLang, changeTargetLang, changeModule, changeExcerpt } =
-  noteDrawerSlice.actions;
+export const {
+  openDrawer,
+  closeDrawer,
+  changeBaseLang,
+  changeTargetLang,
+  changeModule,
+  changeExcerpt,
+  updateStateFromNote,
+  clearState,
+} = noteDrawerSlice.actions;
 export default noteDrawerSlice.reducer;

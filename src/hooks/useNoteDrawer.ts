@@ -6,20 +6,23 @@ import {
   changeModule,
   changeTargetLang,
   closeDrawer,
+  NoteDrawerState,
   openDrawer,
 } from "../redux/noteDrawerSlice";
 import { Language, Module } from "../util/types";
 import React from "react";
 import { useQuery } from "react-query";
 import pb from "../util/pocketbase";
+import { useNotePage } from "./useNotePage";
 
 export const useNoteDrawer = () => {
   const { t } = useTranslation("translation", { keyPrefix: "noteDrawer" });
-  const noteDrawer = useAppSelector((state) => state.noteDrawer);
+  const noteDrawer: NoteDrawerState = useAppSelector((state) => state.noteDrawer);
   const dispatch = useAppDispatch();
   const { data: modules } = useQuery("list-modules", () => {
     return pb.collection("modules").getFullList() as Promise<Module[]>;
   });
+  const { onSave: saveNote } = useNotePage();
 
   const onOpen = () => dispatch(openDrawer());
   const onClose = () => dispatch(closeDrawer());
@@ -35,7 +38,10 @@ export const useNoteDrawer = () => {
   const onExcerptChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     dispatch(changeExcerpt(event.target.value));
   };
-  const onSave = () => {};
+  const onSave = () => {
+    saveNote();
+    onClose();
+  };
 
   return {
     t,

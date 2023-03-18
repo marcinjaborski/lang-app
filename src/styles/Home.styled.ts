@@ -11,4 +11,20 @@ export const HomeStyled = styled.main`
     align-content: center;
     justify-items: center;
   }
+
+  .skeleton-module {
+    width: 50%;
+    height: 3em;
+  }
+
+  .skeleton-notes {
+    display: flex;
+    gap: 1em;
+  }
+
+  .skeleton-notes span {
+    width: 150px;
+    height: 200px;
+    transform: scale(1);
+  }
 `;
