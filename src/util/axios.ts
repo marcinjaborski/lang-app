@@ -1,7 +1,8 @@
 import axios from "axios";
 
-const axiosClient = axios.create({
-  baseURL: import.meta.env.VITE_POCKETBASE_URL,
+export const axiosDeepl = axios.create({
+  baseURL: import.meta.env.VITE_DEEPL_URL,
+  params: {
+    auth_key: import.meta.env.VITE_DEEPL_KEY,
+  },
 });
-
-export default axiosClient;

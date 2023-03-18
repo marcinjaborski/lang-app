@@ -1,5 +1,5 @@
 import { Editor, Node, Text, Transforms } from "slate";
-import { ParagraphElement } from "../pages/NotePage";
+import { ParagraphElement } from "./types";
 
 const format = (editor: Editor, option: string) => {
   const [match] = Editor.nodes(editor, {

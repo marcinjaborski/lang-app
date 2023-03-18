@@ -5,7 +5,6 @@ export const NotePageStyled = styled.main`
   justify-content: center;
 
   .note-editor-root {
-    min-width: fit-content;
     width: 50%;
   }
 

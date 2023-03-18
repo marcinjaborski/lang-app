@@ -7,19 +7,8 @@ import NoteEditor from "../components/NoteEditor";
 import NoteDrawer from "../components/NoteDrawer";
 import { useNotePage } from "../hooks/useNotePage";
 
-type Params = {
-  id?: string;
-};
-
 const NotePage = () => {
-  const { onOpenDrawer } = useNotePage();
-  //
-  // useEffect(() => {
-  //   if (params.id) {
-  //     dispatch(getNoteById(params.id));
-  //   }
-  //   dispatch(getAllModules());
-  // }, [dispatch, params.id]);
+  const { editor, onOpenDrawer, onSave } = useNotePage();
   //
   // useEffect(() => {
   //   if (!note) {
@@ -31,16 +20,6 @@ const NotePage = () => {
   //   setExcerpt(note.excerpt);
   //   editor.children = JSON.parse(note.content);
   // }, [note, editor]);
-  //
-  // useEffect(() => {
-  //   const noteModule = modules.find((module) => module.notesIds.includes(note?.id!));
-  //   setSelectedModule(noteModule?.id);
-  // }, [modules, note]);
-  //
-  // const handleTitleChange = (event: ContentEditableEvent) => {
-  //   title.current = event.target.value;
-  // };
-  //
 
   //
   // const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
@@ -98,12 +77,12 @@ const NotePage = () => {
 
   return (
     <NotePageStyled>
-      <NoteEditor />
+      <NoteEditor editor={editor} />
       <IconButton size="large" className="drawer-button" onClick={onOpenDrawer}>
         <MenuIcon fontSize="inherit" />
       </IconButton>
       <NoteDrawer />
-      <Fab color="primary">
+      <Fab color="primary" onClick={onSave}>
         <SaveIcon />
       </Fab>
     </NotePageStyled>
