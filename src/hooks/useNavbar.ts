@@ -18,8 +18,9 @@ export const useNavbar = () => {
 
   const onLogout = () => {
     pb.authStore.clear();
-    navigate("/");
     onUserMenuClose();
+    navigate("/");
+    navigate(0);
   };
 
   const onUserMenuOpen = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

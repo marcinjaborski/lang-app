@@ -18,7 +18,6 @@ export const resources_en = {
       passwordLabel: "Password",
       passwordRequired: "Password is required",
       passwordLengthMessage: "Password must have at least 8 characters",
-      rememberMe: "Remember me",
       loginButton: "Sign in",
       usernameLabel: "Username",
       usernameInvalid: "Username cannot have spaces",

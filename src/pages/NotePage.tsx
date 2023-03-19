@@ -1,4 +1,4 @@
-import { Fab, IconButton } from "@mui/material";
+import { Fab, Grow, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SaveIcon from "@mui/icons-material/Save";
 
@@ -17,9 +17,11 @@ const NotePage = () => {
         <MenuIcon fontSize="inherit" />
       </IconButton>
       <NoteDrawer />
-      <Fab color="primary" onClick={onSave}>
-        <SaveIcon />
-      </Fab>
+      <Grow in={true}>
+        <Fab color="primary" onClick={onSave}>
+          <SaveIcon />
+        </Fab>
+      </Grow>
     </NotePageStyled>
   );
 };

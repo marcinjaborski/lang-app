@@ -27,7 +27,7 @@ export const useRegisterTab = () => {
     },
     {
       onSuccess: (_data, variables) => {
-        login({ username: variables.email, password: variables.password, rememberMe: false });
+        login({ username: variables.email, password: variables.password });
       },
     },
   );

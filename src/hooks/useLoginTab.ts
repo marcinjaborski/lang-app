@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 type LoginTabFormData = {
   username: string;
   password: string;
-  rememberMe: boolean;
 };
 
 export const useLoginTab = () => {
@@ -26,6 +25,7 @@ export const useLoginTab = () => {
     {
       onSuccess() {
         navigate("/");
+        navigate(0);
       },
     },
   );

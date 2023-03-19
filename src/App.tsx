@@ -14,8 +14,12 @@ const App = () => {
       <Routes>
         <Route path="/" element={isLogged ? <Home /> : <Login />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/note" element={<NotePage />} />
-        <Route path="/note/:id" element={<NotePage />} />
+        {isLogged ? (
+          <>
+            <Route path="/note" element={<NotePage />} />
+            <Route path="/note/:id" element={<NotePage />} />
+          </>
+        ) : null}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

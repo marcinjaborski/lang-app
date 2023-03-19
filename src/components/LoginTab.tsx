@@ -3,8 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import React from "react";
 import { TabProps } from "../pages/Login";
@@ -53,10 +51,6 @@ const LoginTab = (props: TabProps) => {
                 message: t("passwordLengthMessage"),
               },
             })}
-          />
-          <FormControlLabel
-            control={<Checkbox color="primary" {...register("rememberMe")} />}
-            label={t("rememberMe")}
           />
           {isError ? <Alert severity="error">{t(error.message)}</Alert> : null}
           <Button type="submit" variant="contained">

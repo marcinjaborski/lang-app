@@ -32,9 +32,11 @@ const Navbar = () => {
             <ToggleButton value="/" selected={pathname === "/"}>
               <HomeIcon />
             </ToggleButton>
-            <ToggleButton value="/note" selected={pathname === "/note"}>
-              <CreateIcon />
-            </ToggleButton>
+            {isLogged ? (
+              <ToggleButton value="/note" selected={pathname === "/note"}>
+                <CreateIcon />
+              </ToggleButton>
+            ) : null}
           </ToggleButtonGroup>
           <IconButton onClick={onUserMenuOpen}>
             <PersonIcon />
