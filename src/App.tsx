@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import Navbar from "./components/Navbar";
-import Login from "./pages/Login";
+import Home from "./pages/Home/Home";
+import Navbar from "./components/Navbar/Navbar";
+import Login from "./pages/Login/Login";
 import pb from "./util/pocketbase";
-import NotFound from "./pages/NotFound";
-import NotePage from "./pages/NotePage";
+import NotFound from "./pages/NotFound/NotFound";
+import NotePage from "./pages/NotePage/NotePage";
 
 const App = () => {
   const isLogged = pb.authStore.isValid;

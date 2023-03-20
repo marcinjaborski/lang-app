@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material";
-import { backgroundColor, primaryColor } from "../styles/GlobalStyles";
+import { backgroundColor, primaryColor } from "./GlobalStyles";
 
 export const theme = createTheme({
   palette: {

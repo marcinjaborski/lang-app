@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { GlobalStyles } from "./styles/GlobalStyles";
+import { GlobalStyles } from "./util/GlobalStyles";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import store from "./util/store";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./util/theme";
 import { ReactQueryDevtools } from "react-query/devtools";
