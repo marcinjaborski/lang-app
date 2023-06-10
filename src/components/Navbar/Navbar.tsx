@@ -1,8 +1,8 @@
-import { NavbarStyled } from "./Navbar.styled";
-import { AppBar, IconButton, Menu, MenuItem, ToggleButton, ToggleButtonGroup, Toolbar } from "@mui/material";
+import CreateIcon from "@mui/icons-material/Create";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
-import CreateIcon from "@mui/icons-material/Create";
+import { IconButton, Menu, MenuItem, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { NavbarWrap, ToolbarWrap, VerticalToolbar } from "./NavbarWrap";
 import { useNavbar } from "./useNavbar";
 
 export const Navbar = () => {
@@ -20,9 +20,9 @@ export const Navbar = () => {
   } = useNavbar();
 
   return (
-    <NavbarStyled>
-      <AppBar position="static">
-        <Toolbar>
+    <NavbarWrap>
+      <ToolbarWrap position="static">
+        <VerticalToolbar>
           <ToggleButtonGroup
             exclusive
             orientation="vertical"
@@ -60,8 +60,8 @@ export const Navbar = () => {
               <MenuItem onClick={onLogin}>{t("login")}</MenuItem>
             )}
           </Menu>
-        </Toolbar>
-      </AppBar>
-    </NavbarStyled>
+        </VerticalToolbar>
+      </ToolbarWrap>
+    </NavbarWrap>
   );
 };

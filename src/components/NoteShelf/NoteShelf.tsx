@@ -1,8 +1,8 @@
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { Box, IconButton, Menu, MenuItem, Typography } from "@mui/material";
+import { IconButton, Menu, MenuItem } from "@mui/material";
 import { NoteCard } from "@src/components";
 import { Module } from "@src/util";
-import { NoteShelfStyled } from "./NoteShelf.styled";
+import { NoteShelfStyled, NotesWrap, Title } from "./NoteShelf.styled";
 import { useNoteShelf } from "./useNoteShelf";
 
 type NoteShelfProps = {
@@ -15,7 +15,7 @@ export const NoteShelf = (props: NoteShelfProps) => {
 
   return (
     <NoteShelfStyled>
-      <Typography variant="h5" className="module-title" gutterBottom>
+      <Title>
         {module.name}
         <IconButton onClick={onMenuOpen} size="small">
           <MoreVertIcon fontSize="inherit" />
@@ -23,12 +23,12 @@ export const NoteShelf = (props: NoteShelfProps) => {
         <Menu anchorEl={anchorEl} open={openedMenu} onClose={onMenuClose}>
           <MenuItem onClick={() => onDelete(module)}>{t("delete")}</MenuItem>
         </Menu>
-      </Typography>
-      <Box className="notes">
+      </Title>
+      <NotesWrap>
         {module.expand["notes(module)"]?.map((note) => (
           <NoteCard key={note.id} note={note} />
         ))}
-      </Box>
+      </NotesWrap>
     </NoteShelfStyled>
   );
 };

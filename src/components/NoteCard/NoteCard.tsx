@@ -1,17 +1,8 @@
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import {
-  Button,
-  CardActions,
-  CardContent,
-  IconButton,
-  LinearProgress,
-  Menu,
-  MenuItem,
-  Typography,
-} from "@mui/material";
+import { Button, CardActions, IconButton, Menu, MenuItem } from "@mui/material";
 import { Note } from "@src/util";
-import { NoteCardStyled } from "./NoteCard.styled";
+import { Excerpt, NoteCardStyled, NoteProgress, StyledCardContent, Title } from "./NoteCard.styled";
 import { useNoteCard } from "./useNoteCard";
 
 type NoteCardProps = {
@@ -24,19 +15,17 @@ export const NoteCard = (props: NoteCardProps) => {
 
   return (
     <NoteCardStyled>
-      <CardContent>
-        <Typography color="text.primary" gutterBottom className="title">
-          {note.title}
-        </Typography>
+      <StyledCardContent>
+        <Title>{note.title}</Title>
         <IconButton onClick={onMenuOpen} size="small">
           <MoreVertIcon fontSize="inherit" />
         </IconButton>
         <Menu anchorEl={anchorEl} open={openedMenu} onClose={onMenuClose}>
           <MenuItem onClick={() => onDelete(note.id)}>{t("delete")}</MenuItem>
         </Menu>
-        <LinearProgress variant="determinate" value={50} color="secondary" />
-        <Typography className="excerpt">{note.excerpt}</Typography>
-      </CardContent>
+        <NoteProgress variant="determinate" value={50} color="secondary" />
+        <Excerpt>{note.excerpt}</Excerpt>
+      </StyledCardContent>
       <CardActions>
         <Button fullWidth size="small" onClick={() => navigate(`/note/${note.id}`)}>
           <ExpandMoreIcon htmlColor="black" />
