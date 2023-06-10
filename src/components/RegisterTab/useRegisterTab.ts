@@ -12,7 +12,7 @@ type RegisterTabFormData = {
 };
 
 export const useRegisterTab = () => {
-  const { t } = useTranslation("translation", { keyPrefix: "login" });
+  const { t } = useTranslation("login");
   const {
     register,
     handleSubmit,

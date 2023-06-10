@@ -12,7 +12,7 @@ export type TabProps = {
 };
 
 const Login = () => {
-  const { t } = useTranslation("translation", { keyPrefix: "login" });
+  const { t } = useTranslation("login");
   const [selected, setSelected] = useState(0);
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {

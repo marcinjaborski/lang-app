@@ -5,7 +5,7 @@ import pb from "../../util/pocketbase";
 import { Module } from "../../util/types";
 
 export const useNoteShelf = () => {
-  const { t } = useTranslation("translation", { keyPrefix: "home" });
+  const { t } = useTranslation("home");
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const openedMenu = !!anchorEl;
   const queryClient = useQueryClient();

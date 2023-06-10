@@ -44,7 +44,7 @@ const RegisterTab = (props: TabProps) => {
             error={!!errors.email}
             helperText={errors.email?.message}
             {...register("email", {
-              required: t("emailRequired")!,
+              required: t("emailRequired"),
               validate: (value) => emailValidator(value, t("emailInvalid")),
             })}
           />
@@ -58,7 +58,7 @@ const RegisterTab = (props: TabProps) => {
             error={!!errors.password}
             helperText={errors.password?.message}
             {...register("password", {
-              required: t("passwordRequired")!,
+              required: t("passwordRequired"),
               minLength: {
                 value: 8,
                 message: t("passwordLengthMessage"),
@@ -75,7 +75,7 @@ const RegisterTab = (props: TabProps) => {
             error={!!errors.passwordConfirm}
             helperText={errors.passwordConfirm?.message}
             {...register("passwordConfirm", {
-              required: t("confirmPasswordRequired")!,
+              required: t("confirmPasswordRequired"),
               minLength: {
                 value: 8,
                 message: t("passwordLengthMessage"),

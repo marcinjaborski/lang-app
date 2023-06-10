@@ -10,7 +10,7 @@ type LoginTabFormData = {
 };
 
 export const useLoginTab = () => {
-  const { t } = useTranslation("translation", { keyPrefix: "login" });
+  const { t } = useTranslation("login");
   const navigate = useNavigate();
   const {
     register,

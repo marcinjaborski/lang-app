@@ -1,21 +1,24 @@
 import { initReactI18next } from "react-i18next";
 import i18n from "i18next";
-import { resources_en } from "./resources_en";
-import { resources_pl } from "./resources_pl";
+import { en } from "./resources_en";
+import { pl } from "./resources_pl";
+
+export const defaultNS = "shared";
+export const resources = {
+  en,
+  pl,
+};
 
 i18n
   .use(initReactI18next)
   .init({
-    resources: {
-      en: resources_en,
-      pl: resources_pl,
-    },
+    resources,
+    defaultNS,
     lng: "en",
     fallbackLng: "en",
+    returnNull: false,
     interpolation: {
       escapeValue: false,
     },
   })
   .then();
-
-export default i18n;

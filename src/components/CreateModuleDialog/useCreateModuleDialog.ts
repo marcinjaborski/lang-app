@@ -7,7 +7,7 @@ import { ModuleToCreate } from "../../util/types";
 import { ChangeEvent } from "react";
 
 export const useCreateModuleDialog = () => {
-  const { t } = useTranslation("translation", { keyPrefix: "createModuleDialog" });
+  const { t } = useTranslation("createModuleDialog");
   const open = useAppSelector((state) => state.createModuleDialog.open);
   const name = useAppSelector((state) => state.createModuleDialog.name);
   const dispatch = useAppDispatch();
@@ -22,8 +22,8 @@ export const useCreateModuleDialog = () => {
       return pb.collection("modules").create(newModule);
     },
     {
-      onSuccess() {
-        queryClient.invalidateQueries("list-modules");
+      async onSuccess() {
+        await queryClient.invalidateQueries("list-modules");
         dispatch(closeDialog());
       },
     },

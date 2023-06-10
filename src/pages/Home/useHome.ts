@@ -6,7 +6,7 @@ import { useAppDispatch } from "../../util/store";
 import { openDialog } from "../../components/CreateModuleDialog/createModuleDialogSlice";
 
 export const useHome = () => {
-  const { t } = useTranslation("translation", { keyPrefix: "home" });
+  const { t } = useTranslation("home");
   const username = pb.authStore.model?.username;
   const dispatch = useAppDispatch();
 

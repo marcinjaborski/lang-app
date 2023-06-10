@@ -32,7 +32,7 @@ const LoginTab = (props: TabProps) => {
             error={!!errors.username}
             helperText={errors.username?.message}
             {...register("username", {
-              required: t("usernameOrEmailRequired")!,
+              required: t("usernameOrEmailRequired"),
             })}
           />
           <TextField
@@ -45,7 +45,7 @@ const LoginTab = (props: TabProps) => {
             error={!!errors.password}
             helperText={errors.password?.message}
             {...register("password", {
-              required: t("passwordRequired")!,
+              required: t("passwordRequired"),
               minLength: {
                 value: 8,
                 message: t("passwordLengthMessage"),

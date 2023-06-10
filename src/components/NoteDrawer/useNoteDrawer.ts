@@ -16,7 +16,7 @@ import pb from "../../util/pocketbase";
 import { useNotePage } from "../../pages/NotePage/useNotePage";
 
 export const useNoteDrawer = () => {
-  const { t } = useTranslation("translation", { keyPrefix: "noteDrawer" });
+  const { t } = useTranslation("noteDrawer");
   const noteDrawer: NoteDrawerState = useAppSelector((state) => state.noteDrawer);
   const dispatch = useAppDispatch();
   const { data: modules } = useQuery("list-modules", () => {

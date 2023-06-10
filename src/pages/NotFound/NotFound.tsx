@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Typography } from "@mui/material";
 
 const NotFound = () => {
-  const { t } = useTranslation("translation", { keyPrefix: "notFound" });
+  const { t } = useTranslation("notFound");
   const navigate = useNavigate();
   const isLogged = pb.authStore.isValid;
 

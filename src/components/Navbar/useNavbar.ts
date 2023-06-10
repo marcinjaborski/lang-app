@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import pb from "../../util/pocketbase";
 
 export const useNavbar = () => {
-  const { t } = useTranslation("translation", { keyPrefix: "navbar" });
+  const { t } = useTranslation("navbar");
   const location = useLocation();
   const navigate = useNavigate();
   const [userMenuAnchorEl, setUserMenuAnchorEl] = useState<null | HTMLElement>(null);

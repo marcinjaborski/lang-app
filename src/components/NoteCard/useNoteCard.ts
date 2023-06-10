@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "react-query";
 import pb from "../../util/pocketbase";
 
 export const useNoteCard = () => {
-  const { t } = useTranslation("translation", { keyPrefix: "home" });
+  const { t } = useTranslation("home");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
