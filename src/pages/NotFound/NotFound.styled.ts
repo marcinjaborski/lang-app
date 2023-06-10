@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { backgroundColor } from "../../util/GlobalStyles";
+import { backgroundColor } from "@src/util";
 
 export const NotFoundStyled = styled.main`
   display: grid;

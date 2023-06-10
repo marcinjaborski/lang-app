@@ -1,7 +1,7 @@
+import { pb } from "@src/util";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
-import pb from "../../util/pocketbase";
 
 export const useNavbar = () => {
   const { t } = useTranslation("navbar");

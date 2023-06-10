@@ -1,13 +1,10 @@
-import { useAppDispatch, useAppSelector } from "../../util/store";
-import { clearState, openDrawer, updateStateFromNote } from "../../components/NoteDrawer/noteDrawerSlice";
-import { useParams } from "react-router-dom";
-import { Note, NoteToCreate } from "../../util/types";
-import pb from "../../util/pocketbase";
+import { changeTitle, clearState, openDrawer, updateStateFromNote, useAppDispatch, useAppSelector } from "@src/store";
+import { Note, NoteToCreate, pb } from "@src/util";
 import { useEffect, useState } from "react";
-import { withReact } from "slate-react";
-import { createEditor } from "slate";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { changeTitle } from "../../components/NoteEditor/noteEditorSlice";
+import { useParams } from "react-router-dom";
+import { createEditor } from "slate";
+import { withReact } from "slate-react";
 
 export const useNotePage = () => {
   const [editor] = useState(() => withReact(createEditor()));
@@ -49,8 +46,8 @@ export const useNotePage = () => {
       return pb.collection("notes").create(note);
     },
     {
-      onSuccess() {
-        queryClient.invalidateQueries("list-modules");
+      async onSuccess() {
+        await queryClient.invalidateQueries("list-modules");
       },
     },
   );
@@ -60,8 +57,8 @@ export const useNotePage = () => {
       return pb.collection("notes").update(id, note);
     },
     {
-      onSuccess() {
-        queryClient.invalidateQueries("list-modules");
+      async onSuccess() {
+        await queryClient.invalidateQueries("list-modules");
       },
     },
   );

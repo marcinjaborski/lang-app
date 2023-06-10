@@ -1,15 +1,15 @@
+import { TextField } from "@mui/material";
+import { NoteEditorToolbar } from "@src/components";
+import { Editor } from "slate";
 import { Editable, Slate } from "slate-react";
 import { NoteEditorStyled } from "./NoteEditor.styled";
-import NoteEditorToolbar from "../NoteEditorToolbar/NoteEditorToolbar";
-import { TextField } from "@mui/material";
 import { useNoteEditor } from "./useNoteEditor";
-import { Editor } from "slate";
 
 type NoteEditorProps = {
   editor: Editor;
 };
 
-const NoteEditor = (props: NoteEditorProps) => {
+export const NoteEditor = (props: NoteEditorProps) => {
   const { editor } = props;
   const { initialValue, renderElement, renderLeaf, title, onTitleChange, onKeyDown } = useNoteEditor(editor);
 
@@ -23,5 +23,3 @@ const NoteEditor = (props: NoteEditorProps) => {
     </NoteEditorStyled>
   );
 };
-
-export default NoteEditor;

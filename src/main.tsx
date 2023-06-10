@@ -1,14 +1,12 @@
+import { ThemeProvider } from "@mui/material";
+import { App } from "@src/App";
+import { GlobalStyles, store, theme } from "@src/util";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-import { GlobalStyles } from "./util/GlobalStyles";
-import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { Provider } from "react-redux";
-import store from "./util/store";
-import { ThemeProvider } from "@mui/material";
-import { theme } from "./util/theme";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import "./i18n/i18n";
 
 const queryClient = new QueryClient();

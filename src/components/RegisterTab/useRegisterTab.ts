@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import pb, { pbError } from "../../util/pocketbase";
+import { pb, pbError } from "@src/util";
 import { useLoginTab } from "../LoginTab/useLoginTab";
 
 type RegisterTabFormData = {

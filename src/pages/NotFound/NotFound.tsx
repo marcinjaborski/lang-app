@@ -1,11 +1,11 @@
-import { NotFoundStyled } from "./NotFound.styled";
-import { useTranslation } from "react-i18next";
-import pb from "../../util/pocketbase";
-import Button from "@mui/material/Button";
-import { useNavigate } from "react-router-dom";
 import { Typography } from "@mui/material";
+import Button from "@mui/material/Button";
+import { pb } from "@src/util";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { NotFoundStyled } from "./NotFound.styled";
 
-const NotFound = () => {
+export const NotFound = () => {
   const { t } = useTranslation("notFound");
   const navigate = useNavigate();
   const isLogged = pb.authStore.isValid;
@@ -33,5 +33,3 @@ const NotFound = () => {
     </NotFoundStyled>
   );
 };
-
-export default NotFound;

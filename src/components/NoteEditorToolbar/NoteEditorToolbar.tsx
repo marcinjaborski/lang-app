@@ -1,13 +1,13 @@
-import { Box, IconButton } from "@mui/material";
-import { align, bold, italic, underline } from "../../util/formatters";
+import { FormatListBulleted, FormatListNumbered } from "@mui/icons-material";
+import FormatAlignCenterIcon from "@mui/icons-material/FormatAlignCenter";
+import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
+import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
+import FormatAlignRightIcon from "@mui/icons-material/FormatAlignRight";
 import FormatBoldIcon from "@mui/icons-material/FormatBold";
 import FormatItalicIcon from "@mui/icons-material/FormatItalic";
 import FormatUnderlinedIcon from "@mui/icons-material/FormatUnderlined";
-import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
-import FormatAlignCenterIcon from "@mui/icons-material/FormatAlignCenter";
-import FormatAlignRightIcon from "@mui/icons-material/FormatAlignRight";
-import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
-import { FormatListBulleted, FormatListNumbered } from "@mui/icons-material";
+import { Box, IconButton } from "@mui/material";
+import { align, bold, italic, underline } from "@src/util";
 import React from "react";
 import { Editor } from "slate";
 
@@ -15,7 +15,7 @@ type NoteEditorToolbarProps = {
   editor: Editor;
 };
 
-const NoteEditorToolbar = (props: NoteEditorToolbarProps) => {
+export const NoteEditorToolbar = (props: NoteEditorToolbarProps) => {
   const { editor } = props;
 
   return (
@@ -50,5 +50,3 @@ const NoteEditorToolbar = (props: NoteEditorToolbarProps) => {
     </Box>
   );
 };
-
-export default NoteEditorToolbar;

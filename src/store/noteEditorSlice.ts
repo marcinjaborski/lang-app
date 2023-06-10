@@ -19,4 +19,4 @@ const noteEditorSlice = createSlice({
 });
 
 export const { changeTitle } = noteEditorSlice.actions;
-export default noteEditorSlice.reducer;
+export const { reducer: noteEditor } = noteEditorSlice;

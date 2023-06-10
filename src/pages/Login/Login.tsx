@@ -1,17 +1,16 @@
-import React, { useState } from "react";
 import { Tab, Tabs } from "@mui/material";
 import Box from "@mui/material/Box";
-import { LoginStyled } from "./Login.styled";
-import LoginTab from "../../components/LoginTab/LoginTab";
-import RegisterTab from "../../components/RegisterTab/RegisterTab";
+import { LoginTab, RegisterTab } from "@src/components";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { LoginStyled } from "./Login.styled";
 
 export type TabProps = {
   selected: number;
   tabIndex: number;
 };
 
-const Login = () => {
+export const Login = () => {
   const { t } = useTranslation("login");
   const [selected, setSelected] = useState(0);
 
@@ -32,5 +31,3 @@ const Login = () => {
     </LoginStyled>
   );
 };
-
-export default Login;

@@ -28,4 +28,4 @@ const createModuleDialogSlice = createSlice({
 });
 
 export const { openDialog, closeDialog, changeNameValue } = createModuleDialogSlice.actions;
-export default createModuleDialogSlice.reducer;
+export const { reducer: createModuleDialog } = createModuleDialogSlice;

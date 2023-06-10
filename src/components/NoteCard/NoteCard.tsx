@@ -1,3 +1,5 @@
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import {
   Button,
   CardActions,
@@ -8,9 +10,7 @@ import {
   MenuItem,
   Typography,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { Note } from "../../util/types";
+import { Note } from "@src/util";
 import { NoteCardStyled } from "./NoteCard.styled";
 import { useNoteCard } from "./useNoteCard";
 
@@ -18,7 +18,7 @@ type NoteCardProps = {
   note: Note;
 };
 
-const NoteCard = (props: NoteCardProps) => {
+export const NoteCard = (props: NoteCardProps) => {
   const { note } = props;
   const { t, anchorEl, openedMenu, onMenuOpen, onMenuClose, navigate, onDelete } = useNoteCard();
 
@@ -45,5 +45,3 @@ const NoteCard = (props: NoteCardProps) => {
     </NoteCardStyled>
   );
 };
-
-export default NoteCard;

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Language, Note } from "../../util/types";
+import { Language, Note } from "@src/util";
 
 export type NoteDrawerState = {
   open: boolean;
@@ -61,4 +61,4 @@ export const {
   updateStateFromNote,
   clearState,
 } = noteDrawerSlice.actions;
-export default noteDrawerSlice.reducer;
+export const { reducer: noteDrawer } = noteDrawerSlice;

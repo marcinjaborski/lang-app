@@ -1,11 +1,10 @@
-import { HomeStyled } from "./Home.styled";
-import { Box, Button, Divider, Fab, Grow, Skeleton, Typography } from "@mui/material";
-import { useHome } from "./useHome";
-import NoteShelf from "../../components/NoteShelf/NoteShelf";
-import CreateModuleDialog from "../../components/CreateModuleDialog/CreateModuleDialog";
 import AddIcon from "@mui/icons-material/Add";
+import { Box, Button, Divider, Fab, Grow, Skeleton, Typography } from "@mui/material";
+import { CreateModuleDialog, NoteShelf } from "@src/components";
+import { HomeStyled } from "./Home.styled";
+import { useHome } from "./useHome";
 
-const Home = () => {
+export const Home = () => {
   const { t, username, modules, openCreateModuleDialog, isLoading } = useHome();
 
   return (
@@ -44,5 +43,3 @@ const Home = () => {
     </HomeStyled>
   );
 };
-
-export default Home;

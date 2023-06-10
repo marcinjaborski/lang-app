@@ -1,16 +1,16 @@
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import React from "react";
-import { TabProps } from "../../pages/Login/Login";
 import { Alert, Backdrop, CircularProgress, Slide } from "@mui/material";
-import { confirmPasswordValidator, emailValidator, usernameValidator } from "../../util/validators";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { TabProps } from "@src/pages";
+import { confirmPasswordValidator, emailValidator, usernameValidator } from "@src/util";
+import React from "react";
 import { useRegisterTab } from "./useRegisterTab";
 
-const RegisterTab = (props: TabProps) => {
+export const RegisterTab = (props: TabProps) => {
   const { t, register, watch, errors, onSubmit, isLoading, isError, error } = useRegisterTab();
 
   return (
@@ -95,5 +95,3 @@ const RegisterTab = (props: TabProps) => {
     </div>
   );
 };
-
-export default RegisterTab;

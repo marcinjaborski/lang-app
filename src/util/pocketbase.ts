@@ -1,6 +1,6 @@
 import PocketBase from "pocketbase";
 
-const pb = new PocketBase(import.meta.env.VITE_POCKETBASE_URL);
+export const pb = new PocketBase(import.meta.env.VITE_POCKETBASE_URL);
 
 export type pbErrorMessage =
   | "Failed to create record."
@@ -12,5 +12,3 @@ export type pbError = {
   url: string;
   message: pbErrorMessage;
 };
-
-export default pb;

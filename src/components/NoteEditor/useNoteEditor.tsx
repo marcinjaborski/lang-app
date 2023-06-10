@@ -1,13 +1,21 @@
+import { changeTitle } from "@src/store";
+import {
+  align,
+  bold,
+  italic,
+  markAsWord,
+  Shortcut,
+  shortcuts,
+  translateText,
+  underline,
+  useAppDispatch,
+  useAppSelector,
+} from "@src/util";
 import React, { useCallback } from "react";
-import { RenderElementProps, RenderLeafProps } from "slate-react";
 import { Descendant, Editor } from "slate";
-import { useAppDispatch, useAppSelector } from "../../util/store";
-import { changeTitle } from "./noteEditorSlice";
-import Leaf from "./Leaf";
-import DefaultElement from "./DefaultElement";
-import { align, bold, italic, markAsWord, underline } from "../../util/formatters";
-import { translateText } from "../../util/util";
-import { Shortcut, shortcuts } from "../../util/types";
+import { RenderElementProps, RenderLeafProps } from "slate-react";
+import { DefaultElement } from "./DefaultElement";
+import { Leaf } from "./Leaf";
 
 const isShortcut = (key: string): key is Shortcut => {
   return shortcuts.includes(key as Shortcut);

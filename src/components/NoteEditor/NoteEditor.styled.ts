@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { primaryColor } from "../../util/GlobalStyles";
+import { primaryColor } from "@src/util";
 
 export const NoteEditorStyled = styled.div`
   margin-top: 1em;

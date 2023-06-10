@@ -1,5 +1,4 @@
-import { useTranslation } from "react-i18next";
-import { useAppDispatch, useAppSelector } from "../../util/store";
+import { useNotePage } from "@src/pages";
 import {
   changeBaseLang,
   changeExcerpt,
@@ -8,12 +7,13 @@ import {
   closeDrawer,
   NoteDrawerState,
   openDrawer,
-} from "./noteDrawerSlice";
-import { Language, Module } from "../../util/types";
+  useAppDispatch,
+  useAppSelector,
+} from "@src/store";
+import { Language, Module, pb } from "@src/util";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "react-query";
-import pb from "../../util/pocketbase";
-import { useNotePage } from "../../pages/NotePage/useNotePage";
 
 export const useNoteDrawer = () => {
   const { t } = useTranslation("noteDrawer");

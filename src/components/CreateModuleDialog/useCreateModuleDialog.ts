@@ -1,10 +1,8 @@
-import { useTranslation } from "react-i18next";
-import { useAppDispatch, useAppSelector } from "../../util/store";
-import { changeNameValue, closeDialog } from "./createModuleDialogSlice";
-import { useMutation, useQueryClient } from "react-query";
-import pb, { pbError } from "../../util/pocketbase";
-import { ModuleToCreate } from "../../util/types";
+import { changeNameValue, closeDialog, useAppDispatch, useAppSelector } from "@src/store";
+import { ModuleToCreate, pb, pbError } from "@src/util";
 import { ChangeEvent } from "react";
+import { useTranslation } from "react-i18next";
+import { useMutation, useQueryClient } from "react-query";
 
 export const useCreateModuleDialog = () => {
   const { t } = useTranslation("createModuleDialog");

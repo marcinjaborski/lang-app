@@ -1,8 +1,8 @@
+import { pb } from "@src/util";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
-import pb from "../../util/pocketbase";
+import { useNavigate } from "react-router-dom";
 
 export const useNoteCard = () => {
   const { t } = useTranslation("home");
@@ -19,8 +19,8 @@ export const useNoteCard = () => {
       return pb.collection("notes").delete(id);
     },
     {
-      onSuccess() {
-        queryClient.invalidateQueries("list-modules");
+      async onSuccess() {
+        await queryClient.invalidateQueries("list-modules");
       },
     },
   );

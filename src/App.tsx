@@ -1,12 +1,9 @@
+import { Navbar } from "@src/components";
+import { Home, Login, NotePage, NotFound } from "@src/pages";
+import { pb } from "@src/util";
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import Navbar from "./components/Navbar/Navbar";
-import Login from "./pages/Login/Login";
-import pb from "./util/pocketbase";
-import NotFound from "./pages/NotFound/NotFound";
-import NotePage from "./pages/NotePage/NotePage";
 
-const App = () => {
+export const App = () => {
   const isLogged = pb.authStore.isValid;
   return (
     <>
@@ -25,5 +22,3 @@ const App = () => {
     </>
   );
 };
-
-export default App;

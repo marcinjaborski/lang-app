@@ -5,7 +5,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import CreateIcon from "@mui/icons-material/Create";
 import { useNavbar } from "./useNavbar";
 
-const Navbar = () => {
+export const Navbar = () => {
   const {
     t,
     navigate,
@@ -65,5 +65,3 @@ const Navbar = () => {
     </NavbarStyled>
   );
 };
-
-export default Navbar;

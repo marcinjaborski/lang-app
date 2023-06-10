@@ -1,15 +1,15 @@
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import React from "react";
-import { TabProps } from "../../pages/Login/Login";
 import { Alert, Backdrop, CircularProgress, Slide } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { TabProps } from "@src/pages";
+import React from "react";
 import { useLoginTab } from "./useLoginTab";
 
-const LoginTab = (props: TabProps) => {
+export const LoginTab = (props: TabProps) => {
   const { t, register, errors, onSubmit, isError, error, isLoading } = useLoginTab();
 
   return (
@@ -64,5 +64,3 @@ const LoginTab = (props: TabProps) => {
     </div>
   );
 };
-
-export default LoginTab;

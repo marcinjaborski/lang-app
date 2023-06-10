@@ -1,13 +1,11 @@
-import { Fab, Grow, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SaveIcon from "@mui/icons-material/Save";
-
+import { Fab, Grow, IconButton } from "@mui/material";
+import { NoteDrawer, NoteEditor } from "@src/components";
 import { NotePageStyled } from "./NotePage.styled";
-import NoteEditor from "../../components/NoteEditor/NoteEditor";
-import NoteDrawer from "../../components/NoteDrawer/NoteDrawer";
-import { useNotePage } from "./useNotePage";
+import { useNotePage } from "@src/pages";
 
-const NotePage = () => {
+export const NotePage = () => {
   const { editor, onOpenDrawer, onSave } = useNotePage();
 
   return (
@@ -25,5 +23,3 @@ const NotePage = () => {
     </NotePageStyled>
   );
 };
-
-export default NotePage;

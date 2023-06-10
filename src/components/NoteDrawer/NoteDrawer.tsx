@@ -1,9 +1,9 @@
 import { Button, MenuItem, TextField } from "@mui/material";
+import { LanguageSelect } from "@src/components";
 import { NoteDrawerStyled } from "./NoteDrawer.styled";
 import { useNoteDrawer } from "./useNoteDrawer";
-import LanguageSelect from "../LanguageSelect/LanguageSelect";
 
-const NoteDrawer = () => {
+export const NoteDrawer = () => {
   const {
     t,
     open,
@@ -46,5 +46,3 @@ const NoteDrawer = () => {
     </NoteDrawerStyled>
   );
 };
-
-export default NoteDrawer;

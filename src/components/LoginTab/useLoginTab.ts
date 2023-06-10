@@ -1,7 +1,7 @@
-import { useMutation } from "react-query";
-import pb, { pbError } from "../../util/pocketbase";
-import { useTranslation } from "react-i18next";
+import { pb, pbError } from "@src/util";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 
 type LoginTabFormData = {

@@ -1,15 +1,15 @@
-import { Module } from "../../util/types";
-import { NoteShelfStyled } from "./NoteShelf.styled";
-import { Box, IconButton, Menu, MenuItem, Typography } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import NoteCard from "../NoteCard/NoteCard";
+import { Box, IconButton, Menu, MenuItem, Typography } from "@mui/material";
+import { NoteCard } from "@src/components";
+import { Module } from "@src/util";
+import { NoteShelfStyled } from "./NoteShelf.styled";
 import { useNoteShelf } from "./useNoteShelf";
 
 type NoteShelfProps = {
   module: Module;
 };
 
-const NoteShelf = (props: NoteShelfProps) => {
+export const NoteShelf = (props: NoteShelfProps) => {
   const { module } = props;
   const { t, anchorEl, openedMenu, onMenuOpen, onMenuClose, onDelete } = useNoteShelf();
 
@@ -32,5 +32,3 @@ const NoteShelf = (props: NoteShelfProps) => {
     </NoteShelfStyled>
   );
 };
-
-export default NoteShelf;
