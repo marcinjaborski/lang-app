@@ -1,7 +1,7 @@
 import AddIcon from "@mui/icons-material/Add";
-import { Box, Button, Divider, Fab, Grow, Skeleton, Typography } from "@mui/material";
+import { Button, Divider, Fab, Grow, Typography } from "@mui/material";
 import { CreateModuleDialog, NoteShelf } from "@src/components";
-import { HomeStyled } from "./Home.styled";
+import { EmptyMessage, HomeStyled, ModuleSkeleton, NoteSkeleton, NoteSkeletonWrap, Title } from "./Home.styled";
 import { useHome } from "./useHome";
 
 export const Home = () => {
@@ -9,27 +9,27 @@ export const Home = () => {
 
   return (
     <HomeStyled>
-      <Typography variant="h4">
+      <Title>
         {t("hello")} {username}
-      </Typography>
+      </Title>
       <Divider />
       {isLoading ? (
         <>
-          <Skeleton className="skeleton-module" />
-          <Box className="skeleton-notes">
-            <Skeleton />
-            <Skeleton />
-            <Skeleton />
-          </Box>
+          <ModuleSkeleton />
+          <NoteSkeletonWrap>
+            <NoteSkeleton />
+            <NoteSkeleton />
+            <NoteSkeleton />
+          </NoteSkeletonWrap>
         </>
       ) : null}
       {modules?.length === 0 ? (
-        <Box className="empty-message">
+        <EmptyMessage>
           <Typography variant="h5">{t("emptyText")}</Typography>
           <Button variant="contained" onClick={openCreateModuleDialog}>
             {t("createButton")}
           </Button>
-        </Box>
+        </EmptyMessage>
       ) : null}
       {modules?.map((module) => (
         <NoteShelf module={module} key={module.id} />

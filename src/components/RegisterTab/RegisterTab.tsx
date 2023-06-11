@@ -1,11 +1,8 @@
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Alert, Backdrop, CircularProgress, Slide } from "@mui/material";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
 import { TabProps } from "@src/pages";
+import { Form, LoginAvatar, SubmitButton, Title } from "@src/pages/Login/Login.styled";
 import { confirmPasswordValidator, emailValidator, usernameValidator } from "@src/util";
 import React from "react";
 import { useRegisterTab } from "./useRegisterTab";
@@ -16,13 +13,11 @@ export const RegisterTab = (props: TabProps) => {
   return (
     <div role="tabpanel" hidden={props.selected !== props.tabIndex}>
       <Slide in={props.selected === props.tabIndex} direction="left">
-        <Container maxWidth="xs" component="form" onSubmit={onSubmit}>
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+        <Form onSubmit={onSubmit}>
+          <LoginAvatar>
             <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            {t("registerTabTitle")}
-          </Typography>
+          </LoginAvatar>
+          <Title>{t("registerTabTitle")}</Title>
           <TextField
             autoComplete="username"
             fullWidth
@@ -84,13 +79,11 @@ export const RegisterTab = (props: TabProps) => {
             })}
           />
           {isError ? <Alert severity="error">{t(error.message)}</Alert> : null}
-          <Button type="submit" variant="contained">
-            {t("registerButton")}
-          </Button>
+          <SubmitButton type="submit">{t("registerButton")}</SubmitButton>
           <Backdrop open={isLoading}>
             <CircularProgress />
           </Backdrop>
-        </Container>
+        </Form>
       </Slide>
     </div>
   );

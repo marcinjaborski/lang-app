@@ -1,30 +1,34 @@
+import { Button, Typography } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import Container from "@mui/material/Container";
 import styled from "styled-components";
 
 export const LoginStyled = styled.main`
-  display: grid;
-  justify-content: center;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+`;
 
-  .wrap {
-    overflow: hidden;
-  }
+export const Form = styled(Container).attrs({
+  maxWidth: "xs",
+  component: "form",
+  sx: {
+    display: "flex",
+  },
+})`
+  flex-direction: column;
+`;
 
-  form {
-    display: flex;
-    flex-direction: column;
-  }
+export const LoginAvatar = styled(Avatar).attrs({ sx: { m: 1, bgcolor: "secondary.main" } })`
+  align-self: center;
+`;
 
-  form .MuiAvatar-root {
-    align-self: center;
-  }
+export const Title = styled(Typography).attrs({ component: "h1", variant: "h5" })`
+  text-align: center;
+`;
 
-  form h1 {
-    text-align: center;
-  }
-
-  form button {
-    width: 50%;
-    align-self: center;
-    margin-top: 1em;
-  }
+export const SubmitButton = styled(Button).attrs({ variant: "contained" })`
+  width: 50%;
+  align-self: center;
+  margin-top: 1em;
 `;

@@ -1,9 +1,7 @@
-import { Typography } from "@mui/material";
-import Button from "@mui/material/Button";
 import { pb } from "@src/util";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { NotFoundStyled } from "./NotFound.styled";
+import { LoginButton, LoginPrompt, NotFound404, NotFoundStyled, Number, NumbersWrap, Title } from "./NotFound.styled";
 
 export const NotFound = () => {
   const { t } = useTranslation("notFound");
@@ -12,24 +10,20 @@ export const NotFound = () => {
 
   return (
     <NotFoundStyled>
-      <div className="notfound">
-        <div className="notfound-404">
-          <Typography variant="h3">{t("title")}</Typography>
-          <Typography variant="h1">
-            <span>4</span>
-            <span>0</span>
-            <span>4</span>
-          </Typography>
-        </div>
-        {!isLogged ? (
-          <Typography className="bottom">
-            {t("notLoggedText")}
-            <Button variant="contained" onClick={() => navigate("/login")}>
-              {t("login")}
-            </Button>
-          </Typography>
-        ) : null}
-      </div>
+      <NotFound404>
+        <Title>{t("title")}</Title>
+        <NumbersWrap>
+          <Number>4</Number>
+          <Number>0</Number>
+          <Number>4</Number>
+        </NumbersWrap>
+      </NotFound404>
+      {!isLogged ? (
+        <LoginPrompt>
+          {t("notLoggedText")}
+          <LoginButton onClick={() => navigate("/login")}>{t("login")}</LoginButton>
+        </LoginPrompt>
+      ) : null}
     </NotFoundStyled>
   );
 };

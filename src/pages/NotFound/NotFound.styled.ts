@@ -1,44 +1,51 @@
-import styled from "styled-components";
+import { Button, Typography } from "@mui/material";
 import { backgroundColor } from "@src/util";
+import styled from "styled-components";
 
 export const NotFoundStyled = styled.main`
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+`;
 
-  .bottom {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+export const NotFound404 = styled.div``;
 
-  .bottom button {
-    width: fit-content;
-  }
+export const Title = styled(Typography).attrs({
+  variant: "h3",
+  sx: {
+    fontSize: "1.2em",
+    fontWeight: 700,
+  },
+})`
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  padding-left: 6px;
+`;
 
-  .notfound {
-    width: 100%;
-    text-align: center;
-  }
+export const NumbersWrap = styled(Typography).attrs({
+  variant: "h1",
+  sx: {
+    fontSize: "16em",
+    fontWeight: 900,
+    ml: 3,
+    lineHeight: 0.8,
+  },
+})`
+  text-transform: uppercase;
+  letter-spacing: -40px;
+`;
 
-  .notfound .notfound-404 h1 {
-    font-size: 16em;
-    font-weight: 900;
-    margin-left: -20px;
-    text-transform: uppercase;
-    letter-spacing: -40px;
-    line-height: 0.8;
-  }
+export const Number = styled.span`
+  text-shadow: -8px 0 0 ${backgroundColor};
+`;
 
-  .notfound .notfound-404 h1 > span {
-    text-shadow: -8px 0 0 ${backgroundColor};
-  }
+export const LoginPrompt = styled(Typography)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
-  .notfound .notfound-404 h3 {
-    font-size: 1.2em;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin: 0;
-    letter-spacing: 3px;
-    padding-left: 6px;
-  }
+export const LoginButton = styled(Button).attrs({ variant: "contained" })`
+  width: fit-content;
 `;
