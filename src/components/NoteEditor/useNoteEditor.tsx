@@ -1,9 +1,12 @@
-import { changeTitle } from "@src/store";
+import { isSeparatorProps, isTermProps } from "@src/@types";
+import { Separator } from "@src/components/NoteEditor/Separator";
+import { Term } from "@src/components/NoteEditor/TermElement";
+import { useSeparator } from "@src/hooks";
+import { changeTitle, moveToNextStep } from "@src/store";
 import {
   align,
   bold,
   italic,
-  markAsWord,
   Shortcut,
   shortcuts,
   translateText,
@@ -12,7 +15,7 @@ import {
   useAppSelector,
 } from "@src/util";
 import React, { useCallback } from "react";
-import { Descendant, Editor } from "slate";
+import { Descendant, Editor, Transforms } from "slate";
 import { RenderElementProps, RenderLeafProps } from "slate-react";
 import { DefaultElement } from "./DefaultElement";
 import { Leaf } from "./Leaf";
@@ -26,15 +29,16 @@ export const useNoteEditor = (editor: Editor) => {
   const title = useAppSelector((state) => state.noteEditor.title);
   const baseLang = useAppSelector((state) => state.noteDrawer.baseLang);
   const targetLang = useAppSelector((state) => state.noteDrawer.targetLang);
-  const initialValue: Descendant[] = [
+  const termPhase = useAppSelector((state) => state.noteEditor.termPhase);
+  const separator = useSeparator();
+  const emptyElement: Descendant[] = [
     {
       type: "paragraph",
-      children: [{ text: "" }],
+      children: [{ text: "", type: "text" }],
     },
   ];
 
   const formatters = {
-    q: () => markAsWord(editor),
     b: () => bold(editor),
     i: () => italic(editor),
     u: () => underline(editor),
@@ -45,17 +49,37 @@ export const useNoteEditor = (editor: Editor) => {
     j: () => align(editor, "justify"),
   } as const;
 
-  const renderLeaf = useCallback((props: RenderLeafProps) => <Leaf {...props}>{props.children}</Leaf>, []);
-  const renderElement = useCallback(
-    (props: RenderElementProps) => <DefaultElement {...props}>{props.children}</DefaultElement>,
-    [],
-  );
+  const renderLeaf = useCallback((props: RenderLeafProps) => {
+    if (isSeparatorProps(props)) return <Separator {...props}>{props.children}</Separator>;
+    return <Leaf {...props}>{props.children}</Leaf>;
+  }, []);
+
+  const renderElement = useCallback((props: RenderElementProps) => {
+    if (isTermProps(props)) return <Term {...props}>{props.children}</Term>;
+    return <DefaultElement {...props}>{props.children}</DefaultElement>;
+  }, []);
 
   const onTitleChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     dispatch(changeTitle(event.target.value));
   };
 
+  const handleTerm = () => {
+    if (termPhase === "writing") {
+      Transforms.move(editor, {
+        distance: separator.length,
+        unit: "character",
+      });
+    } else {
+      Transforms.insertNodes(editor, emptyElement);
+    }
+    dispatch(moveToNextStep());
+  };
+
   const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter" && termPhase) {
+      event.preventDefault();
+      handleTerm();
+    }
     if (!event.ctrlKey) {
       return;
     }
@@ -66,5 +90,5 @@ export const useNoteEditor = (editor: Editor) => {
     formatters[event.key]();
   };
 
-  return { initialValue, renderLeaf, renderElement, title, onTitleChange, onKeyDown };
+  return { emptyElement, renderLeaf, renderElement, title, onTitleChange, onKeyDown };
 };

@@ -1,7 +1,8 @@
+import { LeafProps, TextElement } from "@src/@types";
 import { RenderLeafProps } from "slate-react";
 
 export const Leaf = (props: RenderLeafProps) => {
-  const { children, leaf, attributes } = props;
+  const { children, leaf, attributes } = props as LeafProps<TextElement>;
   return (
     <span
       {...attributes}

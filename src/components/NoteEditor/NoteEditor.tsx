@@ -11,13 +11,13 @@ type NoteEditorProps = {
 
 export const NoteEditor = (props: NoteEditorProps) => {
   const { editor } = props;
-  const { initialValue, renderElement, renderLeaf, title, onTitleChange, onKeyDown } = useNoteEditor(editor);
+  const { emptyElement, renderElement, renderLeaf, title, onTitleChange, onKeyDown } = useNoteEditor(editor);
 
   return (
     <NoteEditorStyled>
       <TextField variant="standard" fullWidth value={title} onChange={onTitleChange} />
       <NoteEditorToolbar editor={editor} />
-      <Slate editor={editor} value={initialValue}>
+      <Slate editor={editor} value={emptyElement}>
         <EditableStyled renderLeaf={renderLeaf} renderElement={renderElement} onKeyDown={onKeyDown} />
       </Slate>
     </NoteEditorStyled>

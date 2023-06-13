@@ -1,5 +1,6 @@
+import { Note, NoteToCreate } from "@src/@types";
 import { changeTitle, clearState, openDrawer, updateStateFromNote, useAppDispatch, useAppSelector } from "@src/store";
-import { Note, NoteToCreate, pb } from "@src/util";
+import { pb } from "@src/util";
 import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";

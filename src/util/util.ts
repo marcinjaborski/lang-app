@@ -1,6 +1,6 @@
 import { Editor, Transforms } from "slate";
 import { axiosDeepl } from "./axios";
-import { DeeplLanguage, Language } from "./types";
+import { DeeplLanguage, Language } from "@src/@types";
 
 export const translate = async (text: string, sourceLang: Language, targetLang: Language) => {
   const response = await axiosDeepl.get("", {
@@ -31,4 +31,27 @@ export const translateText = async (editor: Editor, baseLang: Language, targetLa
   const translatedText = await translate(selectedText, baseLang, targetLang);
   Transforms.collapse(editor, { edge: "focus" });
   Transforms.insertText(editor, ` - ${translatedText}`);
+};
+
+export const insertTerm = (editor: Editor, separator: string) => {
+  Transforms.insertNodes(editor, [
+    {
+      type: "term",
+      children: [
+        {
+          text: "",
+          type: "text",
+        },
+        {
+          text: separator,
+          type: "separator",
+        },
+        {
+          text: "",
+          type: "text",
+        },
+      ],
+    },
+  ]);
+  Transforms.move(editor, { distance: separator.length, unit: "character", reverse: true });
 };

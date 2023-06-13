@@ -1,5 +1,6 @@
+import { ModuleToCreate } from "@src/@types";
 import { changeNameValue, closeDialog, useAppDispatch, useAppSelector } from "@src/store";
-import { ModuleToCreate, pb, pbError } from "@src/util";
+import { pb, pbError } from "@src/util";
 import { ChangeEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQueryClient } from "react-query";
