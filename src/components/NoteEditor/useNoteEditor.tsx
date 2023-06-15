@@ -1,7 +1,6 @@
-import { isSeparatorProps, isTermProps } from "@src/@types";
-import { Separator } from "@src/components/NoteEditor/Separator";
-import { Term } from "@src/components/NoteEditor/TermElement";
-import { useSeparator } from "@src/hooks";
+import { isTermElement } from "@src/@types";
+import { Element, Leaf } from "@src/features/editor";
+import { useCreateTerm, useSeparator } from "@src/hooks";
 import { changeTitle, moveToNextStep } from "@src/store";
 import {
   align,
@@ -13,12 +12,11 @@ import {
   underline,
   useAppDispatch,
   useAppSelector,
+  ZERO_WIDTH_SPACE,
 } from "@src/util";
 import React, { useCallback } from "react";
 import { Descendant, Editor, Transforms } from "slate";
 import { RenderElementProps, RenderLeafProps } from "slate-react";
-import { DefaultElement } from "./DefaultElement";
-import { Leaf } from "./Leaf";
 
 const isShortcut = (key: string): key is Shortcut => {
   return shortcuts.includes(key as Shortcut);
@@ -31,6 +29,7 @@ export const useNoteEditor = (editor: Editor) => {
   const targetLang = useAppSelector((state) => state.noteDrawer.targetLang);
   const termPhase = useAppSelector((state) => state.noteEditor.termPhase);
   const separator = useSeparator();
+  const { mutate: createTerm } = useCreateTerm();
   const emptyElement: Descendant[] = [
     {
       type: "paragraph",
@@ -49,15 +48,9 @@ export const useNoteEditor = (editor: Editor) => {
     j: () => align(editor, "justify"),
   } as const;
 
-  const renderLeaf = useCallback((props: RenderLeafProps) => {
-    if (isSeparatorProps(props)) return <Separator {...props}>{props.children}</Separator>;
-    return <Leaf {...props}>{props.children}</Leaf>;
-  }, []);
+  const renderLeaf = useCallback((props: RenderLeafProps) => <Leaf {...props}>{props.children}</Leaf>, []);
 
-  const renderElement = useCallback((props: RenderElementProps) => {
-    if (isTermProps(props)) return <Term {...props}>{props.children}</Term>;
-    return <DefaultElement {...props}>{props.children}</DefaultElement>;
-  }, []);
+  const renderElement = useCallback((props: RenderElementProps) => <Element {...props}>{props.children}</Element>, []);
 
   const onTitleChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     dispatch(changeTitle(event.target.value));
@@ -70,7 +63,12 @@ export const useNoteEditor = (editor: Editor) => {
         unit: "character",
       });
     } else {
-      Transforms.insertNodes(editor, emptyElement);
+      const term = editor.selection && Editor.node(editor, editor.selection.focus)[0];
+      Transforms.insertNodes(editor, { type: "text", text: ZERO_WIDTH_SPACE });
+      if (isTermElement(term)) {
+        const [base, translation] = term.text.split(separator);
+        createTerm({ base, translation });
+      }
     }
     dispatch(moveToNextStep());
   };

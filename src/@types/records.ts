@@ -22,6 +22,12 @@ export type Module = Record & {
   };
 };
 
+export type Term = Record & {
+  base: string;
+  translation: string;
+  owner: string;
+};
+
 export type NoteToCreate = {
   title: string;
   owner: string;
@@ -34,5 +40,11 @@ export type NoteToCreate = {
 
 export type ModuleToCreate = {
   name: string;
+  owner: string;
+};
+
+export type TermToCreate = {
+  base: string;
+  translation: string;
   owner: string;
 };

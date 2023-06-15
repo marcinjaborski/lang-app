@@ -1,3 +1,4 @@
+import { ZERO_WIDTH_SPACE } from "@src/util/constants";
 import { Editor, Transforms } from "slate";
 import { axiosDeepl } from "./axios";
 import { DeeplLanguage, Language } from "@src/@types";
@@ -37,21 +38,8 @@ export const insertTerm = (editor: Editor, separator: string) => {
   Transforms.insertNodes(editor, [
     {
       type: "term",
-      children: [
-        {
-          text: "",
-          type: "text",
-        },
-        {
-          text: separator,
-          type: "separator",
-        },
-        {
-          text: "",
-          type: "text",
-        },
-      ],
+      text: `${ZERO_WIDTH_SPACE}${separator}`,
     },
   ]);
-  Transforms.move(editor, { distance: separator.length, unit: "character", reverse: true });
+  Transforms.move(editor, { distance: separator.length, unit: "offset", reverse: true });
 };

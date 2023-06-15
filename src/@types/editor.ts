@@ -1,15 +1,13 @@
+import { Overwrite } from "@src/@types/types";
 import { BaseEditor } from "slate";
-import { ReactEditor, RenderElementProps, RenderLeafProps } from "slate-react";
+import { ReactEditor } from "slate-react";
 
-export type ParagraphElement = {
-  type: "paragraph";
+export type ElementType = "paragraph" | "bulleted-list" | "heading-one" | "heading-two" | "list-item" | "numbered-list";
+
+export type RichElement = {
+  type: ElementType;
   textAlign?: "left" | "right" | "center" | "justify";
   children: TextElement[];
-};
-
-export type TermElement = {
-  type: "term";
-  children: [TextElement, SeparatorElement, TextElement];
 };
 
 export type TextElement = {
@@ -20,23 +18,14 @@ export type TextElement = {
   underline?: boolean;
 };
 
-export type SeparatorElement = {
-  type: "separator";
-  text: string;
-};
-
-export type LeafProps<T> = RenderLeafProps & {
-  leaf: T;
-};
-
-export type ElementProps<T> = RenderElementProps & {
-  element: T;
+export type TermElement = Overwrite<TextElement, { type: "term" }> & {
+  id?: string;
 };
 
 declare module "slate" {
   interface CustomTypes {
     Editor: BaseEditor & ReactEditor;
-    Element: ParagraphElement | TermElement;
-    Text: TextElement | SeparatorElement;
+    Element: RichElement;
+    Text: TextElement | TermElement;
   }
 }
