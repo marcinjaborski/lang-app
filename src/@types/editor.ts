@@ -10,12 +10,10 @@ export type RichElement = {
   children: TextElement[];
 };
 
-export type TextElement = {
-  type: "text";
-  text: string;
-  bold?: boolean;
-  italic?: boolean;
-  underline?: boolean;
+export type TextFormatOption = "bold" | "italic" | "underline";
+
+export type TextElement = { type: "text"; text: string } & {
+  [K in TextFormatOption]?: boolean;
 };
 
 export type TermElement = Overwrite<TextElement, { type: "term" }> & {

@@ -1,4 +1,3 @@
-import { FormatListBulleted, FormatListNumbered } from "@mui/icons-material";
 import FormatAlignCenterIcon from "@mui/icons-material/FormatAlignCenter";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
@@ -7,10 +6,14 @@ import FormatBoldIcon from "@mui/icons-material/FormatBold";
 import FormatItalicIcon from "@mui/icons-material/FormatItalic";
 import FormatUnderlinedIcon from "@mui/icons-material/FormatUnderlined";
 import TranslateIcon from "@mui/icons-material/Translate";
+import Filter1Icon from "@mui/icons-material/Filter1";
+import Filter2Icon from "@mui/icons-material/Filter2";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
 import { Box, IconButton } from "@mui/material";
 import { useSeparator } from "@src/hooks";
 import { startWritingTerm } from "@src/store";
-import { align, bold, insertTerm, italic, underline, useAppDispatch } from "@src/util";
+import { align, bold, h1, h2, insertTerm, italic, underline, useAppDispatch } from "@src/util";
 import React from "react";
 import { Editor } from "slate";
 import { ReactEditor } from "slate-react";
@@ -44,6 +47,12 @@ export const NoteEditorToolbar = (props: NoteEditorToolbarProps) => {
       <IconButton onClick={() => underline(editor)}>
         <FormatUnderlinedIcon />
       </IconButton>
+      <IconButton onClick={() => h1(editor)}>
+        <Filter1Icon />
+      </IconButton>
+      <IconButton onClick={() => h2(editor)}>
+        <Filter2Icon />
+      </IconButton>
       <IconButton onClick={() => align(editor, "left")}>
         <FormatAlignLeftIcon />
       </IconButton>
@@ -57,10 +66,10 @@ export const NoteEditorToolbar = (props: NoteEditorToolbarProps) => {
         <FormatAlignJustifyIcon />
       </IconButton>
       <IconButton>
-        <FormatListBulleted />
+        <FormatListBulletedIcon />
       </IconButton>
       <IconButton>
-        <FormatListNumbered />
+        <FormatListNumberedIcon />
       </IconButton>
     </Box>
   );

@@ -1,5 +1,6 @@
+import { Module } from "@src/@types";
 import { openDialog, useAppDispatch } from "@src/store";
-import { Module, pb } from "@src/util";
+import { pb } from "@src/util";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "react-query";
 
