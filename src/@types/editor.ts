@@ -2,12 +2,14 @@ import { Overwrite } from "@src/@types/types";
 import { BaseEditor } from "slate";
 import { ReactEditor } from "slate-react";
 
-export type ElementType = "paragraph" | "bulleted-list" | "heading-one" | "heading-two" | "list-item" | "numbered-list";
+export type ListType = "numbered-list" | "bulleted-list";
+
+export type ElementType = "paragraph" | "heading-one" | "heading-two" | "list-item" | ListType;
 
 export type RichElement = {
   type: ElementType;
   textAlign?: "left" | "right" | "center" | "justify";
-  children: TextElement[];
+  children: (TextElement | TermElement | RichElement)[];
 };
 
 export type TextFormatOption = "bold" | "italic" | "underline";

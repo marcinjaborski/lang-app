@@ -1,4 +1,4 @@
-import { isTermElement } from "@src/@types";
+import { ElementType, isTermElement } from "@src/@types";
 import { Element, Leaf } from "@src/features/editor";
 import { useCreateTerm, useSeparator } from "@src/hooks";
 import { changeTitle, moveToNextStep } from "@src/store";
@@ -15,7 +15,7 @@ import {
   ZERO_WIDTH_SPACE,
 } from "@src/util";
 import React, { useCallback } from "react";
-import { Descendant, Editor, Transforms } from "slate";
+import { Descendant, Editor, Range, Transforms, Element as SlateElement } from "slate";
 import { RenderElementProps, RenderLeafProps } from "slate-react";
 
 const isShortcut = (key: string): key is Shortcut => {
@@ -73,7 +73,35 @@ export const useNoteEditor = (editor: Editor) => {
     dispatch(moveToNextStep());
   };
 
+  const endList = (): boolean => {
+    const { selection } = editor;
+    if (!selection) return false;
+
+    const [start] = Range.edges(selection);
+    const list = Editor.above(editor, {
+      at: start,
+      match: (node) => SlateElement.isElement(node) && ["numbered-list", "bulleted-list"].includes(node.type),
+    });
+    if (!list) return false;
+
+    const currentNode = Editor.node(editor, selection.focus)[0] as unknown as { type: ElementType; text: string };
+    if (currentNode?.text !== "" || currentNode?.type !== "list-item") return false;
+
+    const [path] = list[1];
+    Transforms.removeNodes(editor);
+    Transforms.insertNodes(editor, emptyElement, { at: [path + 1] });
+    Transforms.move(editor, { unit: "offset" });
+    return true;
+  };
+
   const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter") {
+      if (endList()) {
+        event.preventDefault();
+        return;
+      }
+    }
+
     if (event.key === "Enter" && termPhase) {
       event.preventDefault();
       handleTerm();

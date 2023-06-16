@@ -13,7 +13,7 @@ import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
 import { Box, IconButton } from "@mui/material";
 import { useSeparator } from "@src/hooks";
 import { startWritingTerm } from "@src/store";
-import { align, bold, h1, h2, insertTerm, italic, underline, useAppDispatch } from "@src/util";
+import { align, bold, h1, h2, insertTerm, italic, ol, ul, underline, useAppDispatch } from "@src/util";
 import React from "react";
 import { Editor } from "slate";
 import { ReactEditor } from "slate-react";
@@ -65,10 +65,10 @@ export const NoteEditorToolbar = (props: NoteEditorToolbarProps) => {
       <IconButton onClick={() => align(editor, "justify")}>
         <FormatAlignJustifyIcon />
       </IconButton>
-      <IconButton>
+      <IconButton onClick={() => ul(editor)}>
         <FormatListBulletedIcon />
       </IconButton>
-      <IconButton>
+      <IconButton onClick={() => ol(editor)}>
         <FormatListNumberedIcon />
       </IconButton>
     </Box>
