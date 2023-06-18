@@ -8,3 +8,4 @@ export * from "./NoteEditor/NoteEditor";
 export * from "./NoteEditorToolbar/NoteEditorToolbar";
 export * from "./NoteShelf/NoteShelf";
 export * from "./RegisterTab/RegisterTab";
+export * from "./Portal/Portal";

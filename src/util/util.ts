@@ -1,7 +1,8 @@
+import { DeeplLanguage, Language } from "@src/@types";
 import { ZERO_WIDTH_SPACE } from "@src/util/constants";
 import { Editor, Transforms } from "slate";
+import { ReactEditor } from "slate-react";
 import { axiosDeepl } from "./axios";
-import { DeeplLanguage, Language } from "@src/@types";
 
 export const translate = async (text: string, sourceLang: Language, targetLang: Language) => {
   const response = await axiosDeepl.get("", {
@@ -24,14 +25,16 @@ const toDeeplCode = (lng: Language): DeeplLanguage => {
 };
 
 export const translateText = async (editor: Editor, baseLang: Language, targetLang: Language) => {
-  let selectedText = Editor.string(editor, editor.selection!);
+  if (!editor.selection) return;
+  let selectedText = Editor.string(editor, editor.selection);
   if (selectedText === "") {
     Transforms.move(editor, { distance: 1, unit: "word", reverse: true, edge: "anchor" });
-    selectedText = Editor.string(editor, editor.selection!);
+    selectedText = Editor.string(editor, editor.selection);
   }
   const translatedText = await translate(selectedText, baseLang, targetLang);
-  Transforms.collapse(editor, { edge: "focus" });
+  Transforms.collapse(editor, { edge: "end" });
   Transforms.insertText(editor, ` - ${translatedText}`);
+  ReactEditor.focus(editor);
 };
 
 export const insertTerm = (editor: Editor, separator: string) => {

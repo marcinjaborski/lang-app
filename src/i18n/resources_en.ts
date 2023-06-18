@@ -52,4 +52,7 @@ export const en = {
     excerpt: "Excerpt",
     save: "Save",
   },
+  noteEditor: {
+    placeholder: "Type something...",
+  },
 };

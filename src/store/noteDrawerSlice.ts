@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Language, Note } from "@src/util";
+import { Note } from "@src/@types";
+import { Language } from "@src/util";
 
 export type NoteDrawerState = {
   open: boolean;

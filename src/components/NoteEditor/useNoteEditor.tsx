@@ -15,7 +15,8 @@ import {
   ZERO_WIDTH_SPACE,
 } from "@src/util";
 import React, { useCallback } from "react";
-import { Descendant, Editor, Range, Transforms, Element as SlateElement } from "slate";
+import { useTranslation } from "react-i18next";
+import { Descendant, Editor, Element as SlateElement, Range, Transforms } from "slate";
 import { RenderElementProps, RenderLeafProps } from "slate-react";
 
 const isShortcut = (key: string): key is Shortcut => {
@@ -23,6 +24,7 @@ const isShortcut = (key: string): key is Shortcut => {
 };
 
 export const useNoteEditor = (editor: Editor) => {
+  const { t } = useTranslation("noteEditor");
   const dispatch = useAppDispatch();
   const title = useAppSelector((state) => state.noteEditor.title);
   const baseLang = useAppSelector((state) => state.noteDrawer.baseLang);
@@ -116,5 +118,5 @@ export const useNoteEditor = (editor: Editor) => {
     formatters[event.key]();
   };
 
-  return { emptyElement, renderLeaf, renderElement, title, onTitleChange, onKeyDown };
+  return { t, emptyElement, renderLeaf, renderElement, title, onTitleChange, onKeyDown };
 };
