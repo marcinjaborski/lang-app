@@ -12,20 +12,18 @@ import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
 import { Box, IconButton } from "@mui/material";
 import { useSeparator } from "@src/hooks";
+import { useEditorContext } from "@src/hooks/useEditorContext";
 import { startWritingTerm } from "@src/store";
 import { align, bold, h1, h2, insertTerm, italic, ol, ul, underline, useAppDispatch } from "@src/util";
 import React from "react";
-import { Editor } from "slate";
 import { ReactEditor } from "slate-react";
 
-type NoteEditorToolbarProps = {
-  editor: Editor;
-};
-
-export const NoteEditorToolbar = (props: NoteEditorToolbarProps) => {
-  const { editor } = props;
+export const NoteEditorToolbar = () => {
+  const editor = useEditorContext();
   const separator = useSeparator();
   const dispatch = useAppDispatch();
+
+  if (!editor) return null;
 
   const onCreateWord = () => {
     dispatch(startWritingTerm());

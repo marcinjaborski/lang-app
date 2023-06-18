@@ -6,15 +6,11 @@ import { HoveringToolbarStyled } from "@src/features/editor/HoveringToolbar/Hove
 import { useHoveringToolbar } from "@src/features/editor/HoveringToolbar/useHoveringToolbar";
 import { translateText } from "@src/util";
 import React from "react";
-import { Editor } from "slate";
 
-type HoveringToolbarProps = {
-  editor: Editor;
-};
+export const HoveringToolbar = () => {
+  const { editor, ref, onCreateWord, baseLang, targetLang } = useHoveringToolbar();
 
-export const HoveringToolbar = (props: HoveringToolbarProps) => {
-  const { editor } = props;
-  const { ref, onCreateWord, baseLang, targetLang } = useHoveringToolbar(editor);
+  if (!editor) return null;
 
   const sx: SxProps = {
     fill: "white",

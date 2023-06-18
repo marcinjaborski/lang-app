@@ -1,6 +1,7 @@
 import { ElementType, isTermElement } from "@src/@types";
 import { Element, Leaf } from "@src/features/editor";
 import { useCreateTerm, useSeparator } from "@src/hooks";
+import { useEditorContext } from "@src/hooks/useEditorContext";
 import { changeTitle, moveToNextStep } from "@src/store";
 import {
   align,
@@ -23,7 +24,8 @@ const isShortcut = (key: string): key is Shortcut => {
   return shortcuts.includes(key as Shortcut);
 };
 
-export const useNoteEditor = (editor: Editor) => {
+export const useNoteEditor = () => {
+  const editor = useEditorContext()!;
   const { t } = useTranslation("noteEditor");
   const dispatch = useAppDispatch();
   const title = useAppSelector((state) => state.noteEditor.title);
@@ -118,5 +120,5 @@ export const useNoteEditor = (editor: Editor) => {
     formatters[event.key]();
   };
 
-  return { t, emptyElement, renderLeaf, renderElement, title, onTitleChange, onKeyDown };
+  return { editor, t, emptyElement, renderLeaf, renderElement, title, onTitleChange, onKeyDown };
 };

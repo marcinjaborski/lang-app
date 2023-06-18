@@ -1,10 +1,12 @@
 import { useSeparator } from "@src/hooks";
+import { useEditorContext } from "@src/hooks/useEditorContext";
 import { moveToNextStep, startWritingTerm, useAppDispatch, useAppSelector } from "@src/store";
 import React, { useEffect, useRef } from "react";
 import { Editor, Text, Transforms } from "slate";
 import { ReactEditor } from "slate-react";
 
-export const useHoveringToolbar = (editor: Editor) => {
+export const useHoveringToolbar = () => {
+  const editor = useEditorContext();
   const ref = useRef<HTMLDivElement | null>(null);
   const dispatch = useAppDispatch();
   const baseLang = useAppSelector((state) => state.noteDrawer.baseLang);
@@ -16,7 +18,7 @@ export const useHoveringToolbar = (editor: Editor) => {
       const el = ref.current;
       const selection = window.getSelection();
 
-      if (!el || !selection) {
+      if (!el || !selection || !editor) {
         return;
       }
 
@@ -39,9 +41,8 @@ export const useHoveringToolbar = (editor: Editor) => {
 
   const onCreateWord = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    const { selection } = editor;
-    if (!selection) return;
-    const selectedText = Editor.string(editor, selection);
+    if (!editor?.selection) return;
+    const selectedText = Editor.string(editor, editor.selection);
     Transforms.setNodes(editor, { type: "term" }, { match: (n) => Text.isText(n), split: true });
     ReactEditor.focus(editor);
     Transforms.collapse(editor, { edge: "end" });
@@ -53,5 +54,5 @@ export const useHoveringToolbar = (editor: Editor) => {
     }
   };
 
-  return { ref, onCreateWord, targetLang, baseLang };
+  return { editor, ref, onCreateWord, targetLang, baseLang };
 };
