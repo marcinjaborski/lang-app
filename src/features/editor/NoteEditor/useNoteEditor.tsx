@@ -5,6 +5,7 @@ import { ElementType, isShortcut, isTermElement } from "@src/types";
 import { ZERO_WIDTH_SPACE } from "@src/util";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 import { Descendant, Editor, Element as SlateElement, Range, Transforms } from "slate";
 import { RenderElementProps, RenderLeafProps } from "slate-react";
 
@@ -18,6 +19,7 @@ export const useNoteEditor = () => {
   const separator = useSeparator();
   const { mutate: createTerm } = useCreateTerm();
   const formatters = useFormatters();
+  const params = useParams<{ id: string }>();
 
   const emptyElement: Descendant[] = [
     {
@@ -56,7 +58,9 @@ export const useNoteEditor = () => {
       Transforms.insertNodes(editor, { type: "text", text: ZERO_WIDTH_SPACE });
       if (isTermElement(term)) {
         const [base, translation] = term.text.split(separator);
-        createTerm({ base, translation });
+        if (params.id) {
+          createTerm({ base, translation, note: params.id });
+        }
       }
     }
     dispatch(moveToNextStep());

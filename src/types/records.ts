@@ -11,6 +11,7 @@ export type Note = Record & {
   module: string;
   expand: {
     module?: Module;
+    "terms(note)": Term[];
   };
 };
 
@@ -26,6 +27,9 @@ export type Term = Record & {
   base: string;
   translation: string;
   owner: string;
+  expand: {
+    note?: Note;
+  };
 };
 
 export type NoteToCreate = {
@@ -47,4 +51,5 @@ export type TermToCreate = {
   base: string;
   translation: string;
   owner: string;
+  note: string;
 };
