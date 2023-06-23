@@ -1,6 +1,6 @@
-import { useSeparator } from "@src/hooks";
+import { useSeparator, useTranslateText } from "@src/hooks";
 import { useEditorContext } from "@src/hooks/useEditorContext";
-import { moveToNextStep, startWritingTerm, useAppDispatch, useAppSelector } from "@src/store";
+import { moveToNextStep, startWritingTerm, useAppDispatch } from "@src/store";
 import React, { useEffect, useRef } from "react";
 import { Editor, Text, Transforms } from "slate";
 import { ReactEditor } from "slate-react";
@@ -9,9 +9,8 @@ export const useHoveringToolbar = () => {
   const editor = useEditorContext();
   const ref = useRef<HTMLDivElement | null>(null);
   const dispatch = useAppDispatch();
-  const baseLang = useAppSelector((state) => state.noteDrawer.baseLang);
-  const targetLang = useAppSelector((state) => state.noteDrawer.targetLang);
   const separator = useSeparator();
+  const translateText = useTranslateText();
 
   useEffect(() => {
     const handleHoveringToolbar = () => {
@@ -54,5 +53,5 @@ export const useHoveringToolbar = () => {
     }
   };
 
-  return { editor, ref, onCreateWord, targetLang, baseLang };
+  return { ref, onCreateWord, translateText };
 };

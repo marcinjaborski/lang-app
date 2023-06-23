@@ -4,5 +4,11 @@ import { Editor } from "slate";
 export const EditorContext = createContext<Editor | null>(null);
 
 export const useEditorContext = () => {
-  return useContext(EditorContext);
+  const editor = useContext(EditorContext);
+
+  if (!editor) {
+    throw "useEditorContext must be inside context provider";
+  }
+
+  return editor;
 };

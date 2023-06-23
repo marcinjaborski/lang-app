@@ -6,5 +6,5 @@ type PortalProps = {
 };
 
 export const Portal = ({ children }: PortalProps) => {
-  return typeof document === "object" ? ReactDOM.createPortal(children, document.body) : null;
+  return ReactDOM.createPortal(children, document.body);
 };

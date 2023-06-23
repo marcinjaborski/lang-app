@@ -1,6 +1,6 @@
 import { ElementType, isTermElement } from "@src/@types";
 import { Element, Leaf } from "@src/features/editor";
-import { useCreateTerm, useSeparator } from "@src/hooks";
+import { useCreateTerm, useSeparator, useTranslateText } from "@src/hooks";
 import { useEditorContext } from "@src/hooks/useEditorContext";
 import { changeTitle, moveToNextStep } from "@src/store";
 import {
@@ -9,7 +9,6 @@ import {
   italic,
   Shortcut,
   shortcuts,
-  translateText,
   underline,
   useAppDispatch,
   useAppSelector,
@@ -25,13 +24,12 @@ const isShortcut = (key: string): key is Shortcut => {
 };
 
 export const useNoteEditor = () => {
-  const editor = useEditorContext()!;
+  const editor = useEditorContext();
   const { t } = useTranslation("noteEditor");
   const dispatch = useAppDispatch();
   const title = useAppSelector((state) => state.noteEditor.title);
-  const baseLang = useAppSelector((state) => state.noteDrawer.baseLang);
-  const targetLang = useAppSelector((state) => state.noteDrawer.targetLang);
   const termPhase = useAppSelector((state) => state.noteEditor.termPhase);
+  const translateText = useTranslateText();
   const separator = useSeparator();
   const { mutate: createTerm } = useCreateTerm();
   const emptyElement: Descendant[] = [
@@ -45,7 +43,7 @@ export const useNoteEditor = () => {
     b: () => bold(editor),
     i: () => italic(editor),
     u: () => underline(editor),
-    t: () => translateText(editor, baseLang, targetLang),
+    t: () => translateText(),
     l: () => align(editor, "left"),
     e: () => align(editor, "center"),
     r: () => align(editor, "right"),
