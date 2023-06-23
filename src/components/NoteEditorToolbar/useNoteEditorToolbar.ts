@@ -1,9 +1,11 @@
-import { useEditorContext, useInsertTerm, useTranslateText } from "@src/hooks";
+import { useFormatters, useInsertTerm, useTranslateText } from "@src/hooks";
+import { useTranslation } from "react-i18next";
 
 export const useNoteEditorToolbar = () => {
-  const editor = useEditorContext();
+  const { t } = useTranslation("noteToolbar");
   const translate = useTranslateText();
   const insertTerm = useInsertTerm();
+  const formatters = useFormatters();
 
-  return { editor, translate, insertTerm };
+  return { t, translate, insertTerm, formatters };
 };

@@ -11,55 +11,94 @@ import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
 import FormatUnderlinedIcon from "@mui/icons-material/FormatUnderlined";
 import SchoolIcon from "@mui/icons-material/School";
 import TranslateIcon from "@mui/icons-material/Translate";
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton, Tooltip } from "@mui/material";
 import { useNoteEditorToolbar } from "@src/components/NoteEditorToolbar/useNoteEditorToolbar";
-import { align, bold, h1, h2, italic, ol, ul, underline } from "@src/util";
-import React from "react";
+import React, { ReactNode } from "react";
+
+type ToolbarButton = {
+  tooltip: string;
+  handler: () => void;
+  icon: ReactNode;
+};
 
 export const NoteEditorToolbar = () => {
-  const { editor, translate, insertTerm } = useNoteEditorToolbar();
+  const { t, translate, insertTerm, formatters } = useNoteEditorToolbar();
+
+  const buttons: ToolbarButton[] = [
+    {
+      tooltip: t("term"),
+      handler: insertTerm,
+      icon: <SchoolIcon />,
+    },
+    {
+      tooltip: t("translate"),
+      handler: translate,
+      icon: <TranslateIcon />,
+    },
+    {
+      tooltip: t("bold"),
+      handler: formatters.bold,
+      icon: <FormatBoldIcon />,
+    },
+    {
+      tooltip: t("italic"),
+      handler: formatters.italic,
+      icon: <FormatItalicIcon />,
+    },
+    {
+      tooltip: t("underline"),
+      handler: formatters.underline,
+      icon: <FormatUnderlinedIcon />,
+    },
+    {
+      tooltip: t("title"),
+      handler: formatters.h1,
+      icon: <Filter1Icon />,
+    },
+    {
+      tooltip: t("subtitle"),
+      handler: formatters.h2,
+      icon: <Filter2Icon />,
+    },
+    {
+      tooltip: t("alignLeft"),
+      handler: formatters.alignLeft,
+      icon: <FormatAlignLeftIcon />,
+    },
+    {
+      tooltip: t("center"),
+      handler: formatters.center,
+      icon: <FormatAlignCenterIcon />,
+    },
+    {
+      tooltip: t("alignRight"),
+      handler: formatters.alignRight,
+      icon: <FormatAlignRightIcon />,
+    },
+    {
+      tooltip: t("justify"),
+      handler: formatters.justify,
+      icon: <FormatAlignJustifyIcon />,
+    },
+    {
+      tooltip: t("ul"),
+      handler: formatters.ul,
+      icon: <FormatListBulletedIcon />,
+    },
+    {
+      tooltip: t("ol"),
+      handler: formatters.ol,
+      icon: <FormatListNumberedIcon />,
+    },
+  ];
 
   return (
     <Box>
-      <IconButton onClick={insertTerm}>
-        <SchoolIcon />
-      </IconButton>
-      <IconButton onClick={translate}>
-        <TranslateIcon />
-      </IconButton>
-      <IconButton onClick={() => bold(editor)}>
-        <FormatBoldIcon />
-      </IconButton>
-      <IconButton onClick={() => italic(editor)}>
-        <FormatItalicIcon />
-      </IconButton>
-      <IconButton onClick={() => underline(editor)}>
-        <FormatUnderlinedIcon />
-      </IconButton>
-      <IconButton onClick={() => h1(editor)}>
-        <Filter1Icon />
-      </IconButton>
-      <IconButton onClick={() => h2(editor)}>
-        <Filter2Icon />
-      </IconButton>
-      <IconButton onClick={() => align(editor, "left")}>
-        <FormatAlignLeftIcon />
-      </IconButton>
-      <IconButton onClick={() => align(editor, "center")}>
-        <FormatAlignCenterIcon />
-      </IconButton>
-      <IconButton onClick={() => align(editor, "right")}>
-        <FormatAlignRightIcon />
-      </IconButton>
-      <IconButton onClick={() => align(editor, "justify")}>
-        <FormatAlignJustifyIcon />
-      </IconButton>
-      <IconButton onClick={() => ul(editor)}>
-        <FormatListBulletedIcon />
-      </IconButton>
-      <IconButton onClick={() => ol(editor)}>
-        <FormatListNumberedIcon />
-      </IconButton>
+      {buttons.map((button) => (
+        <Tooltip title={button.tooltip} key={button.tooltip}>
+          <IconButton onClick={button.handler}>{button.icon}</IconButton>
+        </Tooltip>
+      ))}
     </Box>
   );
 };

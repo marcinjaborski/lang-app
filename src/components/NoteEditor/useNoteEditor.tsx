@@ -1,19 +1,9 @@
 import { ElementType, isTermElement } from "@src/@types";
 import { Element, Leaf } from "@src/features/editor";
-import { useCreateTerm, useSeparator, useTranslateText } from "@src/hooks";
+import { useCreateTerm, useFormatters, useSeparator, useTranslateText } from "@src/hooks";
 import { useEditorContext } from "@src/hooks/useEditorContext";
 import { changeTitle, moveToNextStep } from "@src/store";
-import {
-  align,
-  bold,
-  italic,
-  Shortcut,
-  shortcuts,
-  underline,
-  useAppDispatch,
-  useAppSelector,
-  ZERO_WIDTH_SPACE,
-} from "@src/util";
+import { Shortcut, shortcuts, useAppDispatch, useAppSelector, ZERO_WIDTH_SPACE } from "@src/util";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { Descendant, Editor, Element as SlateElement, Range, Transforms } from "slate";
@@ -32,6 +22,8 @@ export const useNoteEditor = () => {
   const translateText = useTranslateText();
   const separator = useSeparator();
   const { mutate: createTerm } = useCreateTerm();
+  const formatters = useFormatters();
+
   const emptyElement: Descendant[] = [
     {
       type: "paragraph",
@@ -39,15 +31,15 @@ export const useNoteEditor = () => {
     },
   ];
 
-  const formatters = {
-    b: () => bold(editor),
-    i: () => italic(editor),
-    u: () => underline(editor),
-    t: () => translateText(),
-    l: () => align(editor, "left"),
-    e: () => align(editor, "center"),
-    r: () => align(editor, "right"),
-    j: () => align(editor, "justify"),
+  const keyBindings = {
+    b: formatters.bold,
+    i: formatters.italic,
+    u: formatters.underline,
+    t: translateText,
+    l: formatters.alignLeft,
+    e: formatters.center,
+    r: formatters.alignRight,
+    j: formatters.justify,
   } as const;
 
   const renderLeaf = useCallback((props: RenderLeafProps) => <Leaf {...props}>{props.children}</Leaf>, []);
@@ -97,11 +89,9 @@ export const useNoteEditor = () => {
   };
 
   const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === "Enter") {
-      if (endList()) {
-        event.preventDefault();
-        return;
-      }
+    if (event.key === "Enter" && endList()) {
+      event.preventDefault();
+      return;
     }
 
     if (event.key === "Enter" && termPhase) {
@@ -115,7 +105,7 @@ export const useNoteEditor = () => {
       return;
     }
     event.preventDefault();
-    formatters[event.key]();
+    keyBindings[event.key]();
   };
 
   return { editor, t, emptyElement, renderLeaf, renderElement, title, onTitleChange, onKeyDown };

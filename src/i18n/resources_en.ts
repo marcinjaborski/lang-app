@@ -55,4 +55,19 @@ export const en = {
   noteEditor: {
     placeholder: "Type something...",
   },
+  noteToolbar: {
+    term: "Create term",
+    translate: "Translate text",
+    bold: "Bold",
+    italic: "Italic",
+    underline: "Underline",
+    title: "Title",
+    subtitle: "Subtitle",
+    alignLeft: "Align left",
+    center: "Center",
+    alignRight: "Align right",
+    justify: "Justify",
+    ul: "Bulleted list",
+    ol: "Numbered list",
+  },
 };
