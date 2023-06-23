@@ -1,7 +1,7 @@
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Button, CardActions, IconButton, Menu, MenuItem } from "@mui/material";
-import { Note } from "@src/util";
+import { Note } from "@src/types";
 import { Excerpt, NoteCardStyled, NoteProgress, StyledCardContent, Title } from "./NoteCard.styled";
 import { useNoteCard } from "./useNoteCard";
 

@@ -1,17 +1,12 @@
-import { ElementType, isTermElement } from "@src/@types";
 import { Element, Leaf } from "@src/features/editor";
-import { useCreateTerm, useFormatters, useSeparator, useTranslateText } from "@src/hooks";
-import { useEditorContext } from "@src/hooks/useEditorContext";
-import { changeTitle, moveToNextStep } from "@src/store";
-import { Shortcut, shortcuts, useAppDispatch, useAppSelector, ZERO_WIDTH_SPACE } from "@src/util";
+import { useCreateTerm, useEditorContext, useFormatters, useSeparator, useTranslateText } from "@src/hooks";
+import { changeTitle, moveToNextStep, useAppDispatch, useAppSelector } from "@src/store";
+import { ElementType, isShortcut, isTermElement } from "@src/types";
+import { ZERO_WIDTH_SPACE } from "@src/util";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { Descendant, Editor, Element as SlateElement, Range, Transforms } from "slate";
 import { RenderElementProps, RenderLeafProps } from "slate-react";
-
-const isShortcut = (key: string): key is Shortcut => {
-  return shortcuts.includes(key as Shortcut);
-};
 
 export const useNoteEditor = () => {
   const editor = useEditorContext();

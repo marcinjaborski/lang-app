@@ -1,8 +1,7 @@
-import { Button, Drawer } from "@mui/material";
-import TextField from "@mui/material/TextField";
+import { Button, Drawer, TextField } from "@mui/material";
 import styled from "styled-components";
 
-export const NoteDrawerStyled = styled(Drawer)`
+export const DrawerStyled = styled(Drawer)`
   & > .MuiDrawer-paper {
     width: 250px;
     display: grid;

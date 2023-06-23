@@ -1,4 +1,5 @@
-import { Module, pb } from "@src/util";
+import { Module } from "@src/types";
+import { pb } from "@src/util";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQueryClient } from "react-query";

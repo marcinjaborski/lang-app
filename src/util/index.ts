@@ -2,8 +2,6 @@ export * from "./constants";
 export * from "./axios";
 export * from "./GlobalStyles";
 export * from "./pocketbase";
-export * from "../store/store";
 export * from "./theme";
-export * from "../@types/types";
 export * from "./util";
 export * from "./validators";

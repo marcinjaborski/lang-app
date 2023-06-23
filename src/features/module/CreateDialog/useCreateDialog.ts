@@ -1,11 +1,11 @@
-import { ModuleToCreate } from "@src/@types";
 import { changeNameValue, closeDialog, useAppDispatch, useAppSelector } from "@src/store";
+import { ModuleToCreate } from "@src/types";
 import { pb, pbError } from "@src/util";
 import { ChangeEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQueryClient } from "react-query";
 
-export const useCreateModuleDialog = () => {
+export const useCreateDialog = () => {
   const { t } = useTranslation("createModuleDialog");
   const open = useAppSelector((state) => state.createModuleDialog.open);
   const name = useAppSelector((state) => state.createModuleDialog.name);

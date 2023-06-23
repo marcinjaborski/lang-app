@@ -1,4 +1,4 @@
-import { DeeplLanguage, Language } from "@src/@types";
+import { DeeplLanguage, Language } from "@src/types";
 import { axiosDeepl } from "./axios";
 
 export const translate = async (text: string, sourceLang: Language, targetLang: Language) => {

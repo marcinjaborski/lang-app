@@ -1,6 +1,6 @@
-import { Overwrite } from "@src/@types/types";
 import { BaseEditor } from "slate";
 import { ReactEditor } from "slate-react";
+import { Overwrite } from "./types";
 
 export type ListType = "numbered-list" | "bulleted-list";
 

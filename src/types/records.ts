@@ -1,5 +1,5 @@
-import { Language } from "@src/@types";
 import { Record } from "pocketbase";
+import { Language } from "./types";
 
 export type Note = Record & {
   title: string;

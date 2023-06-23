@@ -1,7 +1,7 @@
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { IconButton, Menu, MenuItem } from "@mui/material";
-import { NoteCard } from "@src/components";
-import { Module } from "@src/util";
+import { NoteCard } from "@src/features/module";
+import { Module } from "@src/types";
 import { NoteShelfStyled, NotesWrap, Title } from "./NoteShelf.styled";
 import { useNoteShelf } from "./useNoteShelf";
 

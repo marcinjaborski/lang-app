@@ -1,5 +1,5 @@
 import { MenuItem, TextField, TextFieldProps } from "@mui/material";
-import { languages } from "@src/@types";
+import { languages } from "@src/types";
 import ReactCountryFlag from "react-country-flag";
 
 type LanguageSelectProps = TextFieldProps & {};

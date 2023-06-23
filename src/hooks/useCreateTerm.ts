@@ -1,4 +1,4 @@
-import { TermToCreate } from "@src/@types";
+import { TermToCreate } from "@src/types";
 import { pb } from "@src/util";
 import { useMutation } from "react-query";
 

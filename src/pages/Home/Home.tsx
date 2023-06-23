@@ -1,6 +1,6 @@
 import AddIcon from "@mui/icons-material/Add";
 import { Button, Divider, Fab, Grow, Typography } from "@mui/material";
-import { CreateModuleDialog, NoteShelf } from "@src/components";
+import { CreateDialog, NoteShelf } from "@src/features/module";
 import { EmptyMessage, HomeStyled, ModuleSkeleton, NoteSkeleton, NoteSkeletonWrap, Title } from "./Home.styled";
 import { useHome } from "./useHome";
 
@@ -39,7 +39,7 @@ export const Home = () => {
           <AddIcon />
         </Fab>
       </Grow>
-      <CreateModuleDialog />
+      <CreateDialog />
     </HomeStyled>
   );
 };

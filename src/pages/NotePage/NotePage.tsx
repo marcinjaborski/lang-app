@@ -1,10 +1,10 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import SaveIcon from "@mui/icons-material/Save";
 import { Fab, Grow } from "@mui/material";
-import { NoteDrawer, NoteEditor } from "@src/components";
+import { Drawer, NoteEditor } from "@src/features/editor";
+import { EditorContext } from "@src/hooks";
 import { useNotePage } from "@src/pages";
 import { DrawerButton, NotePageStyled } from "./NotePage.styled";
-import { EditorContext } from "@src/hooks/useEditorContext";
 
 export const NotePage = () => {
   const { editor, onOpenDrawer, onSave } = useNotePage();
@@ -16,7 +16,7 @@ export const NotePage = () => {
         <DrawerButton onClick={onOpenDrawer}>
           <MenuIcon fontSize="inherit" />
         </DrawerButton>
-        <NoteDrawer />
+        <Drawer />
         <Grow in={true}>
           <Fab color="primary" onClick={onSave}>
             <SaveIcon />

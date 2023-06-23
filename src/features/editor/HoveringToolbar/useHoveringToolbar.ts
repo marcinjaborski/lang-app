@@ -1,5 +1,4 @@
-import { useInsertTerm, useTranslateText } from "@src/hooks";
-import { useEditorContext } from "@src/hooks/useEditorContext";
+import { useEditorContext, useInsertTerm, useTranslateText } from "@src/hooks";
 import React, { useEffect, useRef } from "react";
 import { ReactEditor } from "slate-react";
 

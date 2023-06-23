@@ -1,6 +1,7 @@
 import { ThemeProvider } from "@mui/material";
 import { App } from "@src/App";
-import { GlobalStyles, store, theme } from "@src/util";
+import { store } from "@src/store";
+import { GlobalStyles, theme } from "@src/util";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";

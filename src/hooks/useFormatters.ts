@@ -1,5 +1,5 @@
-import { ListType, TextFormatOption } from "@src/@types";
-import { useEditorContext } from "@src/hooks/useEditorContext";
+import { useEditorContext } from "@src/hooks";
+import { ListType, TextFormatOption } from "@src/types";
 import { BasePoint, BaseRange, Editor, Element, Range, Text, Transforms } from "slate";
 
 export const useFormatters = () => {

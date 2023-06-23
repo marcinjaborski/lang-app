@@ -1,5 +1,5 @@
 import { Tab, Tabs } from "@mui/material";
-import { LoginTab, RegisterTab } from "@src/components";
+import { LoginTab, RegisterTab } from "@src/features/user";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { LoginStyled } from "./Login.styled";

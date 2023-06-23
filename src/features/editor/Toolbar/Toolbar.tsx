@@ -12,8 +12,8 @@ import FormatUnderlinedIcon from "@mui/icons-material/FormatUnderlined";
 import SchoolIcon from "@mui/icons-material/School";
 import TranslateIcon from "@mui/icons-material/Translate";
 import { Box, IconButton, Tooltip } from "@mui/material";
-import { useNoteEditorToolbar } from "@src/components/NoteEditorToolbar/useNoteEditorToolbar";
 import React, { ReactNode } from "react";
+import { useToolbar } from "./useToolbar";
 
 type ToolbarButton = {
   tooltip: string;
@@ -21,8 +21,8 @@ type ToolbarButton = {
   icon: ReactNode;
 };
 
-export const NoteEditorToolbar = () => {
-  const { t, translate, insertTerm, formatters } = useNoteEditorToolbar();
+export const Toolbar = () => {
+  const { t, translate, insertTerm, formatters } = useToolbar();
 
   const buttons: ToolbarButton[] = [
     {

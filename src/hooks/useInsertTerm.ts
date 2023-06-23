@@ -1,5 +1,4 @@
-import { useEditorContext } from "@src/hooks/useEditorContext";
-import { useSeparator } from "@src/hooks/useSeparator";
+import { useEditorContext, useSeparator } from "@src/hooks";
 import { moveToNextStep, startWritingTerm, useAppDispatch } from "@src/store";
 import { ZERO_WIDTH_SPACE } from "@src/util";
 import { BaseRange, Editor, Text, Transforms } from "slate";

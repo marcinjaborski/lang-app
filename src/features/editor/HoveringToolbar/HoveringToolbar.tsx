@@ -2,9 +2,9 @@ import SchoolIcon from "@mui/icons-material/School";
 import TranslateIcon from "@mui/icons-material/Translate";
 import { IconButton, SxProps } from "@mui/material";
 import { Portal } from "@src/components";
-import { HoveringToolbarStyled } from "@src/features/editor/HoveringToolbar/HoveringToolbar.styled";
-import { useHoveringToolbar } from "@src/features/editor/HoveringToolbar/useHoveringToolbar";
 import React from "react";
+import { HoveringToolbarStyled } from "./HoveringToolbar.styled";
+import { useHoveringToolbar } from "./useHoveringToolbar";
 
 export const HoveringToolbar = () => {
   const { ref, onInsertTerm, translateText } = useHoveringToolbar();

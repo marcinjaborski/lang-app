@@ -1,9 +1,9 @@
 import { MenuItem } from "@mui/material";
 import { LanguageSelect } from "@src/components";
-import { ExcerptTextField, ModuleSelect, NoteDrawerStyled, SaveButton } from "./NoteDrawer.styled";
-import { useNoteDrawer } from "./useNoteDrawer";
+import { DrawerStyled, ExcerptTextField, ModuleSelect, SaveButton } from "./Drawer.styled";
+import { useDrawer } from "./useDrawer";
 
-export const NoteDrawer = () => {
+export const Drawer = () => {
   const {
     t,
     open,
@@ -18,10 +18,10 @@ export const NoteDrawer = () => {
     onExcerptChange,
     onSave,
     modules,
-  } = useNoteDrawer();
+  } = useDrawer();
 
   return (
-    <NoteDrawerStyled anchor="right" open={open} onClose={onClose}>
+    <DrawerStyled anchor="right" open={open} onClose={onClose}>
       <LanguageSelect label={t("baseLang")} value={baseLang} onChange={onBaseLangChange} />
       <LanguageSelect label={t("targetLang")} value={targetLang} onChange={onTargetLangChange} />
       <ModuleSelect select label={t("module")} value={module} onChange={onModuleChange}>
@@ -42,6 +42,6 @@ export const NoteDrawer = () => {
       <SaveButton variant="contained" onClick={onSave}>
         {t("save")}
       </SaveButton>
-    </NoteDrawerStyled>
+    </DrawerStyled>
   );
 };

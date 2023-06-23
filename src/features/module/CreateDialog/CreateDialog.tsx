@@ -4,10 +4,10 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import { useCreateModuleDialog } from "./useCreateModuleDialog";
+import { useCreateDialog } from "./useCreateDialog";
 
-export const CreateModuleDialog = () => {
-  const { t, open, onClose, onCreate, onNameChange, isError, error } = useCreateModuleDialog();
+export const CreateDialog = () => {
+  const { t, open, onClose, onCreate, onNameChange, isError, error } = useCreateDialog();
 
   return (
     <Dialog open={open} onClose={onClose}>

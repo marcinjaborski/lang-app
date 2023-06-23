@@ -1,5 +1,4 @@
-import { useEditorContext } from "@src/hooks/useEditorContext";
-import { useSeparator } from "@src/hooks/useSeparator";
+import { useEditorContext, useSeparator } from "@src/hooks";
 import { useAppSelector } from "@src/store";
 import { translate } from "@src/util";
 import { Editor, Transforms } from "slate";

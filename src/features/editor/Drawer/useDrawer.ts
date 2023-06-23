@@ -1,4 +1,3 @@
-import { Module } from "@src/@types";
 import { useNotePage } from "@src/pages";
 import {
   changeBaseLang,
@@ -11,12 +10,13 @@ import {
   useAppDispatch,
   useAppSelector,
 } from "@src/store";
-import { Language, pb } from "@src/util";
+import { Language, Module } from "@src/types";
+import { pb } from "@src/util";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "react-query";
 
-export const useNoteDrawer = () => {
+export const useDrawer = () => {
   const { t } = useTranslation("noteDrawer");
   const noteDrawer: NoteDrawerState = useAppSelector((state) => state.noteDrawer);
   const dispatch = useAppDispatch();

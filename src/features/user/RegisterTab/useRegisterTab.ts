@@ -1,8 +1,8 @@
-import { useTranslation } from "react-i18next";
-import { useForm } from "react-hook-form";
-import { useMutation } from "react-query";
+import { useLoginTab } from "@src/features/user/LoginTab/useLoginTab";
 import { pb, pbError } from "@src/util";
-import { useLoginTab } from "../LoginTab/useLoginTab";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { useMutation } from "react-query";
 
 type RegisterTabFormData = {
   username: string;

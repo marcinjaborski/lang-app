@@ -1,8 +1,6 @@
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { Alert, Backdrop, CircularProgress, Slide } from "@mui/material";
-import TextField from "@mui/material/TextField";
-import { TabProps } from "@src/pages";
-import { Form, LoginAvatar, SubmitButton, Title } from "@src/pages/Login/Login.styled";
+import { Alert, Backdrop, CircularProgress, Slide, TextField } from "@mui/material";
+import { Form, LoginAvatar, SubmitButton, TabProps, Title } from "@src/pages";
 import { confirmPasswordValidator, emailValidator, usernameValidator } from "@src/util";
 import React from "react";
 import { useRegisterTab } from "./useRegisterTab";

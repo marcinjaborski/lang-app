@@ -54,4 +54,22 @@ export const pl: Resource = {
     excerpt: "Opis",
     save: "Zapisz",
   },
+  noteEditor: {
+    placeholder: "Zacznij pisać...",
+  },
+  noteToolbar: {
+    term: "Stwórz słówko",
+    translate: "Przetłumacz tekst",
+    bold: "Pogrubienie",
+    italic: "Kursywa",
+    underline: "Podkreślenie",
+    title: "Tytuł",
+    subtitle: "Podtytuł",
+    alignLeft: "Wyrównaj do lewo",
+    center: "Wyśrodkuj",
+    alignRight: "Wyrównaj do prawo",
+    justify: "Justowanie",
+    ul: "Lista punktowana",
+    ol: "Lista numerowana",
+  },
 };
