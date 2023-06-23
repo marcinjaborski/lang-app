@@ -7,7 +7,7 @@ import { useHoveringToolbar } from "@src/features/editor/HoveringToolbar/useHove
 import React from "react";
 
 export const HoveringToolbar = () => {
-  const { ref, onCreateWord, translateText } = useHoveringToolbar();
+  const { ref, onInsertTerm, translateText } = useHoveringToolbar();
 
   const sx: SxProps = {
     fill: "white",
@@ -16,7 +16,7 @@ export const HoveringToolbar = () => {
   return (
     <Portal>
       <HoveringToolbarStyled ref={ref}>
-        <IconButton onClick={onCreateWord}>
+        <IconButton onClick={onInsertTerm}>
           <SchoolIcon sx={sx} />
         </IconButton>
         <IconButton onClick={translateText}>

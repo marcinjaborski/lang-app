@@ -12,28 +12,16 @@ import FormatUnderlinedIcon from "@mui/icons-material/FormatUnderlined";
 import SchoolIcon from "@mui/icons-material/School";
 import TranslateIcon from "@mui/icons-material/Translate";
 import { Box, IconButton } from "@mui/material";
-import { useSeparator, useTranslateText } from "@src/hooks";
-import { useEditorContext } from "@src/hooks/useEditorContext";
-import { startWritingTerm } from "@src/store";
-import { align, bold, h1, h2, insertTerm, italic, ol, ul, underline, useAppDispatch } from "@src/util";
+import { useNoteEditorToolbar } from "@src/components/NoteEditorToolbar/useNoteEditorToolbar";
+import { align, bold, h1, h2, italic, ol, ul, underline } from "@src/util";
 import React from "react";
-import { ReactEditor } from "slate-react";
 
 export const NoteEditorToolbar = () => {
-  const editor = useEditorContext();
-  const separator = useSeparator();
-  const dispatch = useAppDispatch();
-  const translate = useTranslateText();
-
-  const onCreateWord = () => {
-    dispatch(startWritingTerm());
-    insertTerm(editor, separator);
-    ReactEditor.focus(editor);
-  };
+  const { editor, translate, insertTerm } = useNoteEditorToolbar();
 
   return (
     <Box>
-      <IconButton onClick={onCreateWord}>
+      <IconButton onClick={insertTerm}>
         <SchoolIcon />
       </IconButton>
       <IconButton onClick={translate}>

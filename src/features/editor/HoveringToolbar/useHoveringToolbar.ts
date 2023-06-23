@@ -1,16 +1,13 @@
-import { useSeparator, useTranslateText } from "@src/hooks";
+import { useInsertTerm, useTranslateText } from "@src/hooks";
 import { useEditorContext } from "@src/hooks/useEditorContext";
-import { moveToNextStep, startWritingTerm, useAppDispatch } from "@src/store";
 import React, { useEffect, useRef } from "react";
-import { Editor, Text, Transforms } from "slate";
 import { ReactEditor } from "slate-react";
 
 export const useHoveringToolbar = () => {
   const editor = useEditorContext();
   const ref = useRef<HTMLDivElement | null>(null);
-  const dispatch = useAppDispatch();
-  const separator = useSeparator();
   const translateText = useTranslateText();
+  const insertTerm = useInsertTerm();
 
   useEffect(() => {
     const handleHoveringToolbar = () => {
@@ -38,20 +35,10 @@ export const useHoveringToolbar = () => {
     return () => document.removeEventListener("selectionchange", handleHoveringToolbar);
   }, []);
 
-  const onCreateWord = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const onInsertTerm = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    if (!editor?.selection) return;
-    const selectedText = Editor.string(editor, editor.selection);
-    Transforms.setNodes(editor, { type: "term" }, { match: (n) => Text.isText(n), split: true });
-    ReactEditor.focus(editor);
-    Transforms.collapse(editor, { edge: "end" });
-    dispatch(startWritingTerm());
-    if (selectedText.includes(separator)) {
-      dispatch(moveToNextStep());
-    } else {
-      Transforms.insertText(editor, separator);
-    }
+    insertTerm();
   };
 
-  return { ref, onCreateWord, translateText };
+  return { ref, onInsertTerm, translateText };
 };

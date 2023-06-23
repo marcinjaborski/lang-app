@@ -1,6 +1,4 @@
 import { DeeplLanguage, Language } from "@src/@types";
-import { ZERO_WIDTH_SPACE } from "@src/util/constants";
-import { Editor, Transforms } from "slate";
 import { axiosDeepl } from "./axios";
 
 export const translate = async (text: string, sourceLang: Language, targetLang: Language) => {
@@ -21,14 +19,4 @@ const toDeeplCode = (lng: Language): DeeplLanguage => {
     default:
       return lng;
   }
-};
-
-export const insertTerm = (editor: Editor, separator: string) => {
-  Transforms.insertNodes(editor, [
-    {
-      type: "term",
-      text: `${ZERO_WIDTH_SPACE}${separator}`,
-    },
-  ]);
-  Transforms.move(editor, { distance: separator.length, unit: "offset", reverse: true });
 };
