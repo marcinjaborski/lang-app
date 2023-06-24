@@ -72,4 +72,12 @@ export const pl: Resource = {
     ul: "Lista punktowana",
     ol: "Lista numerowana",
   },
+  feedback: {
+    created: "Utworzono",
+    updated: "Zapisano",
+    deleted: "Usunięto",
+    "Failed to create record.": "Nie można było utworzyć",
+    "Failed to authenticate.": "Ten użytkownik nie istnieje",
+    "You are not allowed to perform this request.": "Nie możesz wykonać tej operacji",
+  },
 };

@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { createModuleDialog, noteDrawer, noteEditor } from "@src/store";
+import { createModuleDialog, feedback, noteDrawer, noteEditor } from "@src/store";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 export const store = configureStore({
@@ -7,6 +7,7 @@ export const store = configureStore({
     createModuleDialog,
     noteDrawer,
     noteEditor,
+    feedback,
   }),
   middleware: (gdM) => gdM({ serializableCheck: { ignoredActions: ["noteDrawerSlice/updateStateFromNote"] } }),
 });

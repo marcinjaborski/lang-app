@@ -70,4 +70,12 @@ export const en = {
     ul: "Bulleted list",
     ol: "Numbered list",
   },
+  feedback: {
+    created: "Created",
+    updated: "Updated",
+    deleted: "Deleted",
+    "Failed to create record.": "Could not create",
+    "Failed to authenticate.": "The user does not exists",
+    "You are not allowed to perform this request.": "You are not allowed to perform this operation",
+  },
 };

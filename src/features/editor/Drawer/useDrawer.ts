@@ -1,3 +1,4 @@
+import { useModuleRepository } from "@src/hooks";
 import { useNotePage } from "@src/pages";
 import {
   changeBaseLang,
@@ -10,19 +11,17 @@ import {
   useAppDispatch,
   useAppSelector,
 } from "@src/store";
-import { Language, Module } from "@src/types";
-import { pb } from "@src/util";
+import { Language } from "@src/types";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useQuery } from "react-query";
 
 export const useDrawer = () => {
   const { t } = useTranslation("noteDrawer");
   const noteDrawer: NoteDrawerState = useAppSelector((state) => state.noteDrawer);
   const dispatch = useAppDispatch();
-  const { data: modules } = useQuery("list-modules", () => {
-    return pb.collection("modules").getFullList() as Promise<Module[]>;
-  });
+  const {
+    list: { data: modules },
+  } = useModuleRepository();
   const { onSave: saveNote } = useNotePage();
 
   const onOpen = () => dispatch(openDrawer());
