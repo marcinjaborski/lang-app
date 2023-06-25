@@ -1,5 +1,6 @@
-import { useCreateTerm, useEditorContext, useSeparator } from "@src/hooks";
+import { useEditorContext, useSeparator, useTermRepository } from "@src/hooks";
 import { moveToNextStep, startWritingTerm, useAppDispatch } from "@src/store";
+import { NoteUrlParams } from "@src/types";
 import { ZERO_WIDTH_SPACE } from "@src/util";
 import { useParams } from "react-router-dom";
 import { BaseRange, Editor, Text, Transforms } from "slate";
@@ -9,8 +10,8 @@ export const useInsertTerm = () => {
   const editor = useEditorContext();
   const separator = useSeparator();
   const dispatch = useAppDispatch();
-  const { mutate: create } = useCreateTerm();
-  const params = useParams<{ id: string }>();
+  const terms = useTermRepository();
+  const params = useParams<NoteUrlParams>();
 
   const replaceSelected = (selection: BaseRange) => {
     const selectedText = Editor.string(editor, selection);
@@ -30,7 +31,7 @@ export const useInsertTerm = () => {
       return;
     }
     if (params.id) {
-      create({ base, translation, note: params.id });
+      terms.create.mutate({ base, translation, note: params.id });
     }
   };
 

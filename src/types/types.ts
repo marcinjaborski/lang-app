@@ -6,3 +6,7 @@ export const shortcuts = ["b", "i", "u", "t", "l", "e", "r", "j"] as const;
 export type Shortcut = (typeof shortcuts)[number];
 
 export type Overwrite<T, U> = Pick<T, Exclude<keyof T, keyof U>> & U;
+
+export type NoteUrlParams = {
+  id: string;
+};

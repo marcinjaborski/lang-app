@@ -1,7 +1,7 @@
 import { Element, Leaf } from "@src/features/editor";
-import { useCreateTerm, useEditorContext, useFormatters, useSeparator, useTranslateText } from "@src/hooks";
+import { useEditorContext, useFormatters, useSeparator, useTermRepository, useTranslateText } from "@src/hooks";
 import { changeTitle, moveToNextStep, useAppDispatch, useAppSelector } from "@src/store";
-import { ElementType, isShortcut, isTermElement } from "@src/types";
+import { ElementType, isShortcut, isTermElement, NoteUrlParams } from "@src/types";
 import { ZERO_WIDTH_SPACE } from "@src/util";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -17,9 +17,9 @@ export const useNoteEditor = () => {
   const termPhase = useAppSelector((state) => state.noteEditor.termPhase);
   const translateText = useTranslateText();
   const separator = useSeparator();
-  const { mutate: createTerm } = useCreateTerm();
+  const terms = useTermRepository();
   const formatters = useFormatters();
-  const params = useParams<{ id: string }>();
+  const params = useParams<NoteUrlParams>();
 
   const emptyElement: Descendant[] = [
     {
@@ -59,7 +59,7 @@ export const useNoteEditor = () => {
       if (isTermElement(term)) {
         const [base, translation] = term.text.split(separator);
         if (params.id) {
-          createTerm({ base, translation, note: params.id });
+          terms.create.mutate({ base, translation, note: params.id });
         }
       }
     }

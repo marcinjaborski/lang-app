@@ -2,8 +2,8 @@ import { TermToCreate } from "@src/types";
 import { pb } from "@src/util";
 import { useMutation } from "react-query";
 
-export const useCreateTerm = () => {
-  const mutation = useMutation((term: Omit<TermToCreate, "owner">) => {
+export const useTermRepository = () => {
+  const create = useMutation((term: Omit<TermToCreate, "owner">) => {
     const newTerm: TermToCreate = {
       ...term,
       owner: pb.authStore.model!.id,
@@ -11,5 +11,5 @@ export const useCreateTerm = () => {
     return pb.collection("terms").create(newTerm);
   });
 
-  return { ...mutation };
+  return { create };
 };
