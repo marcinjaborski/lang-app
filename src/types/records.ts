@@ -1,3 +1,4 @@
+import { AppLanguage } from "@src/i18n/types";
 import { Record } from "pocketbase";
 import { Language } from "./types";
 
@@ -32,6 +33,15 @@ export type Term = Record & {
   };
 };
 
+export type Settings = Record & {
+  userLanguage: AppLanguage;
+  separator: string;
+  theme: {};
+  defaultBaseLang: Language;
+  defaultTargetLang: Language;
+  user: string;
+};
+
 export type NoteToCreate = {
   title: string;
   owner: string;
@@ -52,4 +62,12 @@ export type TermToCreate = {
   translation: string;
   owner: string;
   note: string;
+};
+
+export type SettingsToCreate = {
+  userLanguage?: AppLanguage;
+  separator?: string;
+  theme?: {};
+  defaultBaseLang?: Language;
+  defaultTargetLang?: Language;
 };

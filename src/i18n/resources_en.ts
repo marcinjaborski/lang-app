@@ -2,6 +2,7 @@ export const en = {
   navbar: {
     login: "Log in",
     logout: "Log out",
+    settings: "Settings",
   },
   home: {
     hello: "Hello",
@@ -77,5 +78,13 @@ export const en = {
     "Failed to create record.": "Could not create",
     "Failed to authenticate.": "The user does not exists",
     "You are not allowed to perform this request.": "You are not allowed to perform this operation",
+  },
+  settings: {
+    title: "User settings",
+    userLanguage: "App language",
+    separator: "Term separator",
+    defaultBaseLang: "Default language for base",
+    defaultTargetLang: "Default language for translations",
+    save: "Save",
   },
 };

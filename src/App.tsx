@@ -1,6 +1,6 @@
 import { Navbar } from "@src/components";
 import { FeedbackSnackbar } from "@src/components/FeedbackSnackbar/FeedbackSnackbar";
-import { Home, Login, NotePage, NotFound } from "@src/pages";
+import { Home, Login, NotePage, NotFound, Settings } from "@src/pages";
 import { pb } from "@src/util";
 import { Route, Routes } from "react-router-dom";
 
@@ -16,6 +16,7 @@ export const App = () => {
           <>
             <Route path="/note" element={<NotePage />} />
             <Route path="/note/:id" element={<NotePage />} />
+            <Route path="/settings" element={<Settings />} />
           </>
         ) : null}
         <Route path="*" element={<NotFound />} />

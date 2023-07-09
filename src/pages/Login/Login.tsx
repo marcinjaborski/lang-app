@@ -1,8 +1,8 @@
 import { Tab, Tabs } from "@mui/material";
 import { LoginTab, RegisterTab } from "@src/features/user";
+import { LoginStyled } from "@src/pages";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { LoginStyled } from "./Login.styled";
 
 export type TabProps = {
   selected: number;

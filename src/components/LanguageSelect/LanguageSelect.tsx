@@ -9,7 +9,7 @@ export const LanguageSelect = (props: LanguageSelectProps) => {
     <TextField select {...props}>
       {languages.map((lng) => (
         <MenuItem value={lng} key={lng}>
-          <ReactCountryFlag countryCode={lng.toUpperCase()} svg />
+          <ReactCountryFlag countryCode={(lng === "en" ? "gb" : lng).toUpperCase()} svg />
         </MenuItem>
       ))}
     </TextField>

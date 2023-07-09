@@ -1,6 +1,8 @@
 import { createTheme } from "@mui/material";
 import { backgroundColor, primaryColor } from "./GlobalStyles";
 
+const borderRadius = 16;
+
 export const theme = createTheme({
   palette: {
     primary: {
@@ -23,6 +25,24 @@ export const theme = createTheme({
   },
   typography: {
     fontFamily: ["Montserrat"].join(","),
+  },
+  components: {
+    MuiPaper: {
+      styleOverrides: {
+        root: { borderRadius },
+      },
+    },
+    MuiMenu: {
+      styleOverrides: {
+        paper: ({ theme }) => ({ padding: theme.spacing(1), borderRadius }),
+        list: { padding: 0 },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: { borderRadius },
+      },
+    },
   },
 });
 

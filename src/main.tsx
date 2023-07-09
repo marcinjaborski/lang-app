@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import { App } from "@src/App";
 import { store } from "@src/store";
 import { GlobalStyles, theme } from "@src/util";
@@ -21,6 +21,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
           <ThemeProvider theme={theme}>
+            <CssBaseline />
             <App />
           </ThemeProvider>
         </Provider>

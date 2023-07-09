@@ -2,7 +2,7 @@ import CreateIcon from "@mui/icons-material/Create";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
 import { IconButton, Menu, MenuItem, ToggleButton, ToggleButtonGroup } from "@mui/material";
-import { NavbarWrap, ToolbarWrap, VerticalToolbar } from "./NavbarWrap";
+import { ToolbarWrap } from "./Navbar.styled";
 import { useNavbar } from "./useNavbar";
 
 export const Navbar = () => {
@@ -19,49 +19,51 @@ export const Navbar = () => {
     openedUserMenu,
   } = useNavbar();
 
+  const menuItems = isLogged
+    ? [
+        <MenuItem key="settings" onClick={() => navigate("/settings")}>
+          {t("settings")}
+        </MenuItem>,
+        <MenuItem key="logout" onClick={onLogout}>
+          {t("logout")}
+        </MenuItem>,
+      ]
+    : [
+        <MenuItem key="login" onClick={onLogin}>
+          {t("login")}
+        </MenuItem>,
+      ];
+
   return (
-    <NavbarWrap>
-      <ToolbarWrap position="static">
-        <VerticalToolbar>
-          <ToggleButtonGroup
-            exclusive
-            orientation="vertical"
-            color="white"
-            onChange={(_event, value) => navigate(value)}
-          >
-            <ToggleButton value="/" selected={pathname === "/"}>
-              <HomeIcon />
-            </ToggleButton>
-            {isLogged ? (
-              <ToggleButton value="/note" selected={pathname === "/note"}>
-                <CreateIcon />
-              </ToggleButton>
-            ) : null}
-          </ToggleButtonGroup>
-          <IconButton onClick={onUserMenuOpen}>
-            <PersonIcon />
-          </IconButton>
-          <Menu
-            anchorEl={userMenuAnchorEl}
-            open={openedUserMenu}
-            onClose={onUserMenuClose}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "left",
-            }}
-          >
-            {isLogged ? (
-              <MenuItem onClick={onLogout}>{t("logout")}</MenuItem>
-            ) : (
-              <MenuItem onClick={onLogin}>{t("login")}</MenuItem>
-            )}
-          </Menu>
-        </VerticalToolbar>
-      </ToolbarWrap>
-    </NavbarWrap>
+    <ToolbarWrap position="static" component="nav">
+      <ToggleButtonGroup exclusive orientation="vertical" color="white" onChange={(_event, value) => navigate(value)}>
+        <ToggleButton value="/" selected={pathname === "/"}>
+          <HomeIcon />
+        </ToggleButton>
+        {isLogged ? (
+          <ToggleButton value="/note" selected={pathname.includes("/note")}>
+            <CreateIcon />
+          </ToggleButton>
+        ) : null}
+      </ToggleButtonGroup>
+      <IconButton onClick={onUserMenuOpen}>
+        <PersonIcon />
+      </IconButton>
+      <Menu
+        anchorEl={userMenuAnchorEl}
+        open={openedUserMenu}
+        onClose={onUserMenuClose}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+      >
+        {menuItems}
+      </Menu>
+    </ToolbarWrap>
   );
 };

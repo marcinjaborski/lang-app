@@ -1,4 +1,5 @@
-import { useEditorContext, useSeparator, useTermRepository } from "@src/hooks";
+import { useEditorContext, useTermRepository } from "@src/hooks";
+import { useSettings } from "@src/hooks/useSettings";
 import { moveToNextStep, startWritingTerm, useAppDispatch } from "@src/store";
 import { NoteUrlParams } from "@src/types";
 import { ZERO_WIDTH_SPACE } from "@src/util";
@@ -8,7 +9,7 @@ import { ReactEditor } from "slate-react";
 
 export const useInsertTerm = () => {
   const editor = useEditorContext();
-  const separator = useSeparator();
+  const separator = useSettings().separator;
   const dispatch = useAppDispatch();
   const terms = useTermRepository();
   const params = useParams<NoteUrlParams>();

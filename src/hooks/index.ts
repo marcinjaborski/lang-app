@@ -1,4 +1,3 @@
-export * from "./useSeparator";
 export * from "./useTermRepository";
 export * from "./useTranslateText";
 export * from "./useEditorContext";

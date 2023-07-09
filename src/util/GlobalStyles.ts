@@ -20,13 +20,17 @@ export const GlobalStyles = createGlobalStyle`
 
     --background: ${backgroundColor};
   }
-   
+
+  * {
+    box-sizing: border-box;
+  }
+
   body {
     margin: 0;
     padding: 0;
     background: var(--background);
   }
-  
+
   #root {
     display: flex;
   }

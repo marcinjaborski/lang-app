@@ -1,5 +1,6 @@
 import { Element, Leaf } from "@src/features/editor";
-import { useEditorContext, useFormatters, useSeparator, useTermRepository, useTranslateText } from "@src/hooks";
+import { useEditorContext, useFormatters, useTermRepository, useTranslateText } from "@src/hooks";
+import { useSettings } from "@src/hooks/useSettings";
 import { changeTitle, moveToNextStep, useAppDispatch, useAppSelector } from "@src/store";
 import { ElementType, isShortcut, isTermElement, NoteUrlParams } from "@src/types";
 import { ZERO_WIDTH_SPACE } from "@src/util";
@@ -16,7 +17,7 @@ export const useNoteEditor = () => {
   const title = useAppSelector((state) => state.noteEditor.title);
   const termPhase = useAppSelector((state) => state.noteEditor.termPhase);
   const translateText = useTranslateText();
-  const separator = useSeparator();
+  const separator = useSettings().separator;
   const terms = useTermRepository();
   const formatters = useFormatters();
   const params = useParams<NoteUrlParams>();
