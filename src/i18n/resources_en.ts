@@ -86,5 +86,6 @@ export const en = {
     defaultBaseLang: "Default language for base",
     defaultTargetLang: "Default language for translations",
     save: "Save",
+    updated: "Settings saved",
   },
 };

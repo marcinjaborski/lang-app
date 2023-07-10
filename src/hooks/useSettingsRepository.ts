@@ -1,9 +1,13 @@
+import { showSuccess, useAppDispatch } from "@src/store";
 import { Settings, SettingsToCreate } from "@src/types";
 import { pb } from "@src/util";
+import { useTranslation } from "react-i18next";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 export const useSettingsRepository = () => {
+  const { t } = useTranslation("settings");
   const queryClient = useQueryClient();
+  const dispatch = useAppDispatch();
 
   const view = useQuery<Settings>("view-settings", () => {
     return pb.collection("settings").getFirstListItem<Settings>("");
@@ -29,6 +33,7 @@ export const useSettingsRepository = () => {
     },
     {
       async onSuccess() {
+        dispatch(showSuccess(t("updated")));
         await queryClient.invalidateQueries("view-settings");
       },
     },

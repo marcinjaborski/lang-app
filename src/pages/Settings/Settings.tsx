@@ -1,13 +1,12 @@
 import { CircularProgress, MenuItem, TextField, Typography } from "@mui/material";
 import { LanguageSelect } from "@src/components";
-import { AppLanguage } from "@src/i18n/types";
-import { SaveButton, SettingsContainer, SettingsStyled, SpinnerWrap } from "@src/pages/Settings/Settings.styled";
-import { useSettingsPage } from "@src/pages/Settings/useSettingsPage";
 import { Language } from "@src/types";
 import ReactCountryFlag from "react-country-flag";
+import { SaveButton, SettingsContainer, SettingsStyled, SpinnerWrap } from "./Settings.styled";
+import { useSettingsPage } from "./useSettingsPage";
 
 export const Settings = () => {
-  const { t, settings, settingsRepository, onSave, ...state } = useSettingsPage();
+  const { t, settings, settingsRepository, onLangChange, onSave, ...state } = useSettingsPage();
 
   return (
     <SettingsStyled>
@@ -20,12 +19,7 @@ export const Settings = () => {
         ) : null}
         {settingsRepository.view.data ? (
           <>
-            <TextField
-              select
-              label={t("userLanguage")}
-              value={state.language}
-              onChange={(event) => state.setLanguage(event.target.value as AppLanguage)}
-            >
+            <TextField select label={t("userLanguage")} value={state.language} onChange={onLangChange}>
               <MenuItem value="en">
                 <ReactCountryFlag countryCode="GB" svg />
               </MenuItem>

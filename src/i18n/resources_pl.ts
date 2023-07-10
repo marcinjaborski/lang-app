@@ -4,6 +4,7 @@ export const pl: Resource = {
   navbar: {
     login: "Zaloguj",
     logout: "Wyloguj",
+    settings: "Ustawienia",
   },
   home: {
     hello: "Cześć",
@@ -79,5 +80,14 @@ export const pl: Resource = {
     "Failed to create record.": "Nie można było utworzyć",
     "Failed to authenticate.": "Ten użytkownik nie istnieje",
     "You are not allowed to perform this request.": "Nie możesz wykonać tej operacji",
+  },
+  settings: {
+    title: "Ustawienia",
+    userLanguage: "Język aplikacji",
+    separator: "Rozdzielacz słówka",
+    defaultBaseLang: "Domyślny język bazowy",
+    defaultTargetLang: "Domyślny język tłumaczeń",
+    save: "Zapisz",
+    updated: "Zapisano ustawienia",
   },
 };

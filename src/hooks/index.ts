@@ -5,3 +5,5 @@ export * from "./useInsertTerm";
 export * from "./useFormatters";
 export * from "./useModuleRepository";
 export * from "./useNoteRepository";
+export * from "./useSettings";
+export * from "./useSettingsRepository";

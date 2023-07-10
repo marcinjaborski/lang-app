@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { DEFAULT_LANG, DEFAULT_TRANSLATION_LANG } from "@src/hooks";
 import { Language, Note } from "@src/types";
 
 export type NoteDrawerState = {
@@ -11,8 +12,8 @@ export type NoteDrawerState = {
 
 const initialState: NoteDrawerState = {
   open: false,
-  baseLang: "gb",
-  targetLang: "es",
+  baseLang: DEFAULT_LANG,
+  targetLang: DEFAULT_TRANSLATION_LANG,
   module: "",
   excerpt: "",
 };

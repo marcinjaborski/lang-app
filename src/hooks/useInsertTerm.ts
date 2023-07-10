@@ -1,5 +1,4 @@
-import { useEditorContext, useTermRepository } from "@src/hooks";
-import { useSettings } from "@src/hooks/useSettings";
+import { useEditorContext, useSettings, useTermRepository } from "@src/hooks";
 import { moveToNextStep, startWritingTerm, useAppDispatch } from "@src/store";
 import { NoteUrlParams } from "@src/types";
 import { ZERO_WIDTH_SPACE } from "@src/util";

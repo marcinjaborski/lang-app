@@ -1,5 +1,14 @@
-import { useNoteRepository } from "@src/hooks";
-import { changeTitle, clearState, openDrawer, updateStateFromNote, useAppDispatch, useAppSelector } from "@src/store";
+import { useNoteRepository, useSettings } from "@src/hooks";
+import {
+  changeBaseLang,
+  changeTargetLang,
+  changeTitle,
+  clearState,
+  openDrawer,
+  updateStateFromNote,
+  useAppDispatch,
+  useAppSelector,
+} from "@src/store";
 import { NoteToCreate, NoteUrlParams } from "@src/types";
 import { pb } from "@src/util";
 import { useEffect, useState } from "react";
@@ -15,11 +24,14 @@ export const useNotePage = () => {
   const title = useAppSelector((state) => state.noteEditor.title);
   const drawerState = useAppSelector((state) => state.noteDrawer);
   const notes = useNoteRepository();
+  const settings = useSettings();
 
   useEffect(() => {
     if (!params.id) {
       dispatch(changeTitle(""));
       dispatch(clearState());
+      dispatch(changeBaseLang(settings.baseLang));
+      dispatch(changeTargetLang(settings.targetLang));
       return;
     }
     notes.view.refetch().then(({ data: note }) => {

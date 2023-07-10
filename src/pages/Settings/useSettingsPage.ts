@@ -1,10 +1,10 @@
-import { useSettings } from "@src/hooks/useSettings";
-import { useSettingsRepository } from "@src/hooks/useSettingsRepository";
-import { useEffect, useState } from "react";
+import { useSettings, useSettingsRepository } from "@src/hooks";
+import { AppLanguage } from "@src/i18n/types";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export const useSettingsPage = () => {
-  const { t } = useTranslation("settings");
+  const { t, i18n } = useTranslation("settings");
   const settings = useSettings();
   const settingsRepository = useSettingsRepository();
   const [language, setLanguage] = useState(settings.language);
@@ -25,6 +25,11 @@ export const useSettingsPage = () => {
     setSeparator(settings.separator);
   }, [settingsRepository.view.data]);
 
+  const onLangChange = async (event: ChangeEvent<HTMLInputElement>) => {
+    setLanguage(event.target.value as AppLanguage);
+    await i18n.changeLanguage(event.target.value);
+  };
+
   const onSave = () => {
     settingsRepository.update.mutate({
       userLanguage: language,
@@ -38,6 +43,7 @@ export const useSettingsPage = () => {
     t,
     settings,
     settingsRepository,
+    onLangChange,
     onSave,
     language,
     setLanguage,

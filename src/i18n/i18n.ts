@@ -1,3 +1,4 @@
+import { DEFAULT_LANG } from "@src/hooks";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import { en } from "./resources_en";
@@ -14,8 +15,8 @@ i18n
   .init({
     resources,
     defaultNS,
-    lng: "en",
-    fallbackLng: "en",
+    lng: DEFAULT_LANG,
+    fallbackLng: DEFAULT_LANG,
     returnNull: false,
     interpolation: {
       escapeValue: false,

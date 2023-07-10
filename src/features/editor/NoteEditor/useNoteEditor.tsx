@@ -1,6 +1,5 @@
 import { Element, Leaf } from "@src/features/editor";
-import { useEditorContext, useFormatters, useTermRepository, useTranslateText } from "@src/hooks";
-import { useSettings } from "@src/hooks/useSettings";
+import { useEditorContext, useFormatters, useSettings, useTermRepository, useTranslateText } from "@src/hooks";
 import { changeTitle, moveToNextStep, useAppDispatch, useAppSelector } from "@src/store";
 import { ElementType, isShortcut, isTermElement, NoteUrlParams } from "@src/types";
 import { ZERO_WIDTH_SPACE } from "@src/util";
