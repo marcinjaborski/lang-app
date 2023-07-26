@@ -1,6 +1,6 @@
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { Alert, Backdrop, CircularProgress, Slide, TextField } from "@mui/material";
-import { Form, LoginAvatar, SubmitButton, TabProps, Title } from "@src/pages";
+import { Alert, Backdrop, CircularProgress, Slide, TextField, Typography } from "@mui/material";
+import { Form, LoginAvatar, SubmitButton, TabProps } from "@src/pages";
 import React from "react";
 import { useLoginTab } from "./useLoginTab";
 
@@ -14,7 +14,9 @@ export const LoginTab = (props: TabProps) => {
           <LoginAvatar>
             <LockOutlinedIcon />
           </LoginAvatar>
-          <Title>{t("loginTabTitle")}</Title>
+          <Typography component="h1" variant="h5">
+            {t("loginTabTitle")}
+          </Typography>
           <TextField
             margin="normal"
             required
@@ -46,9 +48,11 @@ export const LoginTab = (props: TabProps) => {
             })}
           />
           {isError ? <Alert severity="error">{t(error.message)}</Alert> : null}
-          <SubmitButton type="submit">{t("loginButton")}</SubmitButton>
+          <SubmitButton variant="contained" type="submit">
+            {t("loginButton")}
+          </SubmitButton>
           <Backdrop open={isLoading}>
-            <CircularProgress />
+            <CircularProgress sx={{ ml: "80px" }} />
           </Backdrop>
         </Form>
       </Slide>

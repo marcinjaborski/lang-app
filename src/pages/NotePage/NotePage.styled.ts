@@ -1,17 +1,13 @@
 import { IconButton } from "@mui/material";
-import styled from "styled-components";
+import { styled } from "@mui/material/styles";
 
-export const NotePageStyled = styled.main`
-  display: flex;
-  justify-content: center;
-`;
+export const NotePageStyled = styled("main")({
+  display: "flex",
+  justifyContent: "center",
+});
 
-export const DrawerButton = styled(IconButton).attrs({
-  size: "large",
-  sx: {
-    position: "fixed",
-  },
-})`
-  top: 1em;
-  right: 1em;
-`;
+export const DrawerButton = styled(IconButton)(({ theme }) => ({
+  position: "fixed",
+  top: theme.spacing(1),
+  right: theme.spacing(1),
+}));

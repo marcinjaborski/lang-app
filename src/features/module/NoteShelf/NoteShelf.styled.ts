@@ -1,17 +1,17 @@
 import { Typography } from "@mui/material";
-import styled from "styled-components";
+import { styled } from "@mui/material/styles";
 
-export const NoteShelfStyled = styled.section`
-  width: 100%;
-  margin-top: 0.5em;
-`;
+export const NoteShelfStyled = styled("section")(({ theme }) => ({
+  width: "100%",
+  marginTop: theme.spacing(1),
+}));
 
-export const Title = styled(Typography).attrs({ variant: "h5", gutterBottom: true })`
-  width: 50%;
-  border-bottom: 1px solid #d1d0ce;
-`;
+export const Title = styled(Typography)(({ theme }) => ({
+  width: "50%",
+  borderBottom: `1px solid ${theme.palette.grey["400"]}`,
+}));
 
-export const NotesWrap = styled.div`
-  display: flex;
-  gap: 1em;
-`;
+export const NotesWrap = styled("div")(({ theme }) => ({
+  display: "flex",
+  gap: theme.spacing(1),
+}));

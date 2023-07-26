@@ -1,18 +1,17 @@
 import { createTheme } from "@mui/material";
-import { backgroundColor, primaryColor } from "./GlobalStyles";
 
 const borderRadius = 16;
 
 export const theme = createTheme({
   palette: {
     primary: {
-      main: primaryColor,
+      main: "#1abc9c",
     },
     secondary: {
       main: "#FDA769",
     },
     background: {
-      default: backgroundColor,
+      default: "#F0EBE3",
       paper: "#dce5d3",
     },
     white: {
@@ -41,6 +40,15 @@ export const theme = createTheme({
     MuiMenuItem: {
       styleOverrides: {
         root: { borderRadius },
+      },
+    },
+    MuiFab: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          position: "fixed",
+          right: theme.spacing(2),
+          bottom: theme.spacing(2),
+        }),
       },
     },
   },

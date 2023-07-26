@@ -13,11 +13,11 @@ export const NotePage = () => {
     <NotePageStyled>
       <EditorContext.Provider value={editor}>
         <NoteEditor />
-        <DrawerButton onClick={onOpenDrawer}>
+        <DrawerButton size="large" onClick={onOpenDrawer}>
           <MenuIcon fontSize="inherit" />
         </DrawerButton>
         <Drawer />
-        <Grow in={true}>
+        <Grow in>
           <Fab color="primary" onClick={onSave}>
             <SaveIcon />
           </Fab>

@@ -1,8 +1,10 @@
-import { primaryColor } from "@src/util";
+import { useTheme } from "@mui/material";
 import { CSSProperties } from "react";
 import { RenderLeafProps } from "slate-react";
 
 export const Leaf = ({ attributes, children, leaf }: RenderLeafProps) => {
+  const theme = useTheme();
+
   if (leaf.bold) {
     children = <strong>{children}</strong>;
   }
@@ -18,7 +20,7 @@ export const Leaf = ({ attributes, children, leaf }: RenderLeafProps) => {
   const styles: CSSProperties = {};
   if (leaf.type === "term") {
     styles.backgroundColor = "yellow";
-    styles.caretColor = primaryColor;
+    styles.caretColor = theme.palette.primary.main;
   }
 
   return (

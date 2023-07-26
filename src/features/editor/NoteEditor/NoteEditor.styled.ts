@@ -1,17 +1,16 @@
-import { primaryColor } from "@src/util";
+import { styled } from "@mui/material/styles";
 import { Editable } from "slate-react";
-import styled from "styled-components";
 
-export const NoteEditorStyled = styled.div`
-  width: 50%;
-  margin-top: 1em;
-  display: flex;
-  flex-direction: column;
-`;
+export const NoteEditorStyled = styled("div")(({ theme }) => ({
+  width: "50%",
+  marginTop: theme.spacing(1),
+  display: "flex",
+  flexDirection: "column",
+}));
 
-export const EditableStyled = styled(Editable)`
-  background: whitesmoke;
-  padding: 1em;
-  flex-grow: 1;
-  border: 2px dotted ${primaryColor};
-`;
+export const EditableStyled = styled(Editable)(({ theme }) => ({
+  background: theme.palette.grey["100"],
+  padding: theme.spacing(2),
+  flexGrow: 1,
+  border: `2px dotted ${theme.palette.primary.main}`,
+}));

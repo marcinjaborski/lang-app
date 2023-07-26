@@ -15,7 +15,7 @@ export const NoteShelf = (props: NoteShelfProps) => {
 
   return (
     <NoteShelfStyled>
-      <Title>
+      <Title variant="h5" gutterBottom>
         {module.name}
         <IconButton onClick={onMenuOpen} size="small">
           <MoreVertIcon fontSize="inherit" />

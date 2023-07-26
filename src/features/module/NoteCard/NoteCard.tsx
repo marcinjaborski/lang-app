@@ -1,8 +1,8 @@
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { Button, CardActions, IconButton, Menu, MenuItem } from "@mui/material";
+import { Button, CardActions, IconButton, Menu, MenuItem, Typography } from "@mui/material";
 import { Note } from "@src/types";
-import { Excerpt, NoteCardStyled, NoteProgress, StyledCardContent, Title } from "./NoteCard.styled";
+import { Excerpt, NoteCardStyled, NoteProgress, StyledCardContent } from "./NoteCard.styled";
 import { useNoteCard } from "./useNoteCard";
 
 type NoteCardProps = {
@@ -16,7 +16,7 @@ export const NoteCard = (props: NoteCardProps) => {
   return (
     <NoteCardStyled>
       <StyledCardContent>
-        <Title>{note.title}</Title>
+        <Typography gutterBottom>{note.title}</Typography>
         <IconButton onClick={onMenuOpen} size="small">
           <MoreVertIcon fontSize="inherit" />
         </IconButton>

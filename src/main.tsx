@@ -1,7 +1,7 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { App } from "@src/App";
 import { store } from "@src/store";
-import { GlobalStyles, theme } from "@src/util";
+import { inputGlobalStyles, theme } from "@src/util";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -16,12 +16,12 @@ const isDevelopment = import.meta.env.DEV;
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <GlobalStyles />
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
           <ThemeProvider theme={theme}>
             <CssBaseline />
+            {inputGlobalStyles}
             <App />
           </ThemeProvider>
         </Provider>

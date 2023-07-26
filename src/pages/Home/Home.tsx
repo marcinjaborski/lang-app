@@ -1,7 +1,7 @@
 import AddIcon from "@mui/icons-material/Add";
 import { Button, Divider, Fab, Grow, Typography } from "@mui/material";
 import { CreateDialog, NoteShelf } from "@src/features/module";
-import { EmptyMessage, HomeStyled, ModuleSkeleton, NoteSkeleton, NoteSkeletonWrap, Title } from "./Home.styled";
+import { EmptyMessage, HomeStyled, ModuleSkeleton, NoteSkeleton, NoteSkeletonWrap } from "./Home.styled";
 import { useHome } from "./useHome";
 
 export const Home = () => {
@@ -9,9 +9,9 @@ export const Home = () => {
 
   return (
     <HomeStyled>
-      <Title>
+      <Typography variant="h4" fontWeight={500}>
         {t("hello")} {username}
-      </Title>
+      </Typography>
       <Divider />
       {isLoading ? (
         <>
@@ -34,7 +34,7 @@ export const Home = () => {
       {modules?.map((module) => (
         <NoteShelf module={module} key={module.id} />
       ))}
-      <Grow in={true}>
+      <Grow in>
         <Fab color="primary" onClick={openCreateModuleDialog}>
           <AddIcon />
         </Fab>
