@@ -44,8 +44,7 @@ export type Settings = Record & {
 
 export type NoteToCreate = {
   title: string;
-  owner: string;
-  module?: string;
+  module: string;
   content?: string;
   excerpt?: string;
   baseLang?: Language;
@@ -54,13 +53,11 @@ export type NoteToCreate = {
 
 export type ModuleToCreate = {
   name: string;
-  owner: string;
 };
 
 export type TermToCreate = {
   base: string;
   translation: string;
-  owner: string;
   note: string;
 };
 

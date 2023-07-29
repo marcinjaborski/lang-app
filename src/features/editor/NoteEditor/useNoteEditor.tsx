@@ -1,13 +1,22 @@
 import { Element, Leaf } from "@src/features/editor";
-import { useEditorContext, useFormatters, useSettings, useTermRepository, useTranslateText } from "@src/hooks";
+import {
+  useEditorContext,
+  useEmptyElement,
+  useFormatters,
+  useNoteRepository,
+  useSettings,
+  useTermRepository,
+  useTranslateText,
+} from "@src/hooks";
 import { changeTitle, moveToNextStep, useAppDispatch, useAppSelector } from "@src/store";
 import { ElementType, isShortcut, isTermElement, NoteUrlParams } from "@src/types";
 import { ZERO_WIDTH_SPACE } from "@src/util";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
-import { Descendant, Editor, Element as SlateElement, Range, Transforms } from "slate";
+import { Editor, Element as SlateElement, Range, Transforms } from "slate";
 import { RenderElementProps, RenderLeafProps } from "slate-react";
+import { useDebouncedCallback } from "use-debounce";
 
 export const useNoteEditor = () => {
   const editor = useEditorContext();
@@ -20,13 +29,11 @@ export const useNoteEditor = () => {
   const terms = useTermRepository();
   const formatters = useFormatters();
   const params = useParams<NoteUrlParams>();
-
-  const emptyElement: Descendant[] = [
-    {
-      type: "paragraph",
-      children: [{ text: "", type: "text" }],
-    },
-  ];
+  const emptyElement = useEmptyElement();
+  const notes = useNoteRepository();
+  const debounceSave = useDebouncedCallback(() => {
+    notes.update.mutate({ id: params.id!, note: { content: JSON.stringify(editor.children) } });
+  }, 10000);
 
   const keyBindings = {
     b: formatters.bold,
@@ -58,9 +65,7 @@ export const useNoteEditor = () => {
       Transforms.insertNodes(editor, { type: "text", text: ZERO_WIDTH_SPACE });
       if (isTermElement(term)) {
         const [base, translation] = term.text.split(separator);
-        if (params.id) {
-          terms.create.mutate({ base, translation, note: params.id });
-        }
+        terms.create.mutate({ base, translation, note: params.id! });
       }
     }
     dispatch(moveToNextStep());
@@ -88,6 +93,8 @@ export const useNoteEditor = () => {
   };
 
   const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    debounceSave();
+
     if (event.key === "Enter" && endList()) {
       event.preventDefault();
       return;

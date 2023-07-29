@@ -9,6 +9,8 @@ export const en = {
     emptyText: "There are no modules yet, try creating one!",
     createButton: "Create",
     delete: "Delete",
+    createNote: "Create note in this module",
+    newNoteName: "Note",
   },
   login: {
     loginTabTitle: "Login",
@@ -46,6 +48,16 @@ export const en = {
     "Failed to authenticate.": "",
     "You are not allowed to perform this request.": "You are not allowed to perform this operation",
   },
+  createNoteDialog: {
+    title: "Create new note",
+    module: "Module",
+    cancel: "Cancel",
+    create: "Create",
+    newNoteName: "Note",
+    "Failed to create record.": "Select module",
+    "Failed to authenticate.": "",
+    "You are not allowed to perform this request.": "You are not allowed to perform this operation",
+  },
   noteDrawer: {
     baseLang: "Base",
     targetLang: "Target",
@@ -73,6 +85,7 @@ export const en = {
   },
   feedback: {
     created: "Created",
+    saved: "Saved",
     updated: "Updated",
     deleted: "Deleted",
     "Failed to create record.": "Could not create",

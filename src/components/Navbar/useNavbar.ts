@@ -10,6 +10,7 @@ export const useNavbar = () => {
   const [userMenuAnchorEl, setUserMenuAnchorEl] = useState<null | HTMLElement>(null);
   const openedUserMenu = !!userMenuAnchorEl;
   const isLogged = pb.authStore.isValid;
+  const [noteDialogOpen, setNoteDialogOpen] = useState(false);
 
   const onLogin = () => {
     navigate("/login");
@@ -36,6 +37,8 @@ export const useNavbar = () => {
     navigate,
     pathname: location.pathname,
     isLogged,
+    noteDialogOpen,
+    setNoteDialogOpen,
     onLogin,
     onLogout,
     onUserMenuOpen,

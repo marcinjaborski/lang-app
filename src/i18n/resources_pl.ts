@@ -11,6 +11,8 @@ export const pl: Resource = {
     emptyText: "Nie ma na razie żadnych modułów, spróbuj stworzyć jeden!",
     createButton: "Stwórz",
     delete: "Usuń",
+    createNote: "Utwórz notatkę w tym module",
+    newNoteName: "Notatka",
   },
   login: {
     loginTabTitle: "Logowanie",
@@ -48,6 +50,16 @@ export const pl: Resource = {
     "Failed to authenticate.": "",
     "You are not allowed to perform this request.": "Nie możesz wykonać tej operacji",
   },
+  createNoteDialog: {
+    title: "Stwórz nową notatkę",
+    module: "Moduł",
+    cancel: "Anuluj",
+    create: "Stwórz",
+    newNoteName: "Notatka",
+    "Failed to create record.": "Wybierz moduł",
+    "Failed to authenticate.": "",
+    "You are not allowed to perform this request.": "Nie możesz wykonać tej operacji",
+  },
   noteDrawer: {
     baseLang: "Bazowy",
     targetLang: "Docelowy",
@@ -75,6 +87,7 @@ export const pl: Resource = {
   },
   feedback: {
     created: "Utworzono",
+    saved: "Zapisano",
     updated: "Zapisano",
     deleted: "Usunięto",
     "Failed to create record.": "Nie można było utworzyć",

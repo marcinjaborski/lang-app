@@ -2,6 +2,7 @@ import CreateIcon from "@mui/icons-material/Create";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
 import { IconButton, Menu, MenuItem, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { CreateNoteDialog } from "@src/components";
 import { ToolbarWrap } from "./Navbar.styled";
 import { useNavbar } from "./useNavbar";
 
@@ -11,6 +12,8 @@ export const Navbar = () => {
     navigate,
     pathname,
     isLogged,
+    noteDialogOpen,
+    setNoteDialogOpen,
     onLogin,
     onLogout,
     onUserMenuOpen,
@@ -35,13 +38,18 @@ export const Navbar = () => {
       ];
 
   return (
-    <ToolbarWrap position="static" component="nav">
-      <ToggleButtonGroup exclusive orientation="vertical" color="white" onChange={(_event, value) => navigate(value)}>
+    <ToolbarWrap position="sticky" component="nav">
+      <ToggleButtonGroup
+        exclusive
+        orientation="vertical"
+        color="white"
+        onChange={(_event, value) => value && navigate(value)}
+      >
         <ToggleButton value="/" selected={pathname === "/"}>
           <HomeIcon />
         </ToggleButton>
         {isLogged ? (
-          <ToggleButton value="/note" selected={pathname.includes("/note")}>
+          <ToggleButton value="" selected={pathname.includes("/note")} onClick={() => setNoteDialogOpen(true)}>
             <CreateIcon />
           </ToggleButton>
         ) : null}
@@ -52,6 +60,7 @@ export const Navbar = () => {
       <Menu
         anchorEl={userMenuAnchorEl}
         open={openedUserMenu}
+        onClick={onUserMenuClose}
         onClose={onUserMenuClose}
         anchorOrigin={{
           vertical: "top",
@@ -64,6 +73,7 @@ export const Navbar = () => {
       >
         {menuItems}
       </Menu>
+      <CreateNoteDialog open={noteDialogOpen} setOpen={setNoteDialogOpen} />
     </ToolbarWrap>
   );
 };

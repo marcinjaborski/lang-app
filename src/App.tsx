@@ -23,7 +23,6 @@ export const App = () => {
         <Route path="/login" element={<Login />} />
         {isLogged ? (
           <>
-            <Route path="/note" element={<NotePage />} />
             <Route path="/note/:id" element={<NotePage />} />
             <Route path="/settings" element={<Settings />} />
           </>

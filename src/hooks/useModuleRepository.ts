@@ -1,5 +1,5 @@
 import { closeDialog, showSuccess, useAppDispatch, useAppSelector } from "@src/store";
-import { Module, ModuleToCreate } from "@src/types";
+import { Module } from "@src/types";
 import { pb, pbError } from "@src/util";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQuery, useQueryClient } from "react-query";
@@ -18,11 +18,10 @@ export const useModuleRepository = () => {
 
   const create = useMutation<Module, pbError>(
     () => {
-      const newModule: ModuleToCreate = {
+      return pb.collection("modules").create({
         name,
         owner: pb.authStore.model!.id,
-      };
-      return pb.collection("modules").create(newModule);
+      });
     },
     {
       async onSuccess() {
