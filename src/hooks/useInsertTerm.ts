@@ -30,6 +30,7 @@ export const useInsertTerm = () => {
       dispatch(moveToNextStep());
       return;
     }
+    Transforms.insertNodes(editor, { type: "text", text: ZERO_WIDTH_SPACE });
     if (params.id) {
       terms.create.mutate({ base, translation, note: params.id });
     }
