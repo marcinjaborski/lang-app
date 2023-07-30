@@ -98,6 +98,8 @@ export const en = {
     separator: "Term separator",
     defaultBaseLang: "Default language for base",
     defaultTargetLang: "Default language for translations",
+    newTag: "Add new tag",
+    tagExists: "This tag already exists",
     save: "Save",
     updated: "Settings saved",
   },

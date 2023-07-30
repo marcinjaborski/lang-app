@@ -100,6 +100,8 @@ export const pl: Resource = {
     separator: "Rozdzielacz słówka",
     defaultBaseLang: "Domyślny język bazowy",
     defaultTargetLang: "Domyślny język tłumaczeń",
+    newTag: "Dodaj nowy tag",
+    tagExists: "Ten tag już istnieje",
     save: "Zapisz",
     updated: "Zapisano ustawienia",
   },

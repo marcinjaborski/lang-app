@@ -1,18 +1,19 @@
-import { CircularProgress, MenuItem, TextField, Typography } from "@mui/material";
+import { Chip, CircularProgress, MenuItem, TextField, Typography } from "@mui/material";
 import { LanguageSelect } from "@src/components";
 import { Language } from "@src/types";
 import ReactCountryFlag from "react-country-flag";
-import { SaveButton, SettingsContainer, SettingsStyled, SpinnerWrap } from "./Settings.styled";
+import { SaveButton, SettingsContainer, SettingsStyled, SpinnerWrap, TagsWrap } from "./Settings.styled";
 import { useSettingsPage } from "./useSettingsPage";
 
 export const Settings = () => {
-  const { t, settings, settingsRepository, onLangChange, onSave, ...state } = useSettingsPage();
+  const { t, settings, settingsRepository, tagsRepository, onCreateTag, onDeleteTag, onLangChange, onSave, ...state } =
+    useSettingsPage();
 
   return (
     <SettingsStyled>
       <SettingsContainer elevation={5} component="main">
         <Typography variant="h3">{t("title")}</Typography>
-        {settingsRepository.view.isLoading ? (
+        {settingsRepository.view.isLoading || tagsRepository.list.isLoading ? (
           <SpinnerWrap>
             <CircularProgress />
           </SpinnerWrap>
@@ -42,6 +43,17 @@ export const Settings = () => {
               value={state.targetLang}
               onChange={(event) => state.setTargetLang(event.target.value as Language)}
             />
+            <TextField
+              label={t("newTag")}
+              value={state.tagLabel}
+              onChange={(event) => state.setTagLabel(event.target.value)}
+              onKeyDown={onCreateTag}
+            />
+            <TagsWrap>
+              {state.tags.map((tag) => (
+                <Chip key={tag} label={tag} onDelete={() => onDeleteTag(tag)} />
+              ))}
+            </TagsWrap>
             <SaveButton variant="contained" onClick={onSave}>
               {t("save")}
             </SaveButton>

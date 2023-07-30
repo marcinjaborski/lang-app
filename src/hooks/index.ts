@@ -8,3 +8,4 @@ export * from "./useNoteRepository";
 export * from "./useSettings";
 export * from "./useSettingsRepository";
 export * from "./useEmptyElement";
+export * from "./useTagsRepository";

@@ -42,6 +42,11 @@ export type Settings = Record & {
   user: string;
 };
 
+export type Tag = Record & {
+  label: string;
+  owner: string;
+};
+
 export type NoteToCreate = {
   title: string;
   module: string;
@@ -59,6 +64,10 @@ export type TermToCreate = {
   base: string;
   translation: string;
   note: string;
+};
+
+export type TagToCreate = {
+  label: string;
 };
 
 export type SettingsToCreate = {

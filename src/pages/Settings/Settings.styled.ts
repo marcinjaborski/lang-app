@@ -26,6 +26,13 @@ export const SpinnerWrap = styled("div")`
   place-items: center;
 `;
 
+export const TagsWrap = styled("div")(({ theme }) => ({
+  display: "flex",
+  flexWrap: "wrap",
+  gap: theme.spacing(1),
+  maxWidth: 300,
+}));
+
 export const SaveButton = styled(Button)`
   margin-top: auto;
   align-self: center;
