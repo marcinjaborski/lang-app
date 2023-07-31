@@ -12,8 +12,7 @@ export const ColorPicker = ({ open, color, setColor }: ColorPickerProps) => {
   if (!open) return null;
 
   return (
-    <Box sx={{ position: "absolute", top: "calc(100% + 20px)" }}>
-      {" "}
+    <Box sx={{ position: "absolute", top: "calc(100% + 20px)", zIndex: 1 }}>
       <HexAlphaColorPicker color={color} onChange={setColor} />
     </Box>
   );
