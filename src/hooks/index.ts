@@ -9,3 +9,4 @@ export * from "./useSettings";
 export * from "./useSettingsRepository";
 export * from "./useEmptyElement";
 export * from "./useTagsRepository";
+export * from "./useClickAway";

@@ -1,13 +1,24 @@
-import { Chip, CircularProgress, MenuItem, TextField, Typography } from "@mui/material";
+import { CircularProgress, MenuItem, TextField, Typography } from "@mui/material";
 import { LanguageSelect } from "@src/components";
+import { TagChip } from "@src/features/settings";
 import { Language } from "@src/types";
 import ReactCountryFlag from "react-country-flag";
 import { SaveButton, SettingsContainer, SettingsStyled, SpinnerWrap, TagsWrap } from "./Settings.styled";
 import { useSettingsPage } from "./useSettingsPage";
 
 export const Settings = () => {
-  const { t, settings, settingsRepository, tagsRepository, onCreateTag, onDeleteTag, onLangChange, onSave, ...state } =
-    useSettingsPage();
+  const {
+    t,
+    settings,
+    settingsRepository,
+    tagsRepository,
+    onCreateTag,
+    onDeleteTag,
+    onColorChange,
+    onLangChange,
+    onSave,
+    ...state
+  } = useSettingsPage();
 
   return (
     <SettingsStyled>
@@ -51,7 +62,7 @@ export const Settings = () => {
             />
             <TagsWrap>
               {state.tags.map((tag) => (
-                <Chip key={tag} label={tag} onDelete={() => onDeleteTag(tag)} />
+                <TagChip key={tag.label} tag={tag} onDelete={onDeleteTag} onColorChange={onColorChange} />
               ))}
             </TagsWrap>
             <SaveButton variant="contained" onClick={onSave}>

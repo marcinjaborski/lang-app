@@ -1,4 +1,4 @@
-import { useEditorContext, useSettings, useTermRepository } from "@src/hooks";
+import { useEditorContext, useNoteRepository, useSettings, useTermRepository } from "@src/hooks";
 import { moveToNextStep, startWritingTerm, useAppDispatch } from "@src/store";
 import { NoteUrlParams } from "@src/types";
 import { ZERO_WIDTH_SPACE } from "@src/util";
@@ -11,11 +11,13 @@ export const useInsertTerm = () => {
   const separator = useSettings().separator;
   const dispatch = useAppDispatch();
   const terms = useTermRepository();
+  const notes = useNoteRepository();
   const params = useParams<NoteUrlParams>();
 
   const replaceSelected = (selection: BaseRange) => {
     const selectedText = Editor.string(editor, selection);
     Transforms.setNodes(editor, { type: "term" }, { match: (n) => Text.isText(n), split: true });
+    const [insertedTerm] = Editor.nodes(editor, { match: (n) => Text.isText(n) && n.type === "term" });
     ReactEditor.focus(editor);
     Transforms.collapse(editor, { edge: "end" });
     if (!selectedText.includes(separator)) {
@@ -32,7 +34,15 @@ export const useInsertTerm = () => {
     }
     Transforms.insertNodes(editor, { type: "text", text: ZERO_WIDTH_SPACE });
     if (params.id) {
-      terms.create.mutate({ base, translation, note: params.id });
+      terms.create.mutate(
+        { base, translation, note: params.id },
+        {
+          onSuccess({ id }) {
+            Transforms.setNodes(editor, { id }, { at: insertedTerm[1] });
+            notes.update.mutate({ id: params.id!, note: { content: JSON.stringify(editor.children) } });
+          },
+        },
+      );
     }
   };
 

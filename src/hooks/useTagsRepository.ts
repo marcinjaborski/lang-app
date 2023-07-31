@@ -20,6 +20,17 @@ export const useTagsRepository = () => {
     },
   );
 
+  const update = useMutation<Tag, pbError, { id: string; tag: Partial<TagToCreate> }>(
+    ({ id, tag }) => {
+      return pb.collection("tags").update(id, tag);
+    },
+    {
+      async onSuccess() {
+        await queryClient.invalidateQueries("list-tags");
+      },
+    },
+  );
+
   const deleteMutation = useMutation<boolean, pbError, string>(
     (id) => {
       return pb.collection("tags").delete(id);
@@ -31,5 +42,5 @@ export const useTagsRepository = () => {
     },
   );
 
-  return { list, create, delete: deleteMutation };
+  return { list, create, update, delete: deleteMutation };
 };

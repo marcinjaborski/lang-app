@@ -45,6 +45,7 @@ export type Settings = Record & {
 export type Tag = Record & {
   label: string;
   owner: string;
+  color: string;
 };
 
 export type NoteToCreate = {
@@ -68,6 +69,7 @@ export type TermToCreate = {
 
 export type TagToCreate = {
   label: string;
+  color?: string;
 };
 
 export type SettingsToCreate = {

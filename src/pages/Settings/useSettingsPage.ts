@@ -1,6 +1,7 @@
 import { useSettings, useSettingsRepository, useTagsRepository } from "@src/hooks";
 import { AppLanguage } from "@src/i18n/types";
 import { showError, useAppDispatch } from "@src/store";
+import { TagToCreate } from "@src/types";
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -14,7 +15,7 @@ export const useSettingsPage = () => {
   const [targetLang, setTargetLang] = useState(settings.targetLang);
   const [separator, setSeparator] = useState(settings.separator);
   const [tagLabel, setTagLabel] = useState("");
-  const [tags, setTags] = useState<string[]>([]);
+  const [tags, setTags] = useState<(TagToCreate & { id?: string })[]>([]);
   const dispatch = useAppDispatch();
   const [tagsFetched, setTagsFetched] = useState(false);
 
@@ -33,7 +34,7 @@ export const useSettingsPage = () => {
 
   useEffect(() => {
     if (tagsRepository.list.data && !tagsFetched) {
-      setTags(tagsRepository.list.data.map((tag) => tag.label));
+      setTags(tagsRepository.list.data);
       setTagsFetched(true);
     }
   }, [tagsRepository.list.data, tagsFetched]);
@@ -45,11 +46,10 @@ export const useSettingsPage = () => {
 
   const onCreateTag = async (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key !== "Enter") return;
-    // tagsRepository.create.mutate({ label: tagLabel });
-    if (tags.includes(tagLabel)) {
+    if (tags.some((tag) => tag.label === tagLabel)) {
       dispatch(showError(t("tagExists")));
     } else {
-      setTags((prevState) => [...prevState, tagLabel]);
+      setTags((prevState) => [...prevState, { label: tagLabel }]);
     }
     setTagLabel("");
   };
@@ -62,16 +62,26 @@ export const useSettingsPage = () => {
       defaultTargetLang: targetLang,
     });
     if (tagsRepository.list.data) {
-      const deleted = tagsRepository.list.data.filter((tag) => !tags.includes(tag.label));
+      const deleted = tagsRepository.list.data.filter((tag) => !tags.some((t) => t.label === tag.label));
       const tagLabelsFromRepository = tagsRepository.list.data.map((tag) => tag.label);
-      const added = tags.filter((tag) => !tagLabelsFromRepository.includes(tag));
+      const added = tags.filter((tag) => !tagLabelsFromRepository.includes(tag.label));
+      const modified = tags.filter((tag) => {
+        const tagFromRepository = tagsRepository.list.data!.find((t) => t.label === tag.label);
+        return tagFromRepository && tagFromRepository.color !== tag.color;
+      });
       deleted.forEach((tag) => tagsRepository.delete.mutate(tag.id));
-      added.forEach((label) => tagsRepository.create.mutate({ label }));
+      added.forEach((tag) => tagsRepository.create.mutate({ label: tag.label, color: tag.color }));
+      modified.forEach((tag) => tag.id && tagsRepository.update.mutate({ id: tag.id, tag: { color: tag.color } }));
     }
   };
 
-  const onDeleteTag = (label: string) => {
-    setTags((prevState) => prevState.filter((tag) => tag !== label));
+  const onDeleteTag = (tag: TagToCreate) => {
+    setTags((prevState) => prevState.filter((t) => t.label !== tag.label));
+  };
+
+  const onColorChange = (tag: TagToCreate, color: string) => {
+    const newTags = tags.map((t) => (t.label === tag.label ? { ...t, color } : t));
+    setTags(newTags);
   };
 
   return {
@@ -81,6 +91,7 @@ export const useSettingsPage = () => {
     tagsRepository,
     onCreateTag,
     onDeleteTag,
+    onColorChange,
     onLangChange,
     onSave,
     language,

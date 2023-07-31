@@ -31,6 +31,7 @@ export const TagsWrap = styled("div")(({ theme }) => ({
   flexWrap: "wrap",
   gap: theme.spacing(1),
   maxWidth: 300,
+  position: "relative",
 }));
 
 export const SaveButton = styled(Button)`
