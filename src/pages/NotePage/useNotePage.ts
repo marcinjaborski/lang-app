@@ -44,7 +44,7 @@ export const useNotePage = () => {
       baseLang: drawerState.baseLang,
       targetLang: drawerState.targetLang,
     };
-    notes.update.mutate({ id: params.id!, note: newNote });
+    notes.update.mutate({ id: params.id!, record: newNote });
   };
 
   return { editor, onOpenDrawer, onSave };

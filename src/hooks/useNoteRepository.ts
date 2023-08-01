@@ -1,5 +1,5 @@
 import { showSuccess, useAppDispatch } from "@src/store";
-import { Note, NoteToCreate, NoteUrlParams } from "@src/types";
+import { Note, NoteToCreate, NoteUrlParams, UpdateRecord } from "@src/types";
 import { pb, pbError } from "@src/util";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQuery, useQueryClient } from "react-query";
@@ -33,9 +33,9 @@ export const useNoteRepository = () => {
     },
   );
 
-  const update = useMutation<Note, pbError, { id: string; note: Partial<NoteToCreate> }>(
-    ({ id, note }) => {
-      return pb.collection("notes").update(id, note);
+  const update = useMutation<Note, pbError, UpdateRecord<NoteToCreate>>(
+    ({ id, record }) => {
+      return pb.collection("notes").update(id, record);
     },
     {
       async onSuccess() {

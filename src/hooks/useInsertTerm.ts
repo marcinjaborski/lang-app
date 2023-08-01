@@ -39,7 +39,7 @@ export const useInsertTerm = () => {
         {
           onSuccess({ id }) {
             Transforms.setNodes(editor, { id }, { at: insertedTerm[1] });
-            notes.update.mutate({ id: params.id!, note: { content: JSON.stringify(editor.children) } });
+            notes.update.mutate({ id: params.id!, record: { content: JSON.stringify(editor.children) } });
           },
         },
       );

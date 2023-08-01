@@ -71,7 +71,7 @@ export const useSettingsPage = () => {
       });
       deleted.forEach((tag) => tagsRepository.delete.mutate(tag.id));
       added.forEach((tag) => tagsRepository.create.mutate({ label: tag.label, color: tag.color }));
-      modified.forEach((tag) => tag.id && tagsRepository.update.mutate({ id: tag.id, tag: { color: tag.color } }));
+      modified.forEach((tag) => tag.id && tagsRepository.update.mutate({ id: tag.id, record: { color: tag.color } }));
     }
   };
 

@@ -1,4 +1,4 @@
-import { Tag, TagToCreate } from "@src/types";
+import { Tag, TagToCreate, UpdateRecord } from "@src/types";
 import { pb, pbError } from "@src/util";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
@@ -20,9 +20,9 @@ export const useTagsRepository = () => {
     },
   );
 
-  const update = useMutation<Tag, pbError, { id: string; tag: Partial<TagToCreate> }>(
-    ({ id, tag }) => {
-      return pb.collection("tags").update(id, tag);
+  const update = useMutation<Tag, pbError, UpdateRecord<TagToCreate>>(
+    ({ id, record }) => {
+      return pb.collection("tags").update(id, record);
     },
     {
       async onSuccess() {

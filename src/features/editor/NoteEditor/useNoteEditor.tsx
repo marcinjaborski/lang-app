@@ -32,7 +32,7 @@ export const useNoteEditor = () => {
   const emptyElement = useEmptyElement();
   const notes = useNoteRepository();
   const debounceSave = useDebouncedCallback(() => {
-    notes.update.mutate({ id: params.id!, note: { content: JSON.stringify(editor.children) } });
+    notes.update.mutate({ id: params.id!, record: { content: JSON.stringify(editor.children) } });
   }, 10000);
 
   const keyBindings = {

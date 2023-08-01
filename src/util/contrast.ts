@@ -18,5 +18,5 @@ const WHITE = "#FFFFFF";
 const BLACK = "#000000";
 
 export const getTextColorToBgColor = (bgColor: string) => {
-  return getContrastRatio(bgColor, BLACK) > 4.5 ? BLACK : WHITE;
+  return getContrastRatio(bgColor, BLACK) > getContrastRatio(bgColor, WHITE) ? BLACK : WHITE;
 };

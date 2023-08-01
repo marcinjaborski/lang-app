@@ -1,11 +1,37 @@
-import { TermToCreate } from "@src/types";
-import { pb } from "@src/util";
-import { useMutation } from "react-query";
+import { Term, TermToCreate, UpdateRecord } from "@src/types";
+import { pb, pbError } from "@src/util";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 
 export const useTermRepository = () => {
-  const create = useMutation((term: TermToCreate) => {
-    return pb.collection("terms").create({ ...term, owner: pb.authStore.model!.id });
+  const queryClient = useQueryClient();
+
+  const list = useQuery<Term[]>("list-terms", () => {
+    return pb.collection("terms").getFullList<Term>({
+      expand: "note,tags",
+    });
   });
 
-  return { create };
+  const create = useMutation<Term, pbError, TermToCreate>(
+    (term) => {
+      return pb.collection("terms").create({ ...term, owner: pb.authStore.model!.id });
+    },
+    {
+      async onSuccess() {
+        await queryClient.invalidateQueries("list-terms");
+      },
+    },
+  );
+
+  const update = useMutation<Term, pbError, UpdateRecord<TermToCreate>>(
+    ({ id, record }) => {
+      return pb.collection("terms").update(id, record);
+    },
+    {
+      async onSuccess() {
+        await queryClient.invalidateQueries("list-terms");
+      },
+    },
+  );
+
+  return { list, create, update };
 };

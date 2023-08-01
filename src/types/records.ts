@@ -2,6 +2,11 @@ import { AppLanguage } from "@src/i18n/types";
 import { Record } from "pocketbase";
 import { Language } from "./types";
 
+export type UpdateRecord<R> = {
+  id: string;
+  record: Partial<R>;
+};
+
 export type Note = Record & {
   title: string;
   content: string;
@@ -30,6 +35,7 @@ export type Term = Record & {
   owner: string;
   expand: {
     note?: Note;
+    tags?: Tag[];
   };
 };
 
@@ -65,6 +71,7 @@ export type TermToCreate = {
   base: string;
   translation: string;
   note: string;
+  tags?: string[];
 };
 
 export type TagToCreate = {
