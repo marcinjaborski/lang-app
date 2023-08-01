@@ -1,9 +1,13 @@
+import { showSuccess, useAppDispatch } from "@src/store";
 import { Term, TermToCreate, UpdateRecord } from "@src/types";
 import { pb, pbError } from "@src/util";
+import { useTranslation } from "react-i18next";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 export const useTermRepository = () => {
+  const { t } = useTranslation("feedback");
   const queryClient = useQueryClient();
+  const dispatch = useAppDispatch();
 
   const list = useQuery<Term[]>("list-terms", () => {
     return pb.collection("terms").getFullList<Term>({
@@ -29,6 +33,7 @@ export const useTermRepository = () => {
     {
       async onSuccess() {
         await queryClient.invalidateQueries("list-terms");
+        dispatch(showSuccess(t("updatedTags")));
       },
     },
   );

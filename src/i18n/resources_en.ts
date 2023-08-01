@@ -88,6 +88,7 @@ export const en = {
     saved: "Saved",
     updated: "Updated",
     deleted: "Deleted",
+    updatedTags: "Tags updated",
     "Failed to create record.": "Could not create",
     "Failed to authenticate.": "The user does not exists",
     "You are not allowed to perform this request.": "You are not allowed to perform this operation",
