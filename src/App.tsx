@@ -9,7 +9,7 @@ import { Route, Routes } from "react-router-dom";
 export const App = () => {
   const { i18n } = useTranslation();
   const isLogged = pb.authStore.isValid;
-  const appLang = useSettings().language;
+  const appLang = useSettings()?.language;
 
   useEffect(() => {
     i18n.changeLanguage(appLang).then();

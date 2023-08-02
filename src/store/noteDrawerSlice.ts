@@ -41,8 +41,12 @@ const noteDrawerSlice = createSlice({
       state.excerpt = payload;
     },
     updateStateFromNote(state, { payload }: PayloadAction<Note>) {
-      state.baseLang = payload.baseLang;
-      state.targetLang = payload.targetLang;
+      if (payload.baseLang) {
+        state.baseLang = payload.baseLang;
+      }
+      if (payload.targetLang) {
+        state.targetLang = payload.targetLang;
+      }
       state.module = payload.module;
       state.excerpt = payload.excerpt;
     },

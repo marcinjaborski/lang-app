@@ -1,5 +1,13 @@
-import { useEmptyElement, useNoteRepository } from "@src/hooks";
-import { changeTitle, openDrawer, updateStateFromNote, useAppDispatch, useAppSelector } from "@src/store";
+import { useEmptyElement, useNoteRepository, useSettings } from "@src/hooks";
+import {
+  changeBaseLang,
+  changeTargetLang,
+  changeTitle,
+  openDrawer,
+  updateStateFromNote,
+  useAppDispatch,
+  useAppSelector,
+} from "@src/store";
 import { NoteToCreate, NoteUrlParams } from "@src/types";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -15,8 +23,10 @@ export const useNotePage = () => {
   const notes = useNoteRepository();
   const emptyElement = useEmptyElement();
   const navigate = useNavigate();
+  const settings = useSettings();
 
   useEffect(() => {
+    if (!settings) return;
     notes.view.refetch().then(({ data: note }) => {
       if (!note) {
         return;
@@ -27,9 +37,11 @@ export const useNotePage = () => {
         editor.children = emptyElement;
       }
       dispatch(changeTitle(note.title));
+      dispatch(changeBaseLang(settings.baseLang));
+      dispatch(changeTargetLang(settings.targetLang));
       dispatch(updateStateFromNote(note));
     });
-  }, []);
+  }, [settings]);
 
   if (!params.id) navigate("/");
 

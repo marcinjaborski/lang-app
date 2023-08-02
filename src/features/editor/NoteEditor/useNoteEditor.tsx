@@ -1,5 +1,6 @@
 import { Element, Leaf } from "@src/features/editor";
 import {
+  DEFAULT_SEPARATOR,
   useEditorContext,
   useEmptyElement,
   useFormatters,
@@ -25,7 +26,7 @@ export const useNoteEditor = () => {
   const title = useAppSelector((state) => state.noteEditor.title);
   const termPhase = useAppSelector((state) => state.noteEditor.termPhase);
   const translateText = useTranslateText();
-  const separator = useSettings().separator;
+  const separator = useSettings()?.separator || DEFAULT_SEPARATOR;
   const terms = useTermRepository();
   const formatters = useFormatters();
   const params = useParams<NoteUrlParams>();

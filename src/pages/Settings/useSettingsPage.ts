@@ -1,4 +1,12 @@
-import { useSettings, useSettingsRepository, useTagsRepository } from "@src/hooks";
+import {
+  DEFAULT_BASE_LANG,
+  DEFAULT_LANG,
+  DEFAULT_SEPARATOR,
+  DEFAULT_TRANSLATION_LANG,
+  useSettings,
+  useSettingsRepository,
+  useTagsRepository,
+} from "@src/hooks";
 import { AppLanguage } from "@src/i18n/types";
 import { showError, useAppDispatch } from "@src/store";
 import { TagToCreate } from "@src/types";
@@ -10,10 +18,10 @@ export const useSettingsPage = () => {
   const settings = useSettings();
   const settingsRepository = useSettingsRepository();
   const tagsRepository = useTagsRepository();
-  const [language, setLanguage] = useState(settings.language);
-  const [baseLang, setBaseLang] = useState(settings.baseLang);
-  const [targetLang, setTargetLang] = useState(settings.targetLang);
-  const [separator, setSeparator] = useState(settings.separator);
+  const [language, setLanguage] = useState(DEFAULT_LANG);
+  const [baseLang, setBaseLang] = useState(DEFAULT_BASE_LANG);
+  const [targetLang, setTargetLang] = useState(DEFAULT_TRANSLATION_LANG);
+  const [separator, setSeparator] = useState(DEFAULT_SEPARATOR);
   const [tagLabel, setTagLabel] = useState("");
   const [tags, setTags] = useState<(TagToCreate & { id?: string })[]>([]);
   const dispatch = useAppDispatch();
@@ -26,6 +34,7 @@ export const useSettingsPage = () => {
   }, [settingsRepository.view]);
 
   useEffect(() => {
+    if (!settings) return;
     setLanguage(settings.language);
     setBaseLang(settings.baseLang);
     setTargetLang(settings.targetLang);

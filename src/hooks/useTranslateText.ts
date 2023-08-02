@@ -1,4 +1,4 @@
-import { useEditorContext, useSettings } from "@src/hooks";
+import { DEFAULT_SEPARATOR, useEditorContext, useSettings } from "@src/hooks";
 import { useAppSelector } from "@src/store";
 import { translate } from "@src/util";
 import { Editor, Transforms } from "slate";
@@ -8,7 +8,7 @@ export const useTranslateText = () => {
   const editor = useEditorContext();
   const baseLang = useAppSelector((state) => state.noteDrawer.baseLang);
   const targetLang = useAppSelector((state) => state.noteDrawer.targetLang);
-  const separator = useSettings().separator;
+  const separator = useSettings()?.separator || DEFAULT_SEPARATOR;
 
   return async () => {
     const { selection } = editor;
