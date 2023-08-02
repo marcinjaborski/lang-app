@@ -1,4 +1,5 @@
 import { Language } from "@src/types";
+import { Node } from "slate";
 import { axiosDeepl } from "./axios";
 
 export const translate = async (text: string, sourceLang: Language, targetLang: Language) => {
@@ -10,4 +11,14 @@ export const translate = async (text: string, sourceLang: Language, targetLang: 
     },
   });
   return response.data.translations[0].text;
+};
+
+export const serialize = (noteContent: string): string => {
+  try {
+    return JSON.parse(noteContent)
+      .map((n: Node) => Node.string(n))
+      .join("\n");
+  } catch (e) {
+    return "";
+  }
 };

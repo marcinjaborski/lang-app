@@ -23,4 +23,11 @@ export const Excerpt = styled(Typography)(({ theme }) => ({
   gridColumn: "1 / -1",
   fontSize: "0.8em",
   paddingTop: theme.spacing(1),
+  overflowX: "hidden",
+  overflowY: "auto",
+  textOverflow: "ellipsis",
+  maxHeight: 104,
+  "::-webkit-scrollbar": {
+    width: 0,
+  },
 }));
