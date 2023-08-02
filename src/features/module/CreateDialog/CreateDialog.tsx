@@ -7,11 +7,11 @@ import TextField from "@mui/material/TextField";
 import { useCreateDialog } from "./useCreateDialog";
 
 export const CreateDialog = () => {
-  const { t, open, onClose, onCreate, onNameChange, isError, error } = useCreateDialog();
+  const { t, state, onClose, onCreate, onNameChange, isError, error } = useCreateDialog();
 
   return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>{t("title")}</DialogTitle>
+    <Dialog open={state.open} onClose={onClose}>
+      <DialogTitle>{t(`title.${state.type}`)}</DialogTitle>
       <DialogContent>
         <TextField
           autoFocus
@@ -26,7 +26,7 @@ export const CreateDialog = () => {
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>{t("cancel")}</Button>
-        <Button onClick={onCreate}>{t("create")}</Button>
+        <Button onClick={onCreate}>{t(`confirm.${state.type}`)}</Button>
       </DialogActions>
     </Dialog>
   );

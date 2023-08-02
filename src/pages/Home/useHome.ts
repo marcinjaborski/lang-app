@@ -9,7 +9,7 @@ export const useHome = () => {
   const dispatch = useAppDispatch();
   const modules = useModuleRepository();
 
-  const openCreateModuleDialog = () => dispatch(openDialog());
+  const openCreateModuleDialog = () => dispatch(openDialog({ type: "create" }));
 
   return { t, username, openCreateModuleDialog, ...modules.list, modules: modules.list.data };
 };

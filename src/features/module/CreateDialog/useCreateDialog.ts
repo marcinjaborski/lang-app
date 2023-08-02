@@ -5,18 +5,27 @@ import { useTranslation } from "react-i18next";
 
 export const useCreateDialog = () => {
   const { t } = useTranslation("createModuleDialog");
-  const open = useAppSelector((state) => state.createModuleDialog.open);
+  const state = useAppSelector((state) => state.createModuleDialog);
   const dispatch = useAppDispatch();
   const modules = useModuleRepository();
 
   const onClose = () => dispatch(closeDialog());
-  const onCreate = () => modules.create.mutate();
+
+  const onCreate = () => {
+    if (state.type === "create") {
+      modules.create.mutate({ name: state.name });
+    }
+    if (state.type === "update" && state.moduleId) {
+      modules.update.mutate({ id: state.moduleId, record: { name: state.name } });
+    }
+  };
+
   const onNameChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     dispatch(changeNameValue(event.target.value));
 
   return {
     t,
-    open,
+    state,
     onClose,
     onCreate,
     onNameChange,

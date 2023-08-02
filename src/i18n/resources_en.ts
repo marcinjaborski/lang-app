@@ -10,6 +10,7 @@ export const en = {
     createButton: "Create",
     delete: "Delete",
     createNote: "Create note in this module",
+    update: "Change name",
     newNoteName: "Note",
   },
   login: {
@@ -40,10 +41,16 @@ export const en = {
     login: "Login",
   },
   createModuleDialog: {
-    title: "Create new module",
+    title: {
+      create: "Create new module",
+      update: "New name",
+    },
     textFieldLabel: "Name",
     cancel: "Cancel",
-    create: "Create",
+    confirm: {
+      create: "Create",
+      update: "Update",
+    },
     "Failed to create record.": "Name cannot be empty",
     "Failed to authenticate.": "",
     "You are not allowed to perform this request.": "You are not allowed to perform this operation",

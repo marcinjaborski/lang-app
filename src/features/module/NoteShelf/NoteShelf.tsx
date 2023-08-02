@@ -11,7 +11,7 @@ type NoteShelfProps = {
 
 export const NoteShelf = (props: NoteShelfProps) => {
   const { module } = props;
-  const { t, anchorEl, openedMenu, onMenuOpen, onMenuClose, onCreateNote, onDelete } = useNoteShelf();
+  const { t, anchorEl, openedMenu, onMenuOpen, onMenuClose, onCreateNote, onUpdate, onDelete } = useNoteShelf();
 
   return (
     <NoteShelfStyled>
@@ -20,8 +20,9 @@ export const NoteShelf = (props: NoteShelfProps) => {
         <IconButton onClick={onMenuOpen} size="small">
           <MoreVertIcon fontSize="inherit" />
         </IconButton>
-        <Menu anchorEl={anchorEl} open={openedMenu} onClose={onMenuClose}>
+        <Menu anchorEl={anchorEl} open={openedMenu} onClose={onMenuClose} onClick={onMenuClose}>
           <MenuItem onClick={() => onCreateNote(module)}>{t("createNote")}</MenuItem>
+          <MenuItem onClick={() => onUpdate(module.id)}>{t("update")}</MenuItem>
           <MenuItem onClick={() => onDelete(module)}>{t("delete")}</MenuItem>
         </Menu>
       </Title>

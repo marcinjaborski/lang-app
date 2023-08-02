@@ -12,6 +12,7 @@ export const pl: Resource = {
     createButton: "Stwórz",
     delete: "Usuń",
     createNote: "Utwórz notatkę w tym module",
+    update: "Zmień nazwę",
     newNoteName: "Notatka",
   },
   login: {
@@ -42,10 +43,16 @@ export const pl: Resource = {
     login: "Logowanie",
   },
   createModuleDialog: {
-    title: "Stwórz nowy moduł",
+    title: {
+      create: "Stwórz nowy moduł",
+      update: "Nowa nazwa",
+    },
     textFieldLabel: "Nazwa",
     cancel: "Anuluj",
-    create: "Stwórz",
+    confirm: {
+      create: "Stwórz",
+      update: "Zapisz",
+    },
     "Failed to create record.": "Nazwa nie może być pusta",
     "Failed to authenticate.": "",
     "You are not allowed to perform this request.": "Nie możesz wykonać tej operacji",

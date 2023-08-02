@@ -1,4 +1,5 @@
 import { useModuleRepository, useNoteRepository } from "@src/hooks";
+import { openDialog, useAppDispatch } from "@src/store";
 import { Module } from "@src/types";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -11,6 +12,7 @@ export const useNoteShelf = () => {
   const notes = useNoteRepository();
   const modules = useModuleRepository();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const onMenuOpen = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => setAnchorEl(event.currentTarget);
   const onMenuClose = () => setAnchorEl(null);
@@ -30,6 +32,8 @@ export const useNoteShelf = () => {
     );
   };
 
+  const onUpdate = (moduleId: string) => dispatch(openDialog({ type: "update", moduleId }));
+
   const onDelete = (module: Module) => {
     const numberOfNotes = module.expand["notes(module)"]?.length;
     if (numberOfNotes && numberOfNotes > 0) {
@@ -38,5 +42,5 @@ export const useNoteShelf = () => {
     modules.delete.mutate(module.id);
   };
 
-  return { t, anchorEl, openedMenu, onMenuOpen, onMenuClose, onCreateNote, onDelete };
+  return { t, anchorEl, openedMenu, onMenuOpen, onMenuClose, onCreateNote, onUpdate, onDelete };
 };
