@@ -1,16 +1,7 @@
 import { Element, Leaf } from "@src/features/editor";
-import {
-  DEFAULT_SEPARATOR,
-  useEditorContext,
-  useEmptyElement,
-  useFormatters,
-  useNoteRepository,
-  useSettings,
-  useTermRepository,
-  useTranslateText,
-} from "@src/hooks";
-import { changeTitle, moveToNextStep, useAppDispatch, useAppSelector } from "@src/store";
-import { ElementType, isShortcut, isTermElement, NoteUrlParams } from "@src/types";
+import { useEditorContext, useEmptyElement, useFormatters, useNoteRepository, useTranslateText } from "@src/hooks";
+import { changeTitle, useAppDispatch, useAppSelector } from "@src/store";
+import { ElementType, isShortcut, NoteUrlParams } from "@src/types";
 import { ZERO_WIDTH_SPACE } from "@src/util";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -24,10 +15,7 @@ export const useNoteEditor = () => {
   const { t } = useTranslation("noteEditor");
   const dispatch = useAppDispatch();
   const title = useAppSelector((state) => state.noteEditor.title);
-  const termPhase = useAppSelector((state) => state.noteEditor.termPhase);
   const translateText = useTranslateText();
-  const separator = useSettings()?.separator || DEFAULT_SEPARATOR;
-  const terms = useTermRepository();
   const formatters = useFormatters();
   const params = useParams<NoteUrlParams>();
   const emptyElement = useEmptyElement();
@@ -55,23 +43,6 @@ export const useNoteEditor = () => {
     dispatch(changeTitle(event.target.value));
   };
 
-  const handleTerm = () => {
-    if (termPhase === "writing") {
-      Transforms.move(editor, {
-        distance: separator.length,
-        unit: "character",
-      });
-    } else {
-      const term = editor.selection && Editor.node(editor, editor.selection.focus)[0];
-      Transforms.insertNodes(editor, { type: "text", text: ZERO_WIDTH_SPACE });
-      if (isTermElement(term)) {
-        const [base, translation] = term.text.split(separator);
-        terms.create.mutate({ base, translation, note: params.id! });
-      }
-    }
-    dispatch(moveToNextStep());
-  };
-
   const endList = (): boolean => {
     const { selection } = editor;
     if (!selection) return false;
@@ -93,18 +64,27 @@ export const useNoteEditor = () => {
     return true;
   };
 
+  const preventDeletingZeroWidthSpace = () => {
+    const { selection } = editor;
+    if (!selection) return false;
+    const prevNode = Editor.previous(editor, { at: selection });
+    if (!prevNode) return false;
+    return Editor.string(editor, prevNode[1]).at(-1) === ZERO_WIDTH_SPACE;
+  };
+
   const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     debounceSave();
+
+    if (event.key === "Backspace" && preventDeletingZeroWidthSpace()) {
+      event.preventDefault();
+      return;
+    }
 
     if (event.key === "Enter" && endList()) {
       event.preventDefault();
       return;
     }
 
-    if (event.key === "Enter" && termPhase) {
-      event.preventDefault();
-      handleTerm();
-    }
     if (!event.ctrlKey) {
       return;
     }

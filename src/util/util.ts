@@ -1,9 +1,9 @@
-import { Language } from "@src/types";
+import { DeeplResponse, Language } from "@src/types";
 import { Node } from "slate";
 import { axiosDeepl } from "./axios";
 
 export const translate = async (text: string, sourceLang: Language, targetLang: Language) => {
-  const response = await axiosDeepl.get("", {
+  const response = await axiosDeepl.get<DeeplResponse>("", {
     params: {
       text: text,
       source_lang: sourceLang,

@@ -74,6 +74,16 @@ export const en = {
   },
   noteEditor: {
     placeholder: "Type something...",
+    noSeparator: "Selected text does not include separator",
+    termAlreadyExists: "Term like that already exists in this note",
+  },
+  createTermDialog: {
+    title: "Create term",
+    base: "Base",
+    translation: "Translation",
+    translate: "Translate",
+    cancel: "Cancel",
+    create: "Create",
   },
   noteToolbar: {
     term: "Create term",

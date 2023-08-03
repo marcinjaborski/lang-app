@@ -76,6 +76,16 @@ export const pl: Resource = {
   },
   noteEditor: {
     placeholder: "Zacznij pisać...",
+    noSeparator: "Zaznaczony tekst nie zawiera rozdzielaczaq",
+    termAlreadyExists: "Takie słówko już istnieje w tej notatce",
+  },
+  createTermDialog: {
+    title: "Stwórz słówko",
+    base: "Słówko",
+    translation: "Tłumaczenie",
+    translate: "Przetłumacz",
+    cancel: "Anuluj",
+    create: "Utwórz",
   },
   noteToolbar: {
     term: "Stwórz słówko",

@@ -1,12 +1,14 @@
 import { DEFAULT_SEPARATOR, useEditorContext, useNoteRepository, useSettings, useTermRepository } from "@src/hooks";
-import { moveToNextStep, startWritingTerm, useAppDispatch } from "@src/store";
+import { openCreateTermDialog, showError, useAppDispatch } from "@src/store";
 import { NoteUrlParams } from "@src/types";
 import { ZERO_WIDTH_SPACE } from "@src/util";
+import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { BaseRange, Editor, Text, Transforms } from "slate";
 import { ReactEditor } from "slate-react";
 
 export const useInsertTerm = () => {
+  const { t } = useTranslation("noteEditor");
   const editor = useEditorContext();
   const separator = useSettings()?.separator || DEFAULT_SEPARATOR;
   const dispatch = useAppDispatch();
@@ -15,48 +17,38 @@ export const useInsertTerm = () => {
   const params = useParams<NoteUrlParams>();
 
   const replaceSelected = (selection: BaseRange) => {
+    if (!params.id) return;
+
     const selectedText = Editor.string(editor, selection);
-    Transforms.setNodes(editor, { type: "term" }, { match: (n) => Text.isText(n), split: true });
-    const [insertedTerm] = Editor.nodes(editor, { match: (n) => Text.isText(n) && n.type === "term" });
-    ReactEditor.focus(editor);
-    Transforms.collapse(editor, { edge: "end" });
     if (!selectedText.includes(separator)) {
-      Transforms.insertText(editor, separator);
-      dispatch(startWritingTerm());
-      dispatch(moveToNextStep());
+      dispatch(showError(t("noSeparator")));
       return;
     }
+
     const [base, translation] = selectedText.split(separator);
-    if (translation === "") {
-      dispatch(startWritingTerm());
-      dispatch(moveToNextStep());
+    const alreadyExistingTerm = terms.list.data?.find(
+      (term) => term.base === base && term.expand.note?.id === params.id,
+    );
+    if (alreadyExistingTerm) {
+      dispatch(showError(t("termAlreadyExists")));
       return;
     }
-    Transforms.insertNodes(editor, { type: "text", text: ZERO_WIDTH_SPACE });
-    if (params.id) {
-      terms.create.mutate(
-        { base, translation, note: params.id },
-        {
-          onSuccess({ id }) {
-            Transforms.setNodes(editor, { id }, { at: insertedTerm[1] });
-            notes.update.mutate({ id: params.id!, record: { content: JSON.stringify(editor.children) } });
-          },
+
+    terms.create.mutate(
+      { base, translation, note: params.id },
+      {
+        onSuccess({ id }) {
+          Transforms.setNodes(editor, { type: "term", id }, { match: (n) => Text.isText(n), split: true });
+          ReactEditor.focus(editor);
+          Transforms.collapse(editor, { edge: "end" });
+          Transforms.insertNodes(editor, { type: "text", text: ZERO_WIDTH_SPACE });
+          notes.update.mutate({ id: params.id!, record: { content: JSON.stringify(editor.children) } });
         },
-      );
-    }
+      },
+    );
   };
 
-  const insertNew = () => {
-    dispatch(startWritingTerm());
-    Transforms.insertNodes(editor, [
-      {
-        type: "term",
-        text: `${ZERO_WIDTH_SPACE}${separator}`,
-      },
-    ]);
-    Transforms.move(editor, { distance: separator.length, unit: "offset", reverse: true });
-    ReactEditor.focus(editor);
-  };
+  const insertNew = () => dispatch(openCreateTermDialog());
 
   return () => {
     const { selection } = editor;

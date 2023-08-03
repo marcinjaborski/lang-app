@@ -13,3 +13,10 @@ export type NoteUrlParams = {
 };
 
 export type WithComponent<T> = T & { component?: React.ElementType };
+
+export type DeeplResponse = {
+  translations: {
+    text: string;
+    detected_source_language: string;
+  }[];
+};
