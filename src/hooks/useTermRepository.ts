@@ -17,7 +17,7 @@ export const useTermRepository = () => {
 
   const create = useMutation<Term, pbError, TermToCreate>(
     (term) => {
-      return pb.collection("terms").create({ ...term, owner: pb.authStore.model!.id });
+      return pb.collection("terms").create({ ...term, understanding: 1, owner: pb.authStore.model!.id });
     },
     {
       async onSuccess() {

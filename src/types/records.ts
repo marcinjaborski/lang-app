@@ -33,6 +33,7 @@ export type Term = Record & {
   base: string;
   translation: string;
   owner: string;
+  understanding: TermUnderstanding;
   expand: {
     note?: Note;
     tags?: Tag[];
@@ -86,3 +87,5 @@ export type SettingsToCreate = {
   defaultBaseLang?: Language;
   defaultTargetLang?: Language;
 };
+
+export type TermUnderstanding = 1 | 2 | 3;
