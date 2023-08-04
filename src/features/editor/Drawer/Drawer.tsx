@@ -1,6 +1,13 @@
-import { MenuItem } from "@mui/material";
+import { Chip, MenuItem } from "@mui/material";
 import { LanguageSelect } from "@src/components";
-import { DrawerStyled, ExcerptTextField, ModuleSelect, SaveButton } from "./Drawer.styled";
+import {
+  DrawerStyled,
+  ExcerptTextField,
+  ModuleSelect,
+  SaveButton,
+  ShareChipsWrap,
+  ShareTextField,
+} from "./Drawer.styled";
 import { useDrawer } from "./useDrawer";
 
 export const Drawer = () => {
@@ -16,8 +23,13 @@ export const Drawer = () => {
     onModuleChange,
     excerpt,
     onExcerptChange,
+    onShare,
+    onUnShare,
     onSave,
+    share,
+    setShare,
     modules,
+    shared,
   } = useDrawer();
 
   return (
@@ -39,6 +51,18 @@ export const Drawer = () => {
         value={excerpt}
         onChange={onExcerptChange}
       />
+      <ShareTextField
+        fullWidth
+        label={t("share")}
+        value={share}
+        onChange={(e) => setShare(e.target.value)}
+        onKeyDown={onShare}
+      />
+      <ShareChipsWrap>
+        {shared.map((user) => (
+          <Chip label={user.username} key={user.id} onDelete={() => onUnShare(user)} />
+        ))}
+      </ShareChipsWrap>
       <SaveButton variant="contained" onClick={onSave}>
         {t("save")}
       </SaveButton>

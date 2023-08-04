@@ -7,6 +7,12 @@ export type UpdateRecord<R> = {
   record: Partial<R>;
 };
 
+export type User = Record & {
+  username: string;
+};
+
+export type SerializableUser = Pick<User, "id" | "username">;
+
 export type Note = Record & {
   title: string;
   content: string;
@@ -15,7 +21,9 @@ export type Note = Record & {
   baseLang: Language;
   targetLang: Language;
   module: string;
+  shared: string[];
   expand: {
+    shared?: User[];
     module?: Module;
     "terms(note)": Term[];
   };
@@ -58,6 +66,7 @@ export type Tag = Record & {
 export type NoteToCreate = {
   title: string;
   module: string;
+  shared?: string[];
   content?: string;
   excerpt?: string;
   baseLang?: Language;

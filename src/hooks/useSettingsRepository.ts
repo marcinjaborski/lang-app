@@ -9,9 +9,15 @@ export const useSettingsRepository = () => {
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
 
-  const view = useQuery<Settings>("view-settings", () => {
-    return pb.collection("settings").getFirstListItem<Settings>("");
-  });
+  const view = useQuery<Settings>(
+    "view-settings",
+    () => {
+      return pb.collection("settings").getFirstListItem<Settings>("");
+    },
+    {
+      retry: 0,
+    },
+  );
 
   const create = useMutation(
     (settings: SettingsToCreate) => {

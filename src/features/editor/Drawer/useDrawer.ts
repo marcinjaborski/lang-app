@@ -1,6 +1,7 @@
 import { useModuleRepository } from "@src/hooks";
 import { useNotePage } from "@src/pages";
 import {
+  addToShared,
   changeBaseLang,
   changeExcerpt,
   changeModule,
@@ -8,17 +9,21 @@ import {
   closeDrawer,
   NoteDrawerState,
   openDrawer,
+  removeFromShared,
+  showError,
   useAppDispatch,
   useAppSelector,
 } from "@src/store";
-import { Language } from "@src/types";
-import React from "react";
+import { Language, SerializableUser, User } from "@src/types";
+import { pb } from "@src/util";
+import React, { KeyboardEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export const useDrawer = () => {
   const { t } = useTranslation("noteDrawer");
   const noteDrawer: NoteDrawerState = useAppSelector((state) => state.noteDrawer);
   const dispatch = useAppDispatch();
+  const [share, setShare] = useState("");
   const {
     list: { data: modules },
   } = useModuleRepository();
@@ -43,6 +48,21 @@ export const useDrawer = () => {
     onClose();
   };
 
+  const onShare = async (e: KeyboardEvent) => {
+    if (e.key !== "Enter") return;
+    try {
+      const user = await pb.collection("users").getFirstListItem<User>(`username="${share}"`);
+      dispatch(addToShared({ id: user.id, username: user.username }));
+      setShare("");
+    } catch (e) {
+      dispatch(showError(t("noUser")));
+    }
+  };
+
+  const onUnShare = (user: SerializableUser) => {
+    dispatch(removeFromShared(user));
+  };
+
   return {
     t,
     onOpen,
@@ -51,8 +71,12 @@ export const useDrawer = () => {
     onTargetLangChange,
     onModuleChange,
     onExcerptChange,
+    onShare,
+    onUnShare,
     onSave,
     modules,
+    share,
+    setShare,
     ...noteDrawer,
   };
 };

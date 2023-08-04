@@ -55,6 +55,7 @@ export const useNotePage = () => {
       excerpt: drawerState.excerpt,
       baseLang: drawerState.baseLang,
       targetLang: drawerState.targetLang,
+      shared: drawerState.shared.map((user) => user.id),
     };
     notes.update.mutate({ id: params.id!, record: newNote });
   };

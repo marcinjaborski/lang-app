@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { DEFAULT_LANG, DEFAULT_TRANSLATION_LANG } from "@src/hooks";
-import { Language, Note } from "@src/types";
+import { Language, Note, SerializableUser } from "@src/types";
 
 export type NoteDrawerState = {
   open: boolean;
@@ -8,6 +8,7 @@ export type NoteDrawerState = {
   targetLang: Language;
   module: string;
   excerpt: string;
+  shared: SerializableUser[];
 };
 
 const initialState: NoteDrawerState = {
@@ -16,6 +17,7 @@ const initialState: NoteDrawerState = {
   targetLang: DEFAULT_TRANSLATION_LANG,
   module: "",
   excerpt: "",
+  shared: [],
 };
 
 const noteDrawerSlice = createSlice({
@@ -40,6 +42,12 @@ const noteDrawerSlice = createSlice({
     changeExcerpt(state, { payload }: PayloadAction<string>) {
       state.excerpt = payload;
     },
+    addToShared(state, { payload }: PayloadAction<SerializableUser>) {
+      state.shared = [...state.shared, payload];
+    },
+    removeFromShared(state, { payload }: PayloadAction<SerializableUser>) {
+      state.shared = state.shared.filter((user) => user.id !== payload.id);
+    },
     updateStateFromNote(state, { payload }: PayloadAction<Note>) {
       if (payload.baseLang) {
         state.baseLang = payload.baseLang;
@@ -49,6 +57,7 @@ const noteDrawerSlice = createSlice({
       }
       state.module = payload.module;
       state.excerpt = payload.excerpt;
+      state.shared = payload.expand.shared?.map(({ id, username }) => ({ id, username })) || [];
     },
     clearState() {
       return initialState;
@@ -64,6 +73,8 @@ export const {
   changeModule,
   changeExcerpt,
   updateStateFromNote,
+  addToShared,
+  removeFromShared,
   clearState,
 } = noteDrawerSlice.actions;
 export const { reducer: noteDrawer } = noteDrawerSlice;

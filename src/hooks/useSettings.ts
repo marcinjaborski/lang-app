@@ -36,5 +36,5 @@ export const useSettings = (): UserSettings | null => {
       baseLang: settings.defaultBaseLang || DEFAULT_BASE_LANG,
       targetLang: settings.defaultTargetLang || DEFAULT_TRANSLATION_LANG,
     };
-  }, [settings]);
+  }, [settings, settingsRepository.view.isError]);
 };

@@ -14,6 +14,7 @@ export const pl: Resource = {
     createNote: "Utwórz notatkę w tym module",
     update: "Zmień nazwę",
     newNoteName: "Notatka",
+    shared: "Udostępnione notatki",
   },
   login: {
     loginTabTitle: "Logowanie",
@@ -72,6 +73,8 @@ export const pl: Resource = {
     targetLang: "Docelowy",
     module: "Moduł",
     excerpt: "Opis",
+    share: "Udostępnij",
+    noUser: "Nie znaleziono użytkownika",
     save: "Zapisz",
   },
   noteEditor: {

@@ -12,6 +12,7 @@ export const en = {
     createNote: "Create note in this module",
     update: "Change name",
     newNoteName: "Note",
+    shared: "Shared notes",
   },
   login: {
     loginTabTitle: "Login",
@@ -70,6 +71,8 @@ export const en = {
     targetLang: "Target",
     module: "Module",
     excerpt: "Excerpt",
+    share: "Share to",
+    noUser: "Could not find the user",
     save: "Save",
   },
   noteEditor: {

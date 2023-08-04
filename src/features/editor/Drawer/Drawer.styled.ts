@@ -1,4 +1,4 @@
-import { Button, Drawer, TextField } from "@mui/material";
+import { Box, Button, Drawer, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 export const DrawerStyled = styled(Drawer)(({ theme }) => ({
@@ -23,4 +23,14 @@ export const ModuleSelect = styled(TextField)({
 
 export const ExcerptTextField = styled(TextField)({
   gridColumn: "span 2",
+});
+
+export const ShareTextField = styled(TextField)({
+  gridColumn: "span 2",
+});
+
+export const ShareChipsWrap = styled(Box)({
+  gridColumn: "span 2",
+  display: "flex",
+  flexWrap: "wrap",
 });

@@ -11,10 +11,18 @@ export const useNoteRepository = () => {
   const params = useParams<NoteUrlParams>();
   const dispatch = useAppDispatch();
 
-  const view = useQuery(
+  const listShared = useQuery<Note[], pbError>("list-note-shared", () => {
+    return pb.collection("notes").getFullList<Note>({
+      filter: `shared~"${pb.authStore.model?.id}"`,
+    });
+  });
+
+  const view = useQuery<Note, pbError>(
     ["view-note", params.id],
     () => {
-      return pb.collection("notes").getOne(params.id!) as Promise<Note>;
+      return pb.collection("notes").getOne(params.id!, {
+        expand: "shared",
+      });
     },
     {
       enabled: false,
@@ -57,5 +65,5 @@ export const useNoteRepository = () => {
     },
   );
 
-  return { view, create, update, delete: deleteMutation };
+  return { listShared, view, create, update, delete: deleteMutation };
 };
