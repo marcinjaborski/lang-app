@@ -2,7 +2,7 @@ import { Element, Leaf } from "@src/features/editor";
 import { useEditorContext, useEmptyElement, useFormatters, useNoteRepository, useTranslateText } from "@src/hooks";
 import { changeTitle, useAppDispatch, useAppSelector } from "@src/store";
 import { ElementType, isShortcut, NoteUrlParams } from "@src/types";
-import { ZERO_WIDTH_SPACE } from "@src/util";
+import { isNoteShared, ZERO_WIDTH_SPACE } from "@src/util";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
@@ -24,6 +24,8 @@ export const useNoteEditor = () => {
     notes.update.mutate({ id: params.id!, record: { content: JSON.stringify(editor.children) } });
   }, 10000);
 
+  const readonly = isNoteShared(notes.view.data);
+
   const keyBindings = {
     b: formatters.bold,
     i: formatters.italic,
@@ -40,6 +42,7 @@ export const useNoteEditor = () => {
   const renderElement = useCallback((props: RenderElementProps) => <Element {...props}>{props.children}</Element>, []);
 
   const onTitleChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    if (readonly) return;
     dispatch(changeTitle(event.target.value));
   };
 
@@ -95,5 +98,5 @@ export const useNoteEditor = () => {
     keyBindings[event.key]();
   };
 
-  return { editor, t, emptyElement, renderLeaf, renderElement, title, onTitleChange, onKeyDown };
+  return { editor, t, readonly, emptyElement, renderLeaf, renderElement, title, onTitleChange, onKeyDown };
 };

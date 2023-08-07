@@ -60,5 +60,5 @@ export const useNotePage = () => {
     notes.update.mutate({ id: params.id!, record: newNote });
   };
 
-  return { editor, onOpenDrawer, onSave };
+  return { editor, notes, onOpenDrawer, onSave };
 };

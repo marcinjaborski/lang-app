@@ -1,4 +1,5 @@
-import { DeeplResponse, Language } from "@src/types";
+import { DeeplResponse, Language, Note } from "@src/types";
+import { pb } from "@src/util";
 import { Node } from "slate";
 import { axiosDeepl } from "./axios";
 
@@ -21,4 +22,8 @@ export const serialize = (noteContent: string): string => {
   } catch (e) {
     return "";
   }
+};
+
+export const isNoteShared = (note?: Note) => {
+  return note && note.owner !== pb.authStore.model?.id;
 };
