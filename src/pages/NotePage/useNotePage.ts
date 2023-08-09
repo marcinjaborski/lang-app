@@ -24,9 +24,11 @@ export const useNotePage = () => {
   const emptyElement = useEmptyElement();
   const navigate = useNavigate();
   const settings = useSettings();
+  const [fetched, setFetched] = useState(false);
 
   useEffect(() => {
-    if (!settings) return;
+    if (!settings || fetched) return;
+    setFetched(true);
     notes.view.refetch().then(({ data: note }) => {
       if (!note) {
         return;
@@ -41,7 +43,7 @@ export const useNotePage = () => {
       dispatch(changeTargetLang(settings.targetLang));
       dispatch(updateStateFromNote(note));
     });
-  }, [settings]);
+  }, [settings, fetched]);
 
   if (!params.id) navigate("/");
 

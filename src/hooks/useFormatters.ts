@@ -34,7 +34,7 @@ export const useFormatters = () => {
     // If list has no more list items remove it
     const updatedList = Editor.above(editor, {
       at: start,
-      match: (node) => Element.isElement(node) && node.type === type,
+      match: (node) => Element.isElement(node) && (node.type === "numbered-list" || node.type === "bulleted-list"),
     });
 
     if (!updatedList) {
@@ -45,7 +45,7 @@ export const useFormatters = () => {
     if (numberOfListItems === 0) {
       Transforms.unwrapNodes(editor, {
         at: start,
-        match: (node) => Element.isElement(node) && node.type === type,
+        match: (node) => Element.isElement(node) && (node.type === "numbered-list" || node.type === "bulleted-list"),
       });
     }
   };
@@ -80,7 +80,7 @@ export const useFormatters = () => {
     const [start] = Range.edges(selection);
     const isList = Editor.above(editor, {
       at: start,
-      match: (node) => Element.isElement(node) && node.type === type,
+      match: (node) => Element.isElement(node) && (node.type === "numbered-list" || node.type === "bulleted-list"),
     });
 
     if (isList) {
