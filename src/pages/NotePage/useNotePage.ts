@@ -11,7 +11,7 @@ import {
 import { NoteToCreate, NoteUrlParams } from "@src/types";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { createEditor } from "slate";
+import { createEditor, Descendant } from "slate";
 import { withReact } from "slate-react";
 
 export const useNotePage = () => {
@@ -49,10 +49,10 @@ export const useNotePage = () => {
 
   const onOpenDrawer = () => dispatch(openDrawer());
 
-  const onSave = () => {
+  const onSave = (content?: Descendant[]) => {
     const newNote: NoteToCreate = {
       title,
-      content: JSON.stringify(editor.children),
+      content: JSON.stringify(content || editor.children),
       module: drawerState.module,
       excerpt: drawerState.excerpt,
       baseLang: drawerState.baseLang,

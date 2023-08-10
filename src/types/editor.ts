@@ -14,13 +14,11 @@ export type RichElement = {
 
 export type TextFormatOption = "bold" | "italic" | "underline";
 
-export type TextElement = { type: "text"; text: string } & {
+export type TextElement = { type: "text"; text: string; id?: null } & {
   [K in TextFormatOption]?: boolean;
 };
 
-export type TermElement = Overwrite<TextElement, { type: "term" }> & {
-  id?: string;
-};
+export type TermElement = Overwrite<TextElement, { type: "term"; id?: string }>;
 
 declare module "slate" {
   interface CustomTypes {

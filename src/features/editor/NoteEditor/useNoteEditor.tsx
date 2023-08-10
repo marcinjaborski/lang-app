@@ -1,7 +1,7 @@
 import { Element, Leaf } from "@src/features/editor";
 import { useEditorContext, useEmptyElement, useFormatters, useNoteRepository, useTranslateText } from "@src/hooks";
 import { changeTitle, useAppDispatch, useAppSelector } from "@src/store";
-import { ElementType, isShortcut, NoteUrlParams } from "@src/types";
+import { ElementType, isShortcut, isTermElement, NoteUrlParams } from "@src/types";
 import { isNoteShared, ZERO_WIDTH_SPACE } from "@src/util";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -75,8 +75,24 @@ export const useNoteEditor = () => {
     return Editor.string(editor, prevNode[1]).at(-1) === ZERO_WIDTH_SPACE;
   };
 
+  const willInsertCharacter = (key: string) => {
+    return key.length === 1 || key === "Enter" || key === "Backspace";
+  };
+
+  const isInsideTerm = () => {
+    const { selection } = editor;
+    if (!selection) return false;
+    const [node] = Editor.node(editor, selection);
+    return isTermElement(node);
+  };
+
   const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     debounceSave();
+
+    if (willInsertCharacter(event.key) && isInsideTerm()) {
+      event.preventDefault();
+      return;
+    }
 
     if (event.key === "Backspace" && preventDeletingZeroWidthSpace()) {
       event.preventDefault();

@@ -5,3 +5,4 @@ export * from "./Drawer/Drawer";
 export * from "./NoteEditor/NoteEditor";
 export * from "./Toolbar/Toolbar";
 export * from "./CreateTermDIalog/CreateTermDialog";
+export * from "./ContextMenu/ContextMenu";

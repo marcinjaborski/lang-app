@@ -1,5 +1,5 @@
 import { Box, TextField } from "@mui/material";
-import { CreateTermDialog, HoveringToolbar, Toolbar } from "@src/features/editor";
+import { ContextMenu, CreateTermDialog, HoveringToolbar, Toolbar } from "@src/features/editor";
 import { Slate } from "slate-react";
 import { EditableStyled, NoteEditorStyled } from "./NoteEditor.styled";
 import { useNoteEditor } from "./useNoteEditor";
@@ -29,6 +29,7 @@ export const NoteEditor = () => {
           onKeyDown={onKeyDown}
         />
       </Slate>
+      <ContextMenu />
     </NoteEditorStyled>
   );
 };

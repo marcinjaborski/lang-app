@@ -38,5 +38,17 @@ export const useTermRepository = () => {
     },
   );
 
-  return { list, create, update };
+  const deleteMutation = useMutation<boolean, pbError, string>(
+    (id) => {
+      return pb.collection("terms").delete(id);
+    },
+    {
+      async onSuccess() {
+        await queryClient.invalidateQueries("list-terms");
+        dispatch(showSuccess(t("deleted")));
+      },
+    },
+  );
+
+  return { list, create, update, delete: deleteMutation };
 };
