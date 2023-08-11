@@ -63,6 +63,14 @@ export type Tag = Record & {
   color: string;
 };
 
+export type StudySet = Record & {
+  title: string;
+  owner: string;
+  expand: {
+    terms: Term[];
+  };
+};
+
 export type NoteToCreate = {
   title: string;
   module: string;
@@ -95,6 +103,11 @@ export type SettingsToCreate = {
   theme?: {};
   defaultBaseLang?: Language;
   defaultTargetLang?: Language;
+};
+
+export type StudySetToCreate = {
+  title: string;
+  terms: string[];
 };
 
 export type TermUnderstanding = 1 | 2 | 3;

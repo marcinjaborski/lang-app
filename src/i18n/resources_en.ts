@@ -130,4 +130,9 @@ export const en = {
     save: "Save",
     updated: "Settings saved",
   },
+  study: {
+    title: "Study sets",
+    terms: "terms",
+    fiches: "Fiches",
+  },
 };

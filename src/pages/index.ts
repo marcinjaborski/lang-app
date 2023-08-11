@@ -5,3 +5,4 @@ export * from "./NotePage/NotePage";
 export * from "./NotFound/NotFound";
 export * from "./NotePage/useNotePage";
 export * from "./Settings/Settings";
+export * from "./StudyingSetGrid/StudyingSetGrid";

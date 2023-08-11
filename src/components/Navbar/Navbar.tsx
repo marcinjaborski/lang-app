@@ -1,6 +1,7 @@
 import CreateIcon from "@mui/icons-material/Create";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
+import SchoolIcon from "@mui/icons-material/School";
 import { IconButton, Menu, MenuItem, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { CreateNoteDialog } from "@src/components";
 import { ToolbarWrap } from "./Navbar.styled";
@@ -51,6 +52,11 @@ export const Navbar = () => {
         {isLogged ? (
           <ToggleButton value="" selected={pathname.includes("/note")} onClick={() => setNoteDialogOpen(true)}>
             <CreateIcon />
+          </ToggleButton>
+        ) : null}
+        {isLogged ? (
+          <ToggleButton value="/study" selected={pathname === "/study"}>
+            <SchoolIcon />
           </ToggleButton>
         ) : null}
       </ToggleButtonGroup>

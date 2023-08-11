@@ -1,6 +1,6 @@
 import { FeedbackSnackbar, Navbar } from "@src/components";
 import { useSettings } from "@src/hooks";
-import { Home, Login, NotePage, NotFound, Settings } from "@src/pages";
+import { Home, Login, NotePage, NotFound, Settings, StudyingSetGrid } from "@src/pages";
 import { pb } from "@src/util";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -24,6 +24,7 @@ export const App = () => {
         {isLogged ? (
           <>
             <Route path="/note/:id" element={<NotePage />} />
+            <Route path="/study" element={<StudyingSetGrid />} />
             <Route path="/settings" element={<Settings />} />
           </>
         ) : null}

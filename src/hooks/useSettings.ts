@@ -1,4 +1,4 @@
-import { useSettingsRepository } from "@src/hooks/useSettingsRepository";
+import { useSettingsRepository } from "@src/hooks";
 import { AppLanguage } from "@src/i18n/types";
 import { Language } from "@src/types";
 import { useMemo } from "react";

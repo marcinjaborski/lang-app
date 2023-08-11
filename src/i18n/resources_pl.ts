@@ -132,4 +132,9 @@ export const pl: Resource = {
     save: "Zapisz",
     updated: "Zapisano ustawienia",
   },
+  study: {
+    title: "Zestawy do nauki",
+    terms: "słówek",
+    fiches: "Fiszki",
+  },
 };
