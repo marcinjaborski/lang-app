@@ -29,6 +29,10 @@ export const useNoteRepository = () => {
     },
   );
 
+  const list = useQuery<Note[], pbError>(["list-notes", params.id], () => {
+    return pb.collection("notes").getFullList<Note>();
+  });
+
   const create = useMutation<Note, pbError, NoteToCreate>(
     (note) => {
       return pb.collection("notes").create({ ...note, owner: pb.authStore.model!.id });
@@ -65,5 +69,5 @@ export const useNoteRepository = () => {
     },
   );
 
-  return { listShared, view, create, update, delete: deleteMutation };
+  return { listShared, view, list, create, update, delete: deleteMutation };
 };

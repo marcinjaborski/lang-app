@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { createModuleDialog, feedback, noteDrawer, noteEditor } from "@src/store";
+import { createModuleDialog, createStudyDialog, feedback, noteDrawer, noteEditor } from "@src/store";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 const rootReducer = combineReducers({
@@ -7,6 +7,7 @@ const rootReducer = combineReducers({
   noteDrawer,
   noteEditor,
   feedback,
+  createStudyDialog,
 });
 
 export const store = configureStore({

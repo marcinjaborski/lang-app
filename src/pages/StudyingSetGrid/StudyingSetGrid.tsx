@@ -1,13 +1,15 @@
 import AddIcon from "@mui/icons-material/Add";
 import { Divider, Fab, Grow, Typography } from "@mui/material";
-import { StudySetElement } from "@src/features/studying";
+import { StudySetCreateDialog, StudySetElement } from "@src/features/studying";
 import { useStudySetRepository } from "@src/hooks";
+import { openStudyDialog, useAppDispatch } from "@src/store";
 import { useTranslation } from "react-i18next";
 import { SetSkeleton, SetsWrap, Wrap } from "./Wrap";
 
 export const StudyingSetGrid = () => {
   const { t } = useTranslation("study");
   const studySets = useStudySetRepository();
+  const dispatch = useAppDispatch();
 
   return (
     <Wrap>
@@ -32,8 +34,9 @@ export const StudyingSetGrid = () => {
           />
         ))}
       </SetsWrap>
+      <StudySetCreateDialog />
       <Grow in>
-        <Fab color="primary">
+        <Fab color="primary" onClick={() => dispatch(openStudyDialog())}>
           <AddIcon />
         </Fab>
       </Grow>
