@@ -1,5 +1,6 @@
 import { Button, LinearProgress, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { Card } from "./StudySetElement.styled";
 
 type StudySetElementProps = {
@@ -20,7 +21,9 @@ export const StudySetElement = ({ id, title, numberOfTerms }: StudySetElementPro
         {numberOfTerms} {t("terms")}
       </Typography>
       <LinearProgress variant="determinate" value={50} color="secondary" />
-      <Button>{t("fiches")}</Button>
+      <Link to={`/flashcards/${id}`}>
+        <Button>{t("flashcards")}</Button>
+      </Link>
     </Card>
   );
 };

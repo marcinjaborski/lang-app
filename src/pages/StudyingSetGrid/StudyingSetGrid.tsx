@@ -4,7 +4,7 @@ import { StudySetCreateDialog, StudySetElement } from "@src/features/studying";
 import { useStudySetRepository } from "@src/hooks";
 import { openStudyDialog, useAppDispatch } from "@src/store";
 import { useTranslation } from "react-i18next";
-import { SetSkeleton, SetsWrap, Wrap } from "./Wrap";
+import { SetSkeleton, SetsWrap, Wrap } from "./StudyingSetGrid.styled";
 
 export const StudyingSetGrid = () => {
   const { t } = useTranslation("study");

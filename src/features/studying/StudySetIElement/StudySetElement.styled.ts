@@ -7,4 +7,7 @@ export const Card = styled(Paper)(({ theme }) => ({
   flexDirection: "column",
   gap: theme.spacing(1),
   minWidth: 200,
+  a: {
+    alignSelf: "center",
+  },
 }));

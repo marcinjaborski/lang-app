@@ -135,7 +135,8 @@ export const pl: Resource = {
   study: {
     title: "Zestawy do nauki",
     terms: "słówek",
-    fiches: "Fiszki",
+    flashcards: "Fiszki",
+    flashcardsHeader: "Fiszka {{current}} z {{all}}",
   },
   studySetCreate: {
     title: "Stwórz zestaw do nauki",

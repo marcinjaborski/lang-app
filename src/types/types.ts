@@ -12,6 +12,10 @@ export type NoteUrlParams = {
   id: string;
 };
 
+export type FlashcardsUrlParams = {
+  id: string;
+};
+
 export type WithComponent<T> = T & { component?: React.ElementType };
 
 export type DeeplResponse = {

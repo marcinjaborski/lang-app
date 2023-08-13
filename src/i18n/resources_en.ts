@@ -133,7 +133,8 @@ export const en = {
   study: {
     title: "Study sets",
     terms: "terms",
-    fiches: "Fiches",
+    flashcards: "Flashcards",
+    flashcardsHeader: "Flashcard {{current}} of {{all}}",
   },
   studySetCreate: {
     title: "Create study set",
