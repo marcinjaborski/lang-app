@@ -21,7 +21,7 @@ export const NotePage = () => {
             </DrawerButton>
             <Drawer />
             <Grow in>
-              <Fab color="primary" onClick={onSave}>
+              <Fab color="primary" onClick={() => onSave()}>
                 <SaveIcon />
               </Fab>
             </Grow>
