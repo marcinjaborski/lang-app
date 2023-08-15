@@ -24,6 +24,9 @@ export const StudySetElement = ({ id, title, numberOfTerms }: StudySetElementPro
       <Link to={`/flashcards/${id}`}>
         <Button>{t("flashcards")}</Button>
       </Link>
+      <Link to={`/quiz/${id}`}>
+        <Button>{t("quiz")}</Button>
+      </Link>
     </Card>
   );
 };

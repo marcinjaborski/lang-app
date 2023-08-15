@@ -137,6 +137,9 @@ export const pl: Resource = {
     terms: "słówek",
     flashcards: "Fiszki",
     flashcardsHeader: "Fiszka {{current}} z {{all}}",
+    quiz: "Quiz",
+    result: "{{result}} poprawnych odpowiedzi",
+    endQuiz: "Sprawdź odpowiedzi",
   },
   studySetCreate: {
     title: "Stwórz zestaw do nauki",

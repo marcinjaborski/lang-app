@@ -7,3 +7,4 @@ export * from "./NotePage/useNotePage";
 export * from "./Settings/Settings";
 export * from "./StudyingSetGrid/StudyingSetGrid";
 export * from "./FlashcardsPage/FlashcardsPage";
+export * from "./QuizPage/QuizPage";

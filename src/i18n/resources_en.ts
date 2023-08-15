@@ -135,6 +135,9 @@ export const en = {
     terms: "terms",
     flashcards: "Flashcards",
     flashcardsHeader: "Flashcard {{current}} of {{all}}",
+    quiz: "Quiz",
+    result: "You got {{result}} right",
+    endQuiz: "End attempt",
   },
   studySetCreate: {
     title: "Create study set",
