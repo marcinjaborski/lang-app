@@ -11,6 +11,6 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    exclude: ["use-debounce"],
+    exclude: ["pocketbase", "use-debounce"],
   },
 });

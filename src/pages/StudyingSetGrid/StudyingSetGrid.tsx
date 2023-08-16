@@ -26,12 +26,7 @@ export const StudyingSetGrid = () => {
           </>
         ) : null}
         {studySets.list.data?.map((studySet) => (
-          <StudySetElement
-            key={studySet.id}
-            id={studySet.id}
-            title={studySet.title}
-            numberOfTerms={studySet.expand.terms.length}
-          />
+          <StudySetElement key={studySet.id} id={studySet.id} title={studySet.title} terms={studySet.expand.terms} />
         ))}
       </SetsWrap>
       <StudySetCreateDialog />
