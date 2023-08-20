@@ -1,6 +1,6 @@
 import { useStudySetRepository } from "@src/hooks/repositories";
 import { Question } from "@src/types";
-import { QUIZ_ANSWERS, QUIZ_QUESTIONS } from "@src/util";
+import { FINAL_UNDERSTANDING, QUIZ_ANSWERS, QUIZ_QUESTIONS } from "@src/util";
 import _ from "lodash";
 import { useMemo } from "react";
 
@@ -12,6 +12,7 @@ export const useQuestions = (): Question[] | null => {
     const allTerms = studySets.view.data.expand.terms;
     const termsToStudy = [...allTerms]
       .sort((term1, term2) => (term1.understanding > term2.understanding ? 1 : -1))
+      .filter((term) => term.understanding < FINAL_UNDERSTANDING)
       .slice(0, QUIZ_QUESTIONS);
     const allAnswers = allTerms.map((term) => term.translation);
     return termsToStudy.map((term) => {

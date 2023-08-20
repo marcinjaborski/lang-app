@@ -1,6 +1,6 @@
 import { showSuccess, useAppDispatch } from "@src/store";
 import { Term, TermToCreate, UpdateRecord } from "@src/types";
-import { pb, pbError } from "@src/util";
+import { pb, PB_CUSTOM_ROUTES, pbError } from "@src/util";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
@@ -38,6 +38,10 @@ export const useTermRepository = () => {
     },
   );
 
+  const updateUnderstanding = useMutation<void, pbError, string[]>((terms) => {
+    return pb.send(`${PB_CUSTOM_ROUTES}/updateUnderstanding`, { method: "POST", body: { terms } });
+  });
+
   const deleteMutation = useMutation<boolean, pbError, string>(
     (id) => {
       return pb.collection("terms").delete(id);
@@ -50,5 +54,5 @@ export const useTermRepository = () => {
     },
   );
 
-  return { list, create, update, delete: deleteMutation };
+  return { list, create, update, updateUnderstanding, delete: deleteMutation };
 };

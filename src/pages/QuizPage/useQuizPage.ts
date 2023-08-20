@@ -1,5 +1,6 @@
+import { useTermRepository } from "@src/hooks";
 import { useQuestions } from "@src/hooks/useQuestions";
-import { Question } from "@src/types";
+import { isNotNullable, Question } from "@src/types";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -9,16 +10,18 @@ export const useQuizPage = () => {
   const [answered, setAnswered] = useState<Record<string, string>>({});
   const questions = useQuestions();
   const [result, setResult] = useState<number | null>(null);
+  const terms = useTermRepository();
 
   const onEnd = () => {
     if (!questions) return;
-    setResult(
-      Object.entries(answered).reduce((acc, [key, value]) => {
+    const answeredCorrectly = Object.entries(answered)
+      .map(([key, value]) => {
         const question = questions.find((q) => q.term.base === key);
-        if (!question) return acc;
-        return question.term.translation === value ? acc + 1 : acc;
-      }, 0),
-    );
+        if (question?.term.translation === value) return question.term.id;
+      })
+      .filter(isNotNullable);
+    setResult(answeredCorrectly.length);
+    terms.updateUnderstanding.mutate(answeredCorrectly);
   };
 
   const getAnswerColor = (question: Question, answer: string) => {

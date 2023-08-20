@@ -8,3 +8,7 @@ export const isTermElement = (obj: unknown): obj is TermElement => {
 export const isShortcut = (key: string): key is Shortcut => {
   return shortcuts.includes(key as Shortcut);
 };
+
+export const isNotNullable = <T>(obj: T): obj is NonNullable<T> => {
+  return obj !== null && obj !== undefined;
+};
