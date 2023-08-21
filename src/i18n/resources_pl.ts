@@ -140,6 +140,7 @@ export const pl: Resource = {
     quiz: "Quiz",
     result: "{{result}} poprawnych odpowiedzi",
     endQuiz: "Sprawdź odpowiedzi",
+    shared: "Udostępione",
     shareDialog: {
       title: "Udostępnij zestaw",
       shareTo: "Nazwa użytkownika",

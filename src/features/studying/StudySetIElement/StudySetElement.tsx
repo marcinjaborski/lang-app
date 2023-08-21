@@ -19,17 +19,18 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import { useStudySetElement } from "@src/features/studying/StudySetIElement/useStudySetElement";
 import { StudySet } from "@src/types";
 import { FINAL_UNDERSTANDING } from "@src/util";
 import { Link } from "react-router-dom";
 import { Card, Options } from "./StudySetElement.styled";
+import { useStudySetElement } from "./useStudySetElement";
 
 type StudySetElementProps = {
   studySet: StudySet;
+  isShared?: boolean;
 };
 
-export const StudySetElement = ({ studySet }: StudySetElementProps) => {
+export const StudySetElement = ({ studySet, isShared }: StudySetElementProps) => {
   const {
     t,
     id,
@@ -52,9 +53,11 @@ export const StudySetElement = ({ studySet }: StudySetElementProps) => {
 
   return (
     <Card>
-      <Options onClick={(e) => setOptionsAnchor(e.currentTarget)}>
-        <MoreVertIcon />
-      </Options>
+      {!isShared ? (
+        <Options onClick={(e) => setOptionsAnchor(e.currentTarget)}>
+          <MoreVertIcon />
+        </Options>
+      ) : null}
       <Menu open={optionsMenuOpen} onClose={onMenuClose} onClick={onMenuClose} anchorEl={optionsAnchor}>
         <MenuItem onClick={() => setShareDialogOpen(true)}>{t("shareDialog.share")}</MenuItem>
       </Menu>

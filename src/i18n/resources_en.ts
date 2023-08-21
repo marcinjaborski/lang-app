@@ -138,6 +138,7 @@ export const en = {
     quiz: "Quiz",
     result: "You got {{result}} right",
     endQuiz: "End attempt",
+    shared: "Shared",
     shareDialog: {
       title: "Share study set",
       shareTo: "Username",

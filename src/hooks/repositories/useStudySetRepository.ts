@@ -21,6 +21,14 @@ export const useStudySetRepository = () => {
   const list = useQuery<StudySet[]>("list-studySets", () => {
     return pb.collection("studySets").getFullList<StudySet>({
       expand: "terms,shared",
+      filter: `owner="${pb.authStore.model?.id}"`,
+    });
+  });
+
+  const listShared = useQuery<StudySet[]>("list-shared-studySets", () => {
+    return pb.collection("studySets").getFullList<StudySet>({
+      expand: "terms,shared",
+      filter: `shared~"${pb.authStore.model?.id}"`,
     });
   });
 
@@ -63,5 +71,5 @@ export const useStudySetRepository = () => {
     },
   );
 
-  return { view, list, create, update, delete: deleteMutation };
+  return { view, list, listShared, create, update, delete: deleteMutation };
 };
