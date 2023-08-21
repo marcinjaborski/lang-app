@@ -9,7 +9,7 @@ export const useQuestions = (): Question[] | null => {
 
   return useMemo(() => {
     if (!studySets.view.data) return null;
-    const allTerms = studySets.view.data.expand.terms;
+    const allTerms = studySets.view.data.expand.terms || [];
     const termsToStudy = [...allTerms]
       .sort((term1, term2) => (term1.understanding > term2.understanding ? 1 : -1))
       .filter((term) => term.understanding < FINAL_UNDERSTANDING)

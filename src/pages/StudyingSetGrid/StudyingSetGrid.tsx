@@ -29,7 +29,7 @@ export const StudyingSetGrid = () => {
           <StudySetElement key={studySet.id} studySet={studySet} />
         ))}
       </SetsWrap>
-      {studySets.listShared.isLoading || studySets.listShared.data.length > 0 ? (
+      {studySets.listShared.isLoading || studySets.listShared.data?.length ? (
         <>
           <Typography variant="h5">{t("shared")}</Typography>
           <Divider />
