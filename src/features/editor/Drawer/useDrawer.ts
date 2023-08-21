@@ -1,4 +1,4 @@
-import { useModuleRepository } from "@src/hooks";
+import { useModuleRepository, useUserRepository } from "@src/hooks";
 import { useNotePage } from "@src/pages";
 import {
   addToShared,
@@ -14,8 +14,7 @@ import {
   useAppDispatch,
   useAppSelector,
 } from "@src/store";
-import { Language, SerializableUser, User } from "@src/types";
-import { pb } from "@src/util";
+import { Language, SerializableUser } from "@src/types";
 import React, { KeyboardEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -28,6 +27,7 @@ export const useDrawer = () => {
     list: { data: modules },
   } = useModuleRepository();
   const { onSave: saveNote } = useNotePage();
+  const { getByUsername } = useUserRepository();
 
   const onOpen = () => dispatch(openDrawer());
   const onClose = () => dispatch(closeDrawer());
@@ -51,7 +51,7 @@ export const useDrawer = () => {
   const onShare = async (e: KeyboardEvent) => {
     if (e.key !== "Enter") return;
     try {
-      const user = await pb.collection("users").getFirstListItem<User>(`username="${share}"`);
+      const user = await getByUsername(share);
       dispatch(addToShared({ id: user.id, username: user.username }));
       setShare("");
     } catch (e) {

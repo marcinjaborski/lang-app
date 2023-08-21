@@ -1,5 +1,5 @@
 import { showSuccess, useAppDispatch } from "@src/store";
-import { FlashcardsUrlParams, StudySet, StudySetToCreate } from "@src/types";
+import { FlashcardsUrlParams, StudySet, StudySetToCreate, UpdateRecord } from "@src/types";
 import { pb, pbError } from "@src/util";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQuery, useQueryClient } from "react-query";
@@ -14,13 +14,13 @@ export const useStudySetRepository = () => {
   const view = useQuery<StudySet>(["view-studySets", params.id], () => {
     if (!params.id) return new Promise<StudySet>(() => {});
     return pb.collection("studySets").getOne<StudySet>(params.id, {
-      expand: "terms",
+      expand: "terms,shared",
     });
   });
 
   const list = useQuery<StudySet[]>("list-studySets", () => {
     return pb.collection("studySets").getFullList<StudySet>({
-      expand: "terms",
+      expand: "terms,shared",
     });
   });
 
@@ -38,5 +38,30 @@ export const useStudySetRepository = () => {
       },
     },
   );
-  return { view, list, create };
+
+  const update = useMutation<StudySet, pbError, UpdateRecord<StudySetToCreate>>(
+    ({ id, record }) => {
+      return pb.collection("studySets").update(id, record);
+    },
+    {
+      async onSuccess() {
+        await queryClient.invalidateQueries("list-studySets");
+        dispatch(showSuccess(t("updated")));
+      },
+    },
+  );
+
+  const deleteMutation = useMutation<boolean, pbError, string>(
+    (id) => {
+      return pb.collection("studySets").delete(id);
+    },
+    {
+      async onSuccess() {
+        await queryClient.invalidateQueries("list-studySets");
+        dispatch(showSuccess(t("deleted")));
+      },
+    },
+  );
+
+  return { view, list, create, update, delete: deleteMutation };
 };

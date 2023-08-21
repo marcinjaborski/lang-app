@@ -94,7 +94,7 @@ export const useStudySetCreateDialog = () => {
       return;
     }
     studySets.create.mutate(
-      { title: dialogState.title, terms: studySetTerms.map((term) => term.id) },
+      { title: dialogState.title, terms: studySetTerms.map((term) => term.id), shared: [] },
       {
         onSuccess() {
           onClose();

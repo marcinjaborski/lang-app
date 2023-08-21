@@ -1,29 +1,101 @@
-import { Box, Button, LinearProgress, Tooltip, Typography } from "@mui/material";
-import { Term } from "@src/types";
+import AddIcon from "@mui/icons-material/Add";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import {
+  Box,
+  Button,
+  Chip,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  FormControl,
+  IconButton,
+  Input,
+  InputAdornment,
+  InputLabel,
+  LinearProgress,
+  Menu,
+  MenuItem,
+  Tooltip,
+  Typography,
+} from "@mui/material";
+import { useStudySetElement } from "@src/features/studying/StudySetIElement/useStudySetElement";
+import { StudySet } from "@src/types";
 import { FINAL_UNDERSTANDING } from "@src/util";
-import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { Card } from "./StudySetElement.styled";
+import { Card, Options } from "./StudySetElement.styled";
 
 type StudySetElementProps = {
-  id: string;
-  title: string;
-  terms: Term[];
+  studySet: StudySet;
 };
 
-export const StudySetElement = ({ id, title, terms }: StudySetElementProps) => {
-  const { t } = useTranslation("study");
+export const StudySetElement = ({ studySet }: StudySetElementProps) => {
+  const {
+    t,
+    id,
+    title,
+    shareTo,
+    shared,
+    shareDialogOpen,
+    optionsMenuOpen,
+    terms,
+    optionsAnchor,
+    setOptionsAnchor,
+    setShareTo,
+    setShareDialogOpen,
+    onKeyDown,
+    onShare,
+    onDeleteShare,
+    onShareDialogClose,
+    onMenuClose,
+  } = useStudySetElement(studySet);
 
   return (
     <Card>
+      <Options onClick={(e) => setOptionsAnchor(e.currentTarget)}>
+        <MoreVertIcon />
+      </Options>
+      <Menu open={optionsMenuOpen} onClose={onMenuClose} onClick={onMenuClose} anchorEl={optionsAnchor}>
+        <MenuItem onClick={() => setShareDialogOpen(true)}>{t("shareDialog.share")}</MenuItem>
+      </Menu>
+      <Dialog open={shareDialogOpen} onClose={onShareDialogClose}>
+        <DialogTitle>{t("shareDialog.title")}</DialogTitle>
+        <DialogContent>
+          <FormControl sx={{ mt: 1 }}>
+            <InputLabel htmlFor={`shareTo-${studySet.id}`}>{t("shareDialog.shareTo")}</InputLabel>
+            <Input
+              id={`shareTo-${studySet.id}`}
+              value={shareTo}
+              onChange={(e) => setShareTo(e.target.value)}
+              onKeyDown={onKeyDown}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton onClick={onShare}>
+                    <AddIcon />
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+          <Box sx={{ display: "flex", flexWrap: "wrap", mt: 1 }}>
+            {shared.map((shared) => (
+              <Chip key={shared.id} label={shared.username} onDelete={() => onDeleteShare(shared)} />
+            ))}
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={onShareDialogClose}>{t("shareDialog.close")}</Button>
+        </DialogActions>
+      </Dialog>
       <Typography variant="h6" align="center">
         {title}
       </Typography>
       <Tooltip
         title={
           <Box fontSize={18}>
-            {terms.map((term) => (
+            {terms?.map((term) => (
               <Box
+                key={term.id}
                 sx={{
                   textDecoration: term.understanding === FINAL_UNDERSTANDING ? "line-through" : "",
                   textDecorationColor: ({ palette }) => palette.primary.main,

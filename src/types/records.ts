@@ -25,7 +25,7 @@ export type Note = Record & {
   expand: {
     shared?: User[];
     module?: Module;
-    "terms(note)": Term[];
+    "terms(note)"?: Term[];
   };
 };
 
@@ -66,8 +66,10 @@ export type Tag = Record & {
 export type StudySet = Record & {
   title: string;
   owner: string;
+  shared: string[];
   expand: {
-    terms: Term[];
+    shared?: User[];
+    terms?: Term[];
   };
 };
 
@@ -108,6 +110,7 @@ export type SettingsToCreate = {
 export type StudySetToCreate = {
   title: string;
   terms: string[];
+  shared: string[];
 };
 
 export type TermUnderstanding = 1 | 2 | 3;
