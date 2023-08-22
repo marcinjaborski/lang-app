@@ -29,24 +29,6 @@ export const StudyingSetGrid = () => {
           <StudySetElement key={studySet.id} studySet={studySet} />
         ))}
       </SetsWrap>
-      {studySets.listShared.isLoading || studySets.listShared.data?.length ? (
-        <>
-          <Typography variant="h5">{t("shared")}</Typography>
-          <Divider />
-        </>
-      ) : null}
-      <SetsWrap>
-        {studySets.listShared.isLoading ? (
-          <>
-            <SetSkeleton />
-            <SetSkeleton />
-            <SetSkeleton />
-          </>
-        ) : null}
-        {studySets.listShared.data?.map((studySet) => (
-          <StudySetElement key={studySet.id} studySet={studySet} isShared />
-        ))}
-      </SetsWrap>
       <StudySetCreateDialog />
       <Grow in>
         <Fab color="primary" onClick={() => dispatch(openStudyDialog())}>

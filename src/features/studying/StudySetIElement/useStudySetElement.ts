@@ -34,17 +34,13 @@ export const useStudySetElement = (studySet: StudySet) => {
     if (!user) return;
     const newShared = [...shared.map((user) => user.id), user.id];
     studySets.update.mutate({ id, record: { shared: newShared } });
+    studySets.share.mutate({ user: user.id, studySet: id });
     setShareTo("");
   };
 
   const onKeyDown = async (e: KeyboardEvent) => {
     if (e.key !== "Enter") return;
     await onShare();
-  };
-
-  const onDeleteShare = (user: User) => {
-    const newShared = shared.map((user) => user.id).filter((id) => id !== user.id);
-    studySets.update.mutate({ id, record: { shared: newShared } });
   };
 
   return {
@@ -60,7 +56,6 @@ export const useStudySetElement = (studySet: StudySet) => {
     setOptionsAnchor,
     setShareDialogOpen,
     setShareTo,
-    onDeleteShare,
     onShare,
     onShareDialogClose,
     onMenuClose,

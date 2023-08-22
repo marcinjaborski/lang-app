@@ -27,10 +27,9 @@ import { useStudySetElement } from "./useStudySetElement";
 
 type StudySetElementProps = {
   studySet: StudySet;
-  isShared?: boolean;
 };
 
-export const StudySetElement = ({ studySet, isShared }: StudySetElementProps) => {
+export const StudySetElement = ({ studySet }: StudySetElementProps) => {
   const {
     t,
     id,
@@ -46,18 +45,15 @@ export const StudySetElement = ({ studySet, isShared }: StudySetElementProps) =>
     setShareDialogOpen,
     onKeyDown,
     onShare,
-    onDeleteShare,
     onShareDialogClose,
     onMenuClose,
   } = useStudySetElement(studySet);
 
   return (
     <Card>
-      {!isShared ? (
-        <Options onClick={(e) => setOptionsAnchor(e.currentTarget)}>
-          <MoreVertIcon />
-        </Options>
-      ) : null}
+      <Options onClick={(e) => setOptionsAnchor(e.currentTarget)}>
+        <MoreVertIcon />
+      </Options>
       <Menu open={optionsMenuOpen} onClose={onMenuClose} onClick={onMenuClose} anchorEl={optionsAnchor}>
         <MenuItem onClick={() => setShareDialogOpen(true)}>{t("shareDialog.share")}</MenuItem>
       </Menu>
@@ -82,7 +78,7 @@ export const StudySetElement = ({ studySet, isShared }: StudySetElementProps) =>
           </FormControl>
           <Box sx={{ display: "flex", flexWrap: "wrap", mt: 1 }}>
             {shared.map((shared) => (
-              <Chip key={shared.id} label={shared.username} onDelete={() => onDeleteShare(shared)} />
+              <Chip key={shared.id} label={shared.username} />
             ))}
           </Box>
         </DialogContent>

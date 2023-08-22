@@ -1,6 +1,6 @@
 import { showSuccess, useAppDispatch } from "@src/store";
 import { FlashcardsUrlParams, StudySet, StudySetToCreate, UpdateRecord } from "@src/types";
-import { pb, pbError } from "@src/util";
+import { pb, PB_CUSTOM_ROUTES, pbError } from "@src/util";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
@@ -21,14 +21,6 @@ export const useStudySetRepository = () => {
   const list = useQuery<StudySet[]>("list-studySets", () => {
     return pb.collection("studySets").getFullList<StudySet>({
       expand: "terms,shared",
-      filter: `owner="${pb.authStore.model?.id}"`,
-    });
-  });
-
-  const listShared = useQuery<StudySet[]>("list-shared-studySets", () => {
-    return pb.collection("studySets").getFullList<StudySet>({
-      expand: "terms,shared",
-      filter: `shared~"${pb.authStore.model?.id}"`,
     });
   });
 
@@ -59,6 +51,10 @@ export const useStudySetRepository = () => {
     },
   );
 
+  const share = useMutation<void, pbError, { user: string; studySet: string }>((shareData) => {
+    return pb.send(`${PB_CUSTOM_ROUTES}/shareStudySet`, { method: "PATCH", body: shareData });
+  });
+
   const deleteMutation = useMutation<boolean, pbError, string>(
     (id) => {
       return pb.collection("studySets").delete(id);
@@ -71,5 +67,5 @@ export const useStudySetRepository = () => {
     },
   );
 
-  return { view, list, listShared, create, update, delete: deleteMutation };
+  return { view, list, create, update, share, delete: deleteMutation };
 };
