@@ -1,5 +1,5 @@
 import { useEditorContext } from "@src/hooks";
-import { ListType, TextFormatOption } from "@src/types";
+import { isRichElement, ListType, TextFormatOption } from "@src/types";
 import { BasePoint, BaseRange, Editor, Element, Range, Text, Transforms } from "slate";
 
 export const useFormatters = () => {
@@ -23,7 +23,7 @@ export const useFormatters = () => {
     Transforms.setNodes(editor, { type: !match ? variant : "paragraph" });
   };
 
-  const transformToParagraph = (start: BasePoint, type: ListType) => {
+  const transformToParagraph = (start: BasePoint) => {
     // Transform each list item into paragraph
     Transforms.setNodes(
       editor,
@@ -54,6 +54,7 @@ export const useFormatters = () => {
     // Transform each element into list item
     const nodes = Array.from(Editor.nodes(editor, { at: selection }));
     nodes.forEach(([node, path]) => {
+      if (!isRichElement(node)) return;
       Transforms.setNodes(
         editor,
         {
@@ -84,7 +85,7 @@ export const useFormatters = () => {
     });
 
     if (isList) {
-      transformToParagraph(start, type);
+      transformToParagraph(start);
     } else {
       transformToList(selection, type);
     }

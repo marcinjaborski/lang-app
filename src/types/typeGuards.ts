@@ -1,5 +1,15 @@
-import { Shortcut, shortcuts } from "@src/types";
+import { ElementType, elementTypes, RichElement, Shortcut, shortcuts } from "@src/types";
 import { TermElement } from "./editor";
+
+export const isRichElement = (obj: unknown): obj is RichElement => {
+  return (
+    typeof obj === "object" &&
+    obj !== null &&
+    "type" in obj &&
+    typeof obj.type === "string" &&
+    elementTypes.includes(obj.type as ElementType)
+  );
+};
 
 export const isTermElement = (obj: unknown): obj is TermElement => {
   return typeof obj === "object" && obj !== null && "type" in obj && obj.type === "term";

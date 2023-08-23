@@ -12,12 +12,13 @@ export const useTranslateText = () => {
 
   return async () => {
     const { selection } = editor;
-    if (!selection) return;
-    let selectedText = Editor.string(editor, selection);
+    let selectedText = selection ? Editor.string(editor, selection) : "";
     if (selectedText === "") {
       Transforms.move(editor, { distance: 1, unit: "word", reverse: true, edge: "anchor" });
-      selectedText = Editor.string(editor, selection);
+      const newSelection = editor.selection;
+      selectedText = newSelection ? Editor.string(editor, newSelection) : "";
     }
+    if (selectedText === "") return;
     const translatedText = await translate(selectedText, baseLang, targetLang);
     Transforms.collapse(editor, { edge: "end" });
     Transforms.insertText(editor, `${separator}${translatedText}`);

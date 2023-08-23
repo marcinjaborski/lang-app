@@ -2,9 +2,11 @@ import { BaseEditor } from "slate";
 import { ReactEditor } from "slate-react";
 import { Overwrite } from "./types";
 
-export type ListType = "numbered-list" | "bulleted-list";
+export const listTypes = ["numbered-list", "bulleted-list"] as const;
+export const elementTypes = ["paragraph", "heading-one", "heading-two", "list-item", ...listTypes] as const;
 
-export type ElementType = "paragraph" | "heading-one" | "heading-two" | "list-item" | ListType;
+export type ListType = (typeof listTypes)[number];
+export type ElementType = (typeof elementTypes)[number];
 
 export type RichElement = {
   type: ElementType;
