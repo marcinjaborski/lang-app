@@ -1,4 +1,4 @@
-import { DeeplResponse, Language, Note } from "@src/types";
+import { DeeplResponse, Language, Note, Term, UNDERSTANDING } from "@src/types";
 import { pb } from "@src/util";
 import { Node } from "slate";
 import { axiosDeepl } from "./axios";
@@ -26,4 +26,11 @@ export const serialize = (noteContent: string): string => {
 
 export const isNoteShared = (note?: Note) => {
   return note && note.owner !== pb.authStore.model?.id;
+};
+
+export const getProgress = (terms: Term[] = []) => {
+  if (!terms.length) return 0;
+  const cumulativeUnderstanding = terms.reduce((acc, curr) => acc + curr.understanding, 0);
+  const totalUnderstanding = terms.length * UNDERSTANDING.FINAL;
+  return Math.floor((cumulativeUnderstanding / totalUnderstanding) * 100);
 };

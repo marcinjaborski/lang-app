@@ -42,6 +42,7 @@ export type Term = Record & {
   translation: string;
   owner: string;
   understanding: TermUnderstanding;
+  note: string;
   expand: {
     note?: Note;
     tags?: Tag[];
@@ -113,4 +114,10 @@ export type StudySetToCreate = {
   shared: string[];
 };
 
-export type TermUnderstanding = 1 | 2 | 3;
+export const UNDERSTANDING = {
+  INITIAL: 0,
+  1: 1,
+  FINAL: 2,
+} as const;
+
+export type TermUnderstanding = (typeof UNDERSTANDING)[keyof typeof UNDERSTANDING];

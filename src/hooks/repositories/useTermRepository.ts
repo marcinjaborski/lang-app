@@ -1,5 +1,5 @@
 import { showSuccess, useAppDispatch } from "@src/store";
-import { Term, TermToCreate, UpdateRecord } from "@src/types";
+import { Term, TermToCreate, UNDERSTANDING, UpdateRecord } from "@src/types";
 import { pb, PB_CUSTOM_ROUTES, pbError } from "@src/util";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQuery, useQueryClient } from "react-query";
@@ -17,7 +17,9 @@ export const useTermRepository = () => {
 
   const create = useMutation<Term, pbError, TermToCreate>(
     (term) => {
-      return pb.collection("terms").create({ ...term, understanding: 1, owner: pb.authStore.model!.id });
+      return pb
+        .collection("terms")
+        .create({ ...term, understanding: UNDERSTANDING.INITIAL, owner: pb.authStore.model!.id });
     },
     {
       async onSuccess() {

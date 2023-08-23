@@ -13,7 +13,7 @@ type NoteCardProps = {
 
 export const NoteCard = (props: NoteCardProps) => {
   const { note } = props;
-  const { t, anchorEl, openedMenu, onMenuOpen, onMenuClose, navigate, onDelete } = useNoteCard();
+  const { t, progress, anchorEl, openedMenu, onMenuOpen, onMenuClose, navigate, onDelete } = useNoteCard(note);
   const fallbackExcerpt = serialize(note.content);
 
   return (
@@ -26,7 +26,7 @@ export const NoteCard = (props: NoteCardProps) => {
         <Menu anchorEl={anchorEl} open={openedMenu} onClose={onMenuClose}>
           <MenuItem onClick={() => onDelete(note.id)}>{t("delete")}</MenuItem>
         </Menu>
-        <NoteProgress variant="determinate" value={50} color="secondary" />
+        <NoteProgress variant="determinate" value={progress} color="secondary" />
         <Excerpt>{note.excerpt || <TextWithNewLines>{fallbackExcerpt}</TextWithNewLines>}</Excerpt>
       </StyledCardContent>
       <CardActions>

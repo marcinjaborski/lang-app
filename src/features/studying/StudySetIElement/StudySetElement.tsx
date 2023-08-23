@@ -19,8 +19,7 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import { StudySet } from "@src/types";
-import { FINAL_UNDERSTANDING } from "@src/util";
+import { StudySet, UNDERSTANDING } from "@src/types";
 import { Link } from "react-router-dom";
 import { Card, Options } from "./StudySetElement.styled";
 import { useStudySetElement } from "./useStudySetElement";
@@ -34,6 +33,7 @@ export const StudySetElement = ({ studySet }: StudySetElementProps) => {
     t,
     id,
     title,
+    progress,
     shareTo,
     shared,
     shareDialogOpen,
@@ -96,7 +96,7 @@ export const StudySetElement = ({ studySet }: StudySetElementProps) => {
               <Box
                 key={term.id}
                 sx={{
-                  textDecoration: term.understanding === FINAL_UNDERSTANDING ? "line-through" : "",
+                  textDecoration: term.understanding === UNDERSTANDING.FINAL ? "line-through" : "",
                   textDecorationColor: ({ palette }) => palette.primary.main,
                   textDecorationThickness: 3,
                 }}
@@ -111,7 +111,7 @@ export const StudySetElement = ({ studySet }: StudySetElementProps) => {
           {terms.length} {t("terms")}
         </Typography>
       </Tooltip>
-      <LinearProgress variant="determinate" value={50} color="secondary" />
+      <LinearProgress variant="determinate" value={progress} color="secondary" />
       <Link to={`/flashcards/${id}`}>
         <Button>{t("flashcards")}</Button>
       </Link>

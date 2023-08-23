@@ -11,7 +11,7 @@ routerAdd("PATCH", "/hooks/shareStudySet", (c) => {
     const newTerm = new Record(termsCollection, {
       base: term.get("base"),
       translation: term.get("translation"),
-      understanding: 1,
+      understanding: 0,
       owner: user,
     });
     $app.dao().saveRecord(newTerm);

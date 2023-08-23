@@ -1,6 +1,7 @@
 import { useStudySetRepository, useUserRepository } from "@src/hooks";
 import { showError, useAppDispatch } from "@src/store";
 import { StudySet, User } from "@src/types";
+import { getProgress } from "@src/util";
 import { KeyboardEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -16,6 +17,7 @@ export const useStudySetElement = (studySet: StudySet) => {
   const { id, title } = studySet;
   const terms = studySet.expand.terms || [];
   const shared = studySet.expand.shared || [];
+  const progress = getProgress(terms);
 
   const onMenuClose = () => setOptionsAnchor(null);
 
@@ -47,6 +49,7 @@ export const useStudySetElement = (studySet: StudySet) => {
     t,
     id,
     title,
+    progress,
     shareTo,
     optionsMenuOpen,
     shareDialogOpen,
