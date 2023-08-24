@@ -17,8 +17,8 @@ export const SharedNoteShelf = (props: SharedNoteShelfProps) => {
         {t("shared")}
       </Title>
       <NotesWrap>
-        {notes.map((note) => (
-          <NoteCard key={note.id} note={note} />
+        {notes.map((note, index) => (
+          <NoteCard key={note.id} note={note} index={index} />
         ))}
       </NotesWrap>
     </NoteShelfStyled>

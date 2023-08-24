@@ -23,6 +23,7 @@
     "lodash": "^4.17.21",
     "pocketbase": "^0.12.1",
     "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
     "react-colorful": "^5.6.1",
     "react-country-flag": "^3.0.2",
     "react-dom": "^18.2.0",
@@ -43,6 +44,7 @@
   "devDependencies": {
     "@types/node": "^18.15.3",
     "@types/react": "^18.0.27",
+    "@types/react-beautiful-dnd": "^13.1.4",
     "@types/react-dom": "^18.0.10",
     "@types/styled-components": "^5.1.26",
     "@vitejs/plugin-react-swc": "^3.0.0",
