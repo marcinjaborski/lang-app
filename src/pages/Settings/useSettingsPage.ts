@@ -10,7 +10,7 @@ import {
 import { AppLanguage } from "@src/i18n/types";
 import { showError, useAppDispatch } from "@src/store";
 import { TagToCreate } from "@src/types";
-import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
@@ -55,8 +55,8 @@ export const useSettingsPage = () => {
     await i18n.changeLanguage(event.target.value);
   };
 
-  const onCreateTag = async (event: KeyboardEvent<HTMLDivElement>) => {
-    if (event.key !== "Enter") return;
+  const onCreateTag = async () => {
+    if (tagLabel === "") return;
     if (tags.some((tag) => tag.label === tagLabel)) {
       dispatch(showError(t("tagExists")));
     } else {

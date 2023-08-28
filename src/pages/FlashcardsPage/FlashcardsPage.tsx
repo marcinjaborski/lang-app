@@ -29,7 +29,11 @@ export const FlashcardsPage = () => {
           <Typography variant="h4">
             {t("flashcardsHeader", { current: current + 1, all: termsToLearn.length })}
           </Typography>
-          <Flashcard front={termsToLearn[current].base} back={termsToLearn[current].translation} />
+          <Flashcard
+            front={termsToLearn[current].base}
+            back={termsToLearn[current].translation}
+            key={termsToLearn[current].id}
+          />
           <Box>
             <IconButton size="large" onClick={goToPrev}>
               <NavigateBeforeIcon />

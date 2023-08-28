@@ -79,7 +79,6 @@ export const pl: Resource = {
   },
   noteEditor: {
     placeholder: "Zacznij pisać...",
-    noSeparator: "Zaznaczony tekst nie zawiera rozdzielaczaq",
     termAlreadyExists: "Takie słówko już istnieje w tej notatce",
     update: "Zaktualizuj",
     delete: "Usuń",

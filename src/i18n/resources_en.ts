@@ -77,7 +77,6 @@ export const en = {
   },
   noteEditor: {
     placeholder: "Type something...",
-    noSeparator: "Selected text does not include separator",
     termAlreadyExists: "Term like that already exists in this note",
     update: "Update",
     delete: "Delete",

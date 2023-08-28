@@ -1,4 +1,15 @@
-import { CircularProgress, MenuItem, TextField, Typography } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import {
+  CircularProgress,
+  FormControl,
+  IconButton,
+  Input,
+  InputAdornment,
+  InputLabel,
+  MenuItem,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { LanguageSelect } from "@src/components";
 import { TagChip } from "@src/features/settings";
 import { Language } from "@src/types";
@@ -54,12 +65,22 @@ export const Settings = () => {
               value={state.targetLang}
               onChange={(event) => state.setTargetLang(event.target.value as Language)}
             />
-            <TextField
-              label={t("newTag")}
-              value={state.tagLabel}
-              onChange={(event) => state.setTagLabel(event.target.value)}
-              onKeyDown={onCreateTag}
-            />
+            <FormControl>
+              <InputLabel htmlFor="newTagInput">{t("newTag")}</InputLabel>
+              <Input
+                id="newTagInput"
+                value={state.tagLabel}
+                onChange={(event) => state.setTagLabel(event.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && onCreateTag()}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton onClick={onCreateTag}>
+                      <AddIcon />
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
             <TagsWrap>
               {state.tags.map((tag) => (
                 <TagChip key={tag.label} tag={tag} onDelete={onDeleteTag} onColorChange={onColorChange} />

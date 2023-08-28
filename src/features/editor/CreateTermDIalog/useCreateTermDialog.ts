@@ -64,6 +64,7 @@ export const useCreateTermDialog = () => {
             ReactEditor.focus(editor);
             Transforms.insertNodes(editor, { type: "text", text: ZERO_WIDTH_SPACE });
             Transforms.move(editor, { distance: 1, unit: "character" });
+            Transforms.insertNodes(editor, { type: "text", text: " " });
             notes.update.mutate({ id: params.id!, record: { content: JSON.stringify(editor.children) } });
           },
         },

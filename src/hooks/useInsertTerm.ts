@@ -1,5 +1,5 @@
 import { DEFAULT_SEPARATOR, useEditorContext, useNoteRepository, useSettings, useTermRepository } from "@src/hooks";
-import { openCreateTermDialog, showError, useAppDispatch } from "@src/store";
+import { openCreateTermDialog, setTermDialogBase, showError, useAppDispatch } from "@src/store";
 import { NoteUrlParams } from "@src/types";
 import { ZERO_WIDTH_SPACE } from "@src/util";
 import { useTranslation } from "react-i18next";
@@ -21,7 +21,8 @@ export const useInsertTerm = () => {
 
     const selectedText = Editor.string(editor, selection);
     if (!selectedText.includes(separator)) {
-      dispatch(showError(t("noSeparator")));
+      dispatch(setTermDialogBase(selectedText));
+      dispatch(openCreateTermDialog());
       return;
     }
 
@@ -42,6 +43,7 @@ export const useInsertTerm = () => {
           ReactEditor.focus(editor);
           Transforms.collapse(editor, { edge: "end" });
           Transforms.insertNodes(editor, { type: "text", text: ZERO_WIDTH_SPACE });
+          Transforms.insertNodes(editor, { type: "text", text: " " });
           notes.update.mutate({ id: params.id!, record: { content: JSON.stringify(editor.children) } });
         },
       },

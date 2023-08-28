@@ -43,6 +43,7 @@ export const useNoteEditor = () => {
 
   const onTitleChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     if (readonly) return;
+    debounceSave();
     dispatch(changeTitle(event.target.value));
   };
 

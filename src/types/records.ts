@@ -117,7 +117,8 @@ export type StudySetToCreate = {
 export const UNDERSTANDING = {
   INITIAL: 0,
   1: 1,
-  FINAL: 2,
+  2: 2,
+  FINAL: 3,
 } as const;
 
 export type TermUnderstanding = (typeof UNDERSTANDING)[keyof typeof UNDERSTANDING];
