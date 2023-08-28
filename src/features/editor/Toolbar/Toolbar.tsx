@@ -19,10 +19,11 @@ type ToolbarButton = {
   tooltip: string;
   handler: () => void;
   icon: ReactNode;
+  isActive?: boolean;
 };
 
 export const Toolbar = () => {
-  const { t, translate, insertTerm, formatters } = useToolbar();
+  const { t, translate, insertTerm, formatters, onClick, isActive } = useToolbar();
 
   const buttons: ToolbarButton[] = [
     {
@@ -39,46 +40,55 @@ export const Toolbar = () => {
       tooltip: t("bold"),
       handler: formatters.bold,
       icon: <FormatBoldIcon />,
+      isActive: isActive("bold"),
     },
     {
       tooltip: t("italic"),
       handler: formatters.italic,
       icon: <FormatItalicIcon />,
+      isActive: isActive("italic"),
     },
     {
       tooltip: t("underline"),
       handler: formatters.underline,
       icon: <FormatUnderlinedIcon />,
+      isActive: isActive("underline"),
     },
     {
       tooltip: t("title"),
       handler: formatters.h1,
       icon: <Filter1Icon />,
+      isActive: isActive("heading-one"),
     },
     {
       tooltip: t("subtitle"),
       handler: formatters.h2,
       icon: <Filter2Icon />,
+      isActive: isActive("heading-two"),
     },
     {
       tooltip: t("alignLeft"),
       handler: formatters.alignLeft,
       icon: <FormatAlignLeftIcon />,
+      isActive: isActive("left"),
     },
     {
       tooltip: t("center"),
       handler: formatters.center,
       icon: <FormatAlignCenterIcon />,
+      isActive: isActive("center"),
     },
     {
       tooltip: t("alignRight"),
       handler: formatters.alignRight,
       icon: <FormatAlignRightIcon />,
+      isActive: isActive("right"),
     },
     {
       tooltip: t("justify"),
       handler: formatters.justify,
       icon: <FormatAlignJustifyIcon />,
+      isActive: isActive("justify"),
     },
     {
       tooltip: t("ul"),
@@ -96,7 +106,13 @@ export const Toolbar = () => {
     <Box>
       {buttons.map((button) => (
         <Tooltip title={button.tooltip} key={button.tooltip}>
-          <IconButton onClick={button.handler}>{button.icon}</IconButton>
+          <IconButton
+            onClick={() => onClick(button.handler)}
+            color={button.isActive ? "primary" : undefined}
+            sx={{ transition: "color 200ms" }}
+          >
+            {button.icon}
+          </IconButton>
         </Tooltip>
       ))}
     </Box>

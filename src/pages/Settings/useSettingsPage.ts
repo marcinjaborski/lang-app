@@ -12,6 +12,7 @@ import { showError, useAppDispatch } from "@src/store";
 import { TagToCreate } from "@src/types";
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 export const useSettingsPage = () => {
   const { t, i18n } = useTranslation("settings");
@@ -26,6 +27,7 @@ export const useSettingsPage = () => {
   const [tags, setTags] = useState<(TagToCreate & { id?: string })[]>([]);
   const dispatch = useAppDispatch();
   const [tagsFetched, setTagsFetched] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (settingsRepository.view.isLoading || settingsRepository.view.data) return;
@@ -64,12 +66,19 @@ export const useSettingsPage = () => {
   };
 
   const onSave = () => {
-    settingsRepository.update.mutate({
-      userLanguage: language,
-      separator,
-      defaultBaseLang: baseLang,
-      defaultTargetLang: targetLang,
-    });
+    settingsRepository.update.mutate(
+      {
+        userLanguage: language,
+        separator,
+        defaultBaseLang: baseLang,
+        defaultTargetLang: targetLang,
+      },
+      {
+        onSuccess() {
+          navigate(-1);
+        },
+      },
+    );
     if (tagsRepository.list.data) {
       const deleted = tagsRepository.list.data.filter((tag) => !tags.some((t) => t.label === tag.label));
       const tagLabelsFromRepository = tagsRepository.list.data.map((tag) => tag.label);

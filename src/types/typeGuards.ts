@@ -1,4 +1,14 @@
-import { ElementType, elementTypes, RichElement, Shortcut, shortcuts } from "@src/types";
+import {
+  ElementType,
+  elementTypes,
+  HeadingType,
+  headingTypes,
+  RichElement,
+  Shortcut,
+  shortcuts,
+  TextAlignOption,
+  textAlignOptions,
+} from "@src/types";
 import { TermElement } from "./editor";
 
 export const isRichElement = (obj: unknown): obj is RichElement => {
@@ -21,4 +31,12 @@ export const isShortcut = (key: string): key is Shortcut => {
 
 export const isNotNullable = <T>(obj: T): obj is NonNullable<T> => {
   return obj !== null && obj !== undefined;
+};
+
+export const isTextAlignOption = (option: string): option is TextAlignOption => {
+  return (textAlignOptions as readonly string[]).includes(option);
+};
+
+export const isHeadingType = (type: string): type is HeadingType => {
+  return (headingTypes as readonly string[]).includes(type);
 };
