@@ -1,6 +1,7 @@
 import { useSettingsRepository } from "@src/hooks";
 import { AppLanguage } from "@src/i18n/types";
 import { Language } from "@src/types";
+import { DEFAULT_BASE_LANG, DEFAULT_LANG, DEFAULT_SEPARATOR, DEFAULT_TRANSLATION_LANG } from "@src/util";
 import { useMemo } from "react";
 
 export type UserSettings = {
@@ -9,11 +10,6 @@ export type UserSettings = {
   baseLang: Language;
   targetLang: Language;
 };
-
-export const DEFAULT_LANG = "en" as AppLanguage;
-export const DEFAULT_BASE_LANG = "en" as Language;
-export const DEFAULT_TRANSLATION_LANG = "es" as Language;
-export const DEFAULT_SEPARATOR = " > ";
 
 export const useSettings = (): UserSettings | null => {
   const settingsRepository = useSettingsRepository();

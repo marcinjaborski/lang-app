@@ -1,7 +1,7 @@
-import { DEFAULT_SEPARATOR, useEditorContext, useNoteRepository, useSettings, useTermRepository } from "@src/hooks";
+import { useEditorContext, useNoteRepository, useSettings, useTermRepository } from "@src/hooks";
 import { openCreateTermDialog, setTermDialogBase, showError, useAppDispatch } from "@src/store";
 import { NoteUrlParams } from "@src/types";
-import { ZERO_WIDTH_SPACE } from "@src/util";
+import { DEFAULT_SEPARATOR, ZERO_WIDTH_SPACE } from "@src/util";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { BaseRange, Editor, Text, Transforms } from "slate";

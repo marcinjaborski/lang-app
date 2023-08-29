@@ -1,6 +1,6 @@
-import { DEFAULT_SEPARATOR, useEditorContext, useSettings } from "@src/hooks";
+import { useEditorContext, useSettings } from "@src/hooks";
 import { useAppSelector } from "@src/store";
-import { translate } from "@src/util";
+import { DEFAULT_SEPARATOR, translate } from "@src/util";
 import { Editor, Transforms } from "slate";
 import { ReactEditor } from "slate-react";
 
