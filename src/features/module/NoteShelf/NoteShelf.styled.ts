@@ -14,5 +14,6 @@ export const Title = styled(Typography)(({ theme }) => ({
 
 export const NotesWrap = styled("div")(({ theme }) => ({
   display: "flex",
+  flexWrap: "wrap",
   gap: theme.spacing(1),
 }));

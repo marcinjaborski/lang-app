@@ -1,8 +1,9 @@
+import AddIcon from "@mui/icons-material/Add";
 import CreateIcon from "@mui/icons-material/Create";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
 import SchoolIcon from "@mui/icons-material/School";
-import { IconButton, Menu, MenuItem, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { IconButton, Menu, MenuItem, ToggleButton, ToggleButtonGroup, Tooltip } from "@mui/material";
 import { CreateNoteDialog } from "@src/components";
 import { ToolbarWrap } from "./Navbar.styled";
 import { useNavbar } from "./useNavbar";
@@ -14,6 +15,8 @@ export const Navbar = () => {
     pathname,
     isLogged,
     noteDialogOpen,
+    isBottomNavbar,
+    lastAccessedNote,
     setNoteDialogOpen,
     onLogin,
     onLogout,
@@ -42,22 +45,39 @@ export const Navbar = () => {
     <ToolbarWrap position="sticky" component="nav">
       <ToggleButtonGroup
         exclusive
-        orientation="vertical"
+        orientation={isBottomNavbar ? "horizontal" : "vertical"}
         color="white"
         onChange={(_event, value) => value && navigate(value)}
       >
-        <ToggleButton value="/" selected={pathname === "/"}>
-          <HomeIcon />
-        </ToggleButton>
-        {isLogged ? (
-          <ToggleButton value="" selected={pathname.includes("/note")} onClick={() => setNoteDialogOpen(true)}>
-            <CreateIcon />
+        <Tooltip title={t("home")}>
+          <ToggleButton value="/" selected={pathname === "/"}>
+            <HomeIcon />
           </ToggleButton>
+        </Tooltip>
+        {isLogged ? (
+          <Tooltip title={t("newNote")}>
+            <ToggleButton value="" onClick={() => setNoteDialogOpen(true)}>
+              <AddIcon />
+            </ToggleButton>
+          </Tooltip>
         ) : null}
         {isLogged ? (
-          <ToggleButton value="/study" selected={pathname === "/study"}>
-            <SchoolIcon />
-          </ToggleButton>
+          <Tooltip title={t("lastNote")}>
+            <ToggleButton
+              value={`/note/${lastAccessedNote}`}
+              disabled={lastAccessedNote === null}
+              selected={pathname.includes("/note")}
+            >
+              <CreateIcon />
+            </ToggleButton>
+          </Tooltip>
+        ) : null}
+        {isLogged ? (
+          <Tooltip title={t("study")}>
+            <ToggleButton value="/study" selected={pathname === "/study"}>
+              <SchoolIcon />
+            </ToggleButton>
+          </Tooltip>
         ) : null}
       </ToggleButtonGroup>
       <IconButton onClick={onUserMenuOpen}>

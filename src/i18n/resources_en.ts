@@ -3,6 +3,10 @@ export const en = {
     login: "Log in",
     logout: "Log out",
     settings: "Settings",
+    home: "Home",
+    newNote: "Create new note",
+    lastNote: "Last accessed note",
+    study: "Study",
   },
   home: {
     hello: "Hello",

@@ -5,6 +5,10 @@ export const pl: Resource = {
     login: "Zaloguj",
     logout: "Wyloguj",
     settings: "Ustawienia",
+    home: "Strona główna",
+    newNote: "Stwórz nową notatkę",
+    lastNote: "Ostatnia notatka",
+    study: "Nauka",
   },
   home: {
     hello: "Cześć",

@@ -1,3 +1,5 @@
+import { Theme, useMediaQuery } from "@mui/material";
+import { useAppSelector } from "@src/store";
 import { pb } from "@src/util";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -11,6 +13,8 @@ export const useNavbar = () => {
   const openedUserMenu = !!userMenuAnchorEl;
   const isLogged = pb.authStore.isValid;
   const [noteDialogOpen, setNoteDialogOpen] = useState(false);
+  const lastAccessedNote = useAppSelector((state) => state.noteEditor.lastAccessedNote);
+  const isBottomNavbar = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
 
   const onLogin = () => {
     navigate("/login");
@@ -38,6 +42,8 @@ export const useNavbar = () => {
     pathname: location.pathname,
     isLogged,
     noteDialogOpen,
+    isBottomNavbar,
+    lastAccessedNote,
     setNoteDialogOpen,
     onLogin,
     onLogout,

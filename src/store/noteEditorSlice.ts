@@ -20,6 +20,7 @@ type NoteEditorState = {
   };
   termDialogBase: string;
   termDialogTranslation: string;
+  lastAccessedNote: string | null;
 };
 
 const initialState: NoteEditorState = {
@@ -34,6 +35,7 @@ const initialState: NoteEditorState = {
   },
   termDialogBase: "",
   termDialogTranslation: "",
+  lastAccessedNote: null,
 };
 
 const noteEditorSlice = createSlice({
@@ -67,6 +69,9 @@ const noteEditorSlice = createSlice({
     setTermDialogTranslation(state, { payload }: PayloadAction<string>) {
       state.termDialogTranslation = payload;
     },
+    setLastAccessedNote(state, { payload }: PayloadAction<string>) {
+      state.lastAccessedNote = payload;
+    },
   },
 });
 
@@ -79,5 +84,6 @@ export const {
   closeContextMenu,
   setTermDialogTranslation,
   setTermDialogBase,
+  setLastAccessedNote,
 } = noteEditorSlice.actions;
 export const { reducer: noteEditor } = noteEditorSlice;

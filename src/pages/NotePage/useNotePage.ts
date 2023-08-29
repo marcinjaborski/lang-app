@@ -4,6 +4,7 @@ import {
   changeTargetLang,
   changeTitle,
   openDrawer,
+  setLastAccessedNote,
   updateStateFromNote,
   useAppDispatch,
   useAppSelector,
@@ -25,6 +26,12 @@ export const useNotePage = () => {
   const navigate = useNavigate();
   const settings = useSettings();
   const [fetched, setFetched] = useState(false);
+
+  useEffect(() => {
+    if (!params.id) return;
+    dispatch(setLastAccessedNote(params.id));
+    localStorage.setItem("lastAccessedNote", params.id);
+  }, []);
 
   useEffect(() => {
     if (!settings || fetched) return;

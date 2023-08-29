@@ -1,6 +1,7 @@
 import { FeedbackSnackbar, Navbar } from "@src/components";
 import { useSettings } from "@src/hooks";
 import { FlashcardsPage, Home, Login, NotePage, NotFound, QuizPage, Settings, StudyingSetGrid } from "@src/pages";
+import { setLastAccessedNote, useAppDispatch } from "@src/store";
 import { pb } from "@src/util";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -10,10 +11,16 @@ export const App = () => {
   const { i18n } = useTranslation();
   const isLogged = pb.authStore.isValid;
   const appLang = useSettings()?.language;
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     i18n.changeLanguage(appLang).then();
   }, [appLang]);
+
+  useEffect(() => {
+    const lastAccessedNote = localStorage.getItem("lastAccessedNote");
+    if (lastAccessedNote) dispatch(setLastAccessedNote(lastAccessedNote));
+  }, []);
 
   return (
     <>

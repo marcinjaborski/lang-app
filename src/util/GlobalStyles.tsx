@@ -24,6 +24,9 @@ export const inputGlobalStyles = (
       },
       "#root": {
         display: "flex",
+        "@media (max-width: 600px)": {
+          flexDirection: "column-reverse",
+        },
         main: {
           flexGrow: 1,
         },
