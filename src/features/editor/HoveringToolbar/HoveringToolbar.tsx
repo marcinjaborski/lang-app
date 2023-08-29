@@ -4,6 +4,7 @@ import { Box, Chip, IconButton, MenuItem, Select, SxProps } from "@mui/material"
 import { Portal } from "@src/components";
 import { getTextColorToBgColor } from "@src/util";
 import React from "react";
+
 import { HoveringToolbarStyled } from "./HoveringToolbar.styled";
 import { useHoveringToolbar } from "./useHoveringToolbar";
 
@@ -26,10 +27,6 @@ export const HoveringToolbar = () => {
         {tagsSelected ? (
           <Select
             multiple
-            value={tags}
-            onChange={onTagChange}
-            variant="standard"
-            sx={{ svg: { color: "#FFFFFF" } }}
             renderValue={(selected) => (
               <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
                 {selected.map((value) => {
@@ -45,6 +42,10 @@ export const HoveringToolbar = () => {
                 })}
               </Box>
             )}
+            sx={{ svg: { color: "#FFFFFF" } }}
+            value={tags}
+            variant="standard"
+            onChange={onTagChange}
           >
             {tagsRepository.list.data?.map((tag) => (
               <MenuItem key={tag.id} value={tag.id}>

@@ -1,6 +1,7 @@
 import { NoteCard } from "@src/features/module";
 import { Note } from "@src/types";
 import { useTranslation } from "react-i18next";
+
 import { NoteShelfStyled, NotesWrap, Title } from "../NoteShelf/NoteShelf.styled";
 
 type SharedNoteShelfProps = {
@@ -13,12 +14,12 @@ export const SharedNoteShelf = (props: SharedNoteShelfProps) => {
 
   return (
     <NoteShelfStyled>
-      <Title variant="h5" gutterBottom>
+      <Title gutterBottom variant="h5">
         {t("shared")}
       </Title>
       <NotesWrap>
         {notes.map((note, index) => (
-          <NoteCard key={note.id} note={note} index={index} />
+          <NoteCard index={index} key={note.id} note={note} />
         ))}
       </NotesWrap>
     </NoteShelfStyled>

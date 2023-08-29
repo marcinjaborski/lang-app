@@ -4,6 +4,7 @@ import { useClickAway } from "@src/hooks";
 import { getTextColorToBgColor } from "@src/util";
 import { useEffect, useRef, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
+
 import { TagChipProps } from "./types";
 
 export const TagChip = ({ tag, onColorChange, onDelete }: TagChipProps) => {
@@ -26,15 +27,15 @@ export const TagChip = ({ tag, onColorChange, onDelete }: TagChipProps) => {
     <div ref={ref}>
       <Chip
         label={tag.label}
-        onClick={() => setColorPickerOpen(true)}
-        onDelete={() => onDelete(tag)}
         sx={{
           backgroundColor: color,
           color: getTextColorToBgColor(color),
           transitionProperty: "color, background-color",
         }}
+        onClick={() => setColorPickerOpen(true)}
+        onDelete={() => onDelete(tag)}
       />
-      <ColorPicker open={colorPickerOpen} color={color} setColor={setColor} />
+      <ColorPicker color={color} open={colorPickerOpen} setColor={setColor} />
     </div>
   );
 };

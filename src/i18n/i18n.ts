@@ -1,6 +1,7 @@
 import { DEFAULT_LANG } from "@src/hooks";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+
 import { en } from "./resources_en";
 import { pl } from "./resources_pl";
 

@@ -1,6 +1,7 @@
 import { DeeplResponse, Language, Note, Term, UNDERSTANDING } from "@src/types";
 import { pb } from "@src/util";
 import { Node } from "slate";
+
 import { axiosDeepl } from "./axios";
 
 export const translate = async (text: string, sourceLang: Language, targetLang: Language) => {

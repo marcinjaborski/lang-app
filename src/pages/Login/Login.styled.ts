@@ -8,7 +8,7 @@ export const LoginStyled = styled("main")({
   overflow: "hidden",
 });
 
-export const Form = styled("form")(({ theme }) => ({
+export const Form = styled("form")(({}) => ({
   textAlign: "center",
   maxWidth: 400,
   display: "flex",

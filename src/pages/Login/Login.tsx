@@ -19,7 +19,7 @@ export const Login = () => {
 
   return (
     <LoginStyled>
-      <Tabs value={selected} onChange={handleChange} sx={{ borderBottom: 1, borderColor: "divider" }}>
+      <Tabs sx={{ borderBottom: 1, borderColor: "divider" }} value={selected} onChange={handleChange}>
         <Tab label={t("loginTabTitle")} />
         <Tab label={t("registerTabTitle")} />
       </Tabs>

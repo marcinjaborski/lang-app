@@ -1,3 +1,5 @@
+import "./i18n/i18n";
+
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { App } from "@src/App";
 import { store } from "@src/store";
@@ -8,7 +10,6 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import "./i18n/i18n";
 
 const queryClient = new QueryClient();
 

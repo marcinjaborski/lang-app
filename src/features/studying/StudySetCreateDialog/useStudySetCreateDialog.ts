@@ -36,8 +36,8 @@ export const useStudySetCreateDialog = () => {
     if (dialogState.from === "module") {
       const selectedModule = modules.list.data?.find((module) => module.id === dialogState.fromId);
       if (!selectedModule) return;
-      studySetTerms = studySetTerms.filter((term) =>
-        selectedModule.expand["notes(module)"]?.find((note) => note.id === term.note),
+      studySetTerms = studySetTerms.filter(
+        (term) => selectedModule.expand["notes(module)"]?.find((note) => note.id === term.note),
       );
     }
     if (dialogState.from === "note") {

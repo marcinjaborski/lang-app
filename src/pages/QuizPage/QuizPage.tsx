@@ -1,5 +1,6 @@
 import { CircularProgress, FormControlLabel, Pagination, Radio, RadioGroup, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
+
 import { QuestionPaper, Wrap } from "./QuizPage.styled";
 import { useQuizPage } from "./useQuizPage";
 
@@ -18,7 +19,7 @@ export const QuizPage = () => {
 
   return (
     <Wrap>
-      <Typography variant="h3" align="center" gutterBottom visibility={result === null ? "hidden" : "visible"}>
+      <Typography align="center" gutterBottom variant="h3" visibility={result === null ? "hidden" : "visible"}>
         {t("result", { result })}
       </Typography>
       <QuestionPaper>
@@ -30,21 +31,21 @@ export const QuizPage = () => {
         >
           {currentQuestion.answers.map((answer) => (
             <FormControlLabel
-              sx={{ color: getAnswerColor(currentQuestion, answer) }}
-              key={answer}
               control={<Radio />}
+              key={answer}
               label={answer}
+              sx={{ color: getAnswerColor(currentQuestion, answer) }}
               value={answer}
             />
           ))}
         </RadioGroup>
       </QuestionPaper>
-      <Pagination count={questions.length} color="primary" page={page} onChange={(_, value) => setPage(value)} />
+      <Pagination color="primary" count={questions.length} page={page} onChange={(_, value) => setPage(value)} />
       <Button
-        variant="contained"
-        sx={{ mt: 3, visibility: page === questions.length ? "visible" : "hidden" }}
-        onClick={onEnd}
         disabled={result !== null}
+        sx={{ mt: 3, visibility: page === questions.length ? "visible" : "hidden" }}
+        variant="contained"
+        onClick={onEnd}
       >
         {t("endQuiz")}
       </Button>

@@ -1,6 +1,7 @@
 import { pb } from "@src/util";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+
 import { LoginButton, LoginPrompt, NotFoundStyled, Number, NumbersWrap, Title } from "./NotFound.styled";
 
 export const NotFound = () => {

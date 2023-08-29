@@ -3,14 +3,15 @@ import { Alert, Backdrop, CircularProgress, Slide, TextField, Typography } from 
 import { Form, LoginAvatar, SubmitButton, TabProps } from "@src/pages";
 import { confirmPasswordValidator, emailValidator, usernameValidator } from "@src/util";
 import React from "react";
+
 import { useRegisterTab } from "./useRegisterTab";
 
 export const RegisterTab = (props: TabProps) => {
   const { t, register, watch, errors, onSubmit, isLoading, isError, error } = useRegisterTab();
 
   return (
-    <div role="tabpanel" hidden={props.selected !== props.tabIndex}>
-      <Slide in={props.selected === props.tabIndex} direction="left">
+    <div hidden={props.selected !== props.tabIndex} role="tabpanel">
+      <Slide direction="left" in={props.selected === props.tabIndex}>
         <Form onSubmit={onSubmit}>
           <LoginAvatar>
             <LockOutlinedIcon />
@@ -20,38 +21,38 @@ export const RegisterTab = (props: TabProps) => {
           </Typography>
           <TextField
             autoComplete="username"
-            fullWidth
-            label={t("usernameLabel")}
             autoFocus
-            margin="normal"
             error={!!errors.username}
+            fullWidth
             helperText={errors.username?.message}
+            label={t("usernameLabel")}
+            margin="normal"
             {...register("username", {
               validate: (value) => usernameValidator(value, t("usernameInvalid")),
             })}
           />
           <TextField
-            required
-            fullWidth
-            label={t("emailLabel")}
             autoComplete="email"
-            margin="normal"
             error={!!errors.email}
+            fullWidth
             helperText={errors.email?.message}
+            label={t("emailLabel")}
+            margin="normal"
+            required
             {...register("email", {
               required: t("emailRequired"),
               validate: (value) => emailValidator(value, t("emailInvalid")),
             })}
           />
           <TextField
-            required
-            fullWidth
-            label={t("passwordLabel")}
-            type="password"
             autoComplete="new-password"
-            margin="normal"
             error={!!errors.password}
+            fullWidth
             helperText={errors.password?.message}
+            label={t("passwordLabel")}
+            margin="normal"
+            required
+            type="password"
             {...register("password", {
               required: t("passwordRequired"),
               minLength: {
@@ -61,14 +62,14 @@ export const RegisterTab = (props: TabProps) => {
             })}
           />
           <TextField
-            required
-            fullWidth
-            label={t("confirmPasswordLabel")}
-            type="password"
             autoComplete="confirm-password"
-            margin="normal"
             error={!!errors.passwordConfirm}
+            fullWidth
             helperText={errors.passwordConfirm?.message}
+            label={t("confirmPasswordLabel")}
+            margin="normal"
+            required
+            type="password"
             {...register("passwordConfirm", {
               required: t("confirmPasswordRequired"),
               minLength: {
@@ -79,7 +80,7 @@ export const RegisterTab = (props: TabProps) => {
             })}
           />
           {isError ? <Alert severity="error">{t(error.message)}</Alert> : null}
-          <SubmitButton variant="contained" type="submit">
+          <SubmitButton type="submit" variant="contained">
             {t("registerButton")}
           </SubmitButton>
           <Backdrop open={isLoading}>

@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material";
 import { useState } from "react";
+
 import { Container, Side } from "./Flashcard.styled";
 
 type FlashcardProps = {

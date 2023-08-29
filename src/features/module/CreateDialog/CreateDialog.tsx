@@ -4,6 +4,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
+
 import { useCreateDialog } from "./useCreateDialog";
 
 export const CreateDialog = () => {
@@ -15,13 +16,13 @@ export const CreateDialog = () => {
       <DialogContent>
         <TextField
           autoFocus
-          margin="dense"
-          label={t("textFieldLabel")}
+          error={isError}
           fullWidth
+          helperText={error ? t(error.message) : null}
+          label={t("textFieldLabel")}
+          margin="dense"
           variant="standard"
           onChange={onNameChange}
-          error={isError}
-          helperText={error ? t(error.message) : null}
         />
       </DialogContent>
       <DialogActions>

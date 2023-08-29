@@ -1,6 +1,7 @@
 import { Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { setTermDialogBase, setTermDialogTranslation } from "@src/store";
+
 import { useCreateTermDialog } from "./useCreateTermDialog";
 
 export const CreateTermDialog = () => {
@@ -13,15 +14,15 @@ export const CreateTermDialog = () => {
       <DialogContent sx={{ display: "flex", alignItems: "flex-end", gap: 2 }}>
         <TextField
           label={t("base")}
-          variant="standard"
           value={base}
+          variant="standard"
           onChange={(e) => dispatch(setTermDialogBase(e.target.value))}
         />
         <Typography variant="h4">{separator}</Typography>
         <TextField
           label={t("translation")}
-          variant="standard"
           value={translation}
+          variant="standard"
           onChange={(e) => dispatch(setTermDialogTranslation(e.target.value))}
         />
       </DialogContent>

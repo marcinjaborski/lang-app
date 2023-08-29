@@ -5,6 +5,7 @@ import { TextWithNewLines } from "@src/components";
 import { Note } from "@src/types";
 import { serialize } from "@src/util";
 import { Draggable } from "react-beautiful-dnd";
+
 import { Excerpt, NoteCardStyled, NoteProgress, StyledCardContent } from "./NoteCard.styled";
 import { useNoteCard } from "./useNoteCard";
 
@@ -24,13 +25,13 @@ export const NoteCard = (props: NoteCardProps) => {
         <NoteCardStyled ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
           <StyledCardContent>
             <Typography gutterBottom>{note.title}</Typography>
-            <IconButton onClick={onMenuOpen} size="small">
+            <IconButton size="small" onClick={onMenuOpen}>
               <MoreVertIcon fontSize="inherit" />
             </IconButton>
             <Menu anchorEl={anchorEl} open={openedMenu} onClose={onMenuClose}>
               <MenuItem onClick={() => onDelete(note.id)}>{t("delete")}</MenuItem>
             </Menu>
-            <NoteProgress variant="determinate" value={progress} color="secondary" />
+            <NoteProgress color="secondary" value={progress} variant="determinate" />
             <Excerpt>{note.excerpt || <TextWithNewLines>{fallbackExcerpt}</TextWithNewLines>}</Excerpt>
           </StyledCardContent>
           <CardActions>

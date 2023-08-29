@@ -5,6 +5,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import SchoolIcon from "@mui/icons-material/School";
 import { IconButton, Menu, MenuItem, ToggleButton, ToggleButtonGroup, Tooltip } from "@mui/material";
 import { CreateNoteDialog } from "@src/components";
+
 import { ToolbarWrap } from "./Navbar.styled";
 import { useNavbar } from "./useNavbar";
 
@@ -22,8 +23,8 @@ export const Navbar = () => {
     onLogout,
     onUserMenuOpen,
     onUserMenuClose,
-    userMenuAnchorEl,
     openedUserMenu,
+    userMenuAnchorEl,
   } = useNavbar();
 
   const menuItems = isLogged
@@ -42,15 +43,15 @@ export const Navbar = () => {
       ];
 
   return (
-    <ToolbarWrap position="sticky" component="nav">
+    <ToolbarWrap component="nav" position="sticky">
       <ToggleButtonGroup
+        color="white"
         exclusive
         orientation={isBottomNavbar ? "horizontal" : "vertical"}
-        color="white"
         onChange={(_event, value) => value && navigate(value)}
       >
         <Tooltip title={t("home")}>
-          <ToggleButton value="/" selected={pathname === "/"}>
+          <ToggleButton selected={pathname === "/"} value="/">
             <HomeIcon />
           </ToggleButton>
         </Tooltip>
@@ -64,9 +65,9 @@ export const Navbar = () => {
         {isLogged ? (
           <Tooltip title={t("lastNote")}>
             <ToggleButton
-              value={`/note/${lastAccessedNote}`}
               disabled={lastAccessedNote === null}
               selected={pathname.includes("/note")}
+              value={`/note/${lastAccessedNote}`}
             >
               <CreateIcon />
             </ToggleButton>
@@ -74,7 +75,7 @@ export const Navbar = () => {
         ) : null}
         {isLogged ? (
           <Tooltip title={t("study")}>
-            <ToggleButton value="/study" selected={pathname === "/study"}>
+            <ToggleButton selected={pathname === "/study"} value="/study">
               <SchoolIcon />
             </ToggleButton>
           </Tooltip>
@@ -85,17 +86,17 @@ export const Navbar = () => {
       </IconButton>
       <Menu
         anchorEl={userMenuAnchorEl}
-        open={openedUserMenu}
-        onClick={onUserMenuClose}
-        onClose={onUserMenuClose}
         anchorOrigin={{
           vertical: "top",
           horizontal: "right",
         }}
+        open={openedUserMenu}
         transformOrigin={{
           vertical: "top",
           horizontal: "left",
         }}
+        onClick={onUserMenuClose}
+        onClose={onUserMenuClose}
       >
         {menuItems}
       </Menu>

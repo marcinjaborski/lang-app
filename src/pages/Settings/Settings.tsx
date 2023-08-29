@@ -14,13 +14,13 @@ import { LanguageSelect } from "@src/components";
 import { TagChip } from "@src/features/settings";
 import { Language } from "@src/types";
 import ReactCountryFlag from "react-country-flag";
+
 import { SaveButton, SettingsContainer, SettingsStyled, SpinnerWrap, TagsWrap } from "./Settings.styled";
 import { useSettingsPage } from "./useSettingsPage";
 
 export const Settings = () => {
   const {
     t,
-    settings,
     settingsRepository,
     tagsRepository,
     onCreateTag,
@@ -33,7 +33,7 @@ export const Settings = () => {
 
   return (
     <SettingsStyled>
-      <SettingsContainer elevation={5} component="main">
+      <SettingsContainer component="main" elevation={5}>
         <Typography variant="h3">{t("title")}</Typography>
         {settingsRepository.view.isLoading || tagsRepository.list.isLoading ? (
           <SpinnerWrap>
@@ -42,7 +42,7 @@ export const Settings = () => {
         ) : null}
         {settingsRepository.view.data ? (
           <>
-            <TextField select label={t("userLanguage")} value={state.language} onChange={onLangChange}>
+            <TextField label={t("userLanguage")} select value={state.language} onChange={onLangChange}>
               <MenuItem value="en">
                 <ReactCountryFlag countryCode="GB" svg />
               </MenuItem>
@@ -68,10 +68,6 @@ export const Settings = () => {
             <FormControl>
               <InputLabel htmlFor="newTagInput">{t("newTag")}</InputLabel>
               <Input
-                id="newTagInput"
-                value={state.tagLabel}
-                onChange={(event) => state.setTagLabel(event.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && onCreateTag()}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton onClick={onCreateTag}>
@@ -79,11 +75,15 @@ export const Settings = () => {
                     </IconButton>
                   </InputAdornment>
                 }
+                id="newTagInput"
+                value={state.tagLabel}
+                onChange={(event) => state.setTagLabel(event.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && onCreateTag()}
               />
             </FormControl>
             <TagsWrap>
               {state.tags.map((tag) => (
-                <TagChip key={tag.label} tag={tag} onDelete={onDeleteTag} onColorChange={onColorChange} />
+                <TagChip key={tag.label} tag={tag} onColorChange={onColorChange} onDelete={onDeleteTag} />
               ))}
             </TagsWrap>
             <SaveButton variant="contained" onClick={onSave}>

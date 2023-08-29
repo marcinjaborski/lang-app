@@ -5,6 +5,7 @@ import { Drawer, NoteEditor } from "@src/features/editor";
 import { EditorContext } from "@src/hooks";
 import { useNotePage } from "@src/pages";
 import { isNoteShared } from "@src/util";
+
 import { DrawerButton, NotePageStyled } from "./NotePage.styled";
 
 export const NotePage = () => {

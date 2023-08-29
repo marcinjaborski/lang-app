@@ -13,6 +13,7 @@ import SchoolIcon from "@mui/icons-material/School";
 import TranslateIcon from "@mui/icons-material/Translate";
 import { Box, IconButton, Tooltip } from "@mui/material";
 import React, { ReactNode } from "react";
+
 import { useToolbar } from "./useToolbar";
 
 type ToolbarButton = {
@@ -105,11 +106,11 @@ export const Toolbar = () => {
   return (
     <Box>
       {buttons.map((button) => (
-        <Tooltip title={button.tooltip} key={button.tooltip}>
+        <Tooltip key={button.tooltip} title={button.tooltip}>
           <IconButton
-            onClick={() => onClick(button.handler)}
             color={button.isActive ? "primary" : undefined}
             sx={{ transition: "color 200ms" }}
+            onClick={() => onClick(button.handler)}
           >
             {button.icon}
           </IconButton>

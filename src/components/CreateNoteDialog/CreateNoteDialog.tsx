@@ -5,6 +5,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Dispatch, SetStateAction } from "react";
+
 import { useCreateNoteDialog } from "./useCreateNoteDialog";
 
 type CreateNoteDialogProps = {
@@ -19,13 +20,13 @@ export const CreateNoteDialog = ({ open, setOpen }: CreateNoteDialogProps) => {
       <DialogTitle>{t("title")}</DialogTitle>
       <DialogContent>
         <TextField
-          select
-          label={t("module")}
-          fullWidth
-          variant="standard"
-          value={module}
           error={!!error}
+          fullWidth
           helperText={error ? t(error.message) : null}
+          label={t("module")}
+          select
+          value={module}
+          variant="standard"
           onChange={(e) => setModule(e.target.value)}
         >
           {modules?.map((m) => (

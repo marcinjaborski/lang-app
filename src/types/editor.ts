@@ -1,5 +1,6 @@
 import { BaseEditor } from "slate";
 import { ReactEditor } from "slate-react";
+
 import { Overwrite } from "./types";
 
 export const headingTypes = ["heading-one", "heading-two"] as const;

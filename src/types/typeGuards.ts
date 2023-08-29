@@ -9,6 +9,7 @@ import {
   TextAlignOption,
   textAlignOptions,
 } from "@src/types";
+
 import { TermElement } from "./editor";
 
 export const isRichElement = (obj: unknown): obj is RichElement => {

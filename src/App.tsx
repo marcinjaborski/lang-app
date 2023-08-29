@@ -26,18 +26,18 @@ export const App = () => {
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={isLogged ? <Home /> : <Login />} />
-        <Route path="/login" element={<Login />} />
+        <Route element={isLogged ? <Home /> : <Login />} path="/" />
+        <Route element={<Login />} path="/login" />
         {isLogged ? (
           <>
-            <Route path="/note/:id" element={<NotePage />} />
-            <Route path="/study" element={<StudyingSetGrid />} />
-            <Route path="/flashcards/:id" element={<FlashcardsPage />} />
-            <Route path="/quiz/:id" element={<QuizPage />} />
-            <Route path="/settings" element={<Settings />} />
+            <Route element={<NotePage />} path="/note/:id" />
+            <Route element={<StudyingSetGrid />} path="/study" />
+            <Route element={<FlashcardsPage />} path="/flashcards/:id" />
+            <Route element={<QuizPage />} path="/quiz/:id" />
+            <Route element={<Settings />} path="/settings" />
           </>
         ) : null}
-        <Route path="*" element={<NotFound />} />
+        <Route element={<NotFound />} path="*" />
       </Routes>
       <FeedbackSnackbar />
     </>

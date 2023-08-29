@@ -12,7 +12,8 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { createStudySetFrom, CreateStudySetFrom, setFrom, setFromId, setTitle } from "@src/store";
+import { CreateStudySetFrom, createStudySetFrom, setFrom, setFromId, setTitle } from "@src/store";
+
 import { useStudySetCreateDialog } from "./useStudySetCreateDialog";
 
 export const StudySetCreateDialog = () => {
@@ -35,10 +36,10 @@ export const StudySetCreateDialog = () => {
       <DialogTitle>{t("title")}</DialogTitle>
       <DialogContent>
         <TextField
-          sx={{ mt: 1 }}
-          value={dialogState.title}
           fullWidth
           label={t("setTitle")}
+          sx={{ mt: 1 }}
+          value={dialogState.title}
           onChange={(e) => dispatch(setTitle(e.target.value))}
         />
         <RadioGroup
@@ -47,13 +48,13 @@ export const StudySetCreateDialog = () => {
           onChange={(e) => dispatch(setFrom(e.target.value as CreateStudySetFrom))}
         >
           {Object.values(createStudySetFrom).map((value) => (
-            <FormControlLabel key={value} control={<Radio />} label={t(value)} value={value} />
+            <FormControlLabel control={<Radio />} key={value} label={t(value)} value={value} />
           ))}
         </RadioGroup>
         {dialogState.from === "module" || dialogState.from === "note" ? (
           <TextField
-            select
             fullWidth
+            select
             value={dialogState.fromId}
             onChange={(e) => {
               dispatch(setFromId(e.target.value));
@@ -75,7 +76,7 @@ export const StudySetCreateDialog = () => {
         ) : null}
 
         <Typography>{t("includeTags")}</Typography>
-        <Select multiple value={dialogState.includeTags} fullWidth onChange={onIncludeTagsChange}>
+        <Select fullWidth multiple value={dialogState.includeTags} onChange={onIncludeTagsChange}>
           {tags.list.data?.map((tag) => (
             <MenuItem key={tag.id} value={tag.id}>
               {tag.label}
@@ -84,20 +85,20 @@ export const StudySetCreateDialog = () => {
         </Select>
 
         <Typography>{t("excludeTags")}</Typography>
-        <Select multiple value={dialogState.excludeTags} fullWidth onChange={onExcludeTagsChange}>
+        <Select fullWidth multiple value={dialogState.excludeTags} onChange={onExcludeTagsChange}>
           {tags.list.data?.map((tag) => (
             <MenuItem key={tag.id} value={tag.id}>
               {tag.label}
             </MenuItem>
           ))}
         </Select>
-        <Typography align="center" variant="h6" sx={{ mt: 2 }}>
+        <Typography align="center" sx={{ mt: 2 }} variant="h6">
           {t("summary", { terms: studySetTerms.length })}
         </Typography>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>{t("cancel")}</Button>
-        <Button onClick={onCreate} variant="contained">
+        <Button variant="contained" onClick={onCreate}>
           {t("create")}
         </Button>
       </DialogActions>

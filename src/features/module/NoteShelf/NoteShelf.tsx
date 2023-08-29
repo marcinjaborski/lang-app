@@ -3,6 +3,7 @@ import { IconButton, Menu, MenuItem } from "@mui/material";
 import { NoteCard } from "@src/features/module";
 import { Module } from "@src/types";
 import { Droppable } from "react-beautiful-dnd";
+
 import { NoteShelfStyled, NotesWrap, Title } from "./NoteShelf.styled";
 import { useNoteShelf } from "./useNoteShelf";
 
@@ -15,24 +16,22 @@ export const NoteShelf = (props: NoteShelfProps) => {
   const { t, anchorEl, openedMenu, onMenuOpen, onMenuClose, onCreateNote, onUpdate, onDelete } = useNoteShelf();
 
   return (
-    <Droppable droppableId={module.id} direction="horizontal">
+    <Droppable direction="horizontal" droppableId={module.id}>
       {(provided, snapshot) => (
         <NoteShelfStyled ref={provided.innerRef} {...provided.droppableProps} isDraggingOver={snapshot.isDraggingOver}>
-          <Title variant="h5" gutterBottom>
+          <Title gutterBottom variant="h5">
             {module.name}
-            <IconButton onClick={onMenuOpen} size="small">
+            <IconButton size="small" onClick={onMenuOpen}>
               <MoreVertIcon fontSize="inherit" />
             </IconButton>
-            <Menu anchorEl={anchorEl} open={openedMenu} onClose={onMenuClose} onClick={onMenuClose}>
+            <Menu anchorEl={anchorEl} open={openedMenu} onClick={onMenuClose} onClose={onMenuClose}>
               <MenuItem onClick={() => onCreateNote(module)}>{t("createNote")}</MenuItem>
               <MenuItem onClick={() => onUpdate(module.id)}>{t("update")}</MenuItem>
               <MenuItem onClick={() => onDelete(module)}>{t("delete")}</MenuItem>
             </Menu>
           </Title>
           <NotesWrap>
-            {module.expand["notes(module)"]?.map((note, index) => (
-              <NoteCard key={note.id} note={note} index={index} />
-            ))}
+            {module.expand["notes(module)"]?.map((note, index) => <NoteCard index={index} key={note.id} note={note} />)}
             {provided.placeholder}
           </NotesWrap>
         </NoteShelfStyled>

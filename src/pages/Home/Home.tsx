@@ -2,6 +2,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { Button, Divider, Fab, Grow, Typography } from "@mui/material";
 import { CreateDialog, NoteShelf, SharedNoteShelf } from "@src/features/module";
 import { DragDropContext } from "react-beautiful-dnd";
+
 import { EmptyMessage, HomeStyled, ModuleSkeleton, NoteSkeleton, NoteSkeletonWrap } from "./Home.styled";
 import { useHome } from "./useHome";
 
@@ -10,7 +11,7 @@ export const Home = () => {
 
   return (
     <HomeStyled>
-      <Typography variant="h4" fontWeight={500}>
+      <Typography fontWeight={500} variant="h4">
         {t("hello")} {username}
       </Typography>
       <Divider />
@@ -33,9 +34,7 @@ export const Home = () => {
         </EmptyMessage>
       ) : null}
       <DragDropContext onDragEnd={onDragEnd}>
-        {modules?.map((module) => (
-          <NoteShelf module={module} key={module.id} />
-        ))}
+        {modules?.map((module) => <NoteShelf key={module.id} module={module} />)}
       </DragDropContext>
       {notes.listShared.data?.length ? <SharedNoteShelf notes={notes.listShared.data} /> : null}
       <Grow in>

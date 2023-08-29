@@ -1,4 +1,5 @@
 import { Button, Dialog, DialogActions, DialogTitle, Menu, MenuItem } from "@mui/material";
+
 import { useContextMenu } from "./useContextMenu";
 
 export const ContextMenu = () => {
@@ -8,11 +9,11 @@ export const ContextMenu = () => {
   return (
     <>
       <Menu
-        open={open}
-        onClose={onClose}
-        onClick={onClose}
-        anchorReference="anchorPosition"
         anchorPosition={contextPosition}
+        anchorReference="anchorPosition"
+        open={open}
+        onClick={onClose}
+        onClose={onClose}
       >
         <MenuItem onClick={onUpdate}>{t("update")}</MenuItem>
         <MenuItem onClick={() => setConfirmDeleteDialogOpen(true)}>{t("delete")}</MenuItem>

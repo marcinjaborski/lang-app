@@ -21,6 +21,7 @@ import {
 } from "@mui/material";
 import { StudySet, UNDERSTANDING } from "@src/types";
 import { Link } from "react-router-dom";
+
 import { Card, Options } from "./StudySetElement.styled";
 import { useStudySetElement } from "./useStudySetElement";
 
@@ -54,7 +55,7 @@ export const StudySetElement = ({ studySet }: StudySetElementProps) => {
       <Options onClick={(e) => setOptionsAnchor(e.currentTarget)}>
         <MoreVertIcon />
       </Options>
-      <Menu open={optionsMenuOpen} onClose={onMenuClose} onClick={onMenuClose} anchorEl={optionsAnchor}>
+      <Menu anchorEl={optionsAnchor} open={optionsMenuOpen} onClick={onMenuClose} onClose={onMenuClose}>
         <MenuItem onClick={() => setShareDialogOpen(true)}>{t("shareDialog.share")}</MenuItem>
       </Menu>
       <Dialog open={shareDialogOpen} onClose={onShareDialogClose}>
@@ -63,10 +64,6 @@ export const StudySetElement = ({ studySet }: StudySetElementProps) => {
           <FormControl sx={{ mt: 1 }}>
             <InputLabel htmlFor={`shareTo-${studySet.id}`}>{t("shareDialog.shareTo")}</InputLabel>
             <Input
-              id={`shareTo-${studySet.id}`}
-              value={shareTo}
-              onChange={(e) => setShareTo(e.target.value)}
-              onKeyDown={onKeyDown}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton onClick={onShare}>
@@ -74,6 +71,10 @@ export const StudySetElement = ({ studySet }: StudySetElementProps) => {
                   </IconButton>
                 </InputAdornment>
               }
+              id={`shareTo-${studySet.id}`}
+              value={shareTo}
+              onChange={(e) => setShareTo(e.target.value)}
+              onKeyDown={onKeyDown}
             />
           </FormControl>
           <Box sx={{ display: "flex", flexWrap: "wrap", mt: 1 }}>
@@ -86,7 +87,7 @@ export const StudySetElement = ({ studySet }: StudySetElementProps) => {
           <Button onClick={onShareDialogClose}>{t("shareDialog.close")}</Button>
         </DialogActions>
       </Dialog>
-      <Typography variant="h6" align="center">
+      <Typography align="center" variant="h6">
         {title}
       </Typography>
       <Tooltip
@@ -107,11 +108,11 @@ export const StudySetElement = ({ studySet }: StudySetElementProps) => {
           </Box>
         }
       >
-        <Typography variant="caption" align="center">
+        <Typography align="center" variant="caption">
           {terms.length} {t("terms")}
         </Typography>
       </Tooltip>
-      <LinearProgress variant="determinate" value={progress} color="secondary" />
+      <LinearProgress color="secondary" value={progress} variant="determinate" />
       <Link to={`/flashcards/${id}`}>
         <Button>{t("flashcards")}</Button>
       </Link>

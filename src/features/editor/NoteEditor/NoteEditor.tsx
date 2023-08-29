@@ -1,6 +1,7 @@
 import { Box, TextField } from "@mui/material";
 import { ContextMenu, CreateTermDialog, HoveringToolbar, Toolbar } from "@src/features/editor";
 import { Slate } from "slate-react";
+
 import { EditableStyled, NoteEditorStyled } from "./NoteEditor.styled";
 import { useNoteEditor } from "./useNoteEditor";
 
@@ -10,7 +11,7 @@ export const NoteEditor = () => {
 
   return (
     <NoteEditorStyled>
-      <TextField variant="standard" fullWidth value={title} onChange={onTitleChange} />
+      <TextField fullWidth value={title} variant="standard" onChange={onTitleChange} />
       {!readonly ? (
         <>
           <Toolbar />
@@ -22,10 +23,10 @@ export const NoteEditor = () => {
       <CreateTermDialog />
       <Slate editor={editor} value={emptyElement}>
         <EditableStyled
-          readOnly={readonly}
-          renderLeaf={renderLeaf}
-          renderElement={renderElement}
           placeholder={t("placeholder")}
+          readOnly={readonly}
+          renderElement={renderElement}
+          renderLeaf={renderLeaf}
           onKeyDown={onKeyDown}
         />
       </Slate>

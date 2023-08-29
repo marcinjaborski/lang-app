@@ -5,6 +5,7 @@ import { Flashcard } from "@src/features/studying";
 import { useStudySetRepository } from "@src/hooks";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+
 import { Wrap } from "./FlashcardsPage.styled";
 
 export const FlashcardsPage = () => {
@@ -30,8 +31,8 @@ export const FlashcardsPage = () => {
             {t("flashcardsHeader", { current: current + 1, all: termsToLearn.length })}
           </Typography>
           <Flashcard
-            front={termsToLearn[current].base}
             back={termsToLearn[current].translation}
+            front={termsToLearn[current].base}
             key={termsToLearn[current].id}
           />
           <Box>

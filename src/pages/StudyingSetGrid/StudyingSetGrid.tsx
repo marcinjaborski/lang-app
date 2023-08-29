@@ -4,6 +4,7 @@ import { StudySetCreateDialog, StudySetElement } from "@src/features/studying";
 import { useStudySetRepository } from "@src/hooks";
 import { openStudyDialog, useAppDispatch } from "@src/store";
 import { useTranslation } from "react-i18next";
+
 import { SetSkeleton, SetsWrap, Wrap } from "./StudyingSetGrid.styled";
 
 export const StudyingSetGrid = () => {
@@ -13,7 +14,7 @@ export const StudyingSetGrid = () => {
 
   return (
     <Wrap>
-      <Typography variant="h4" fontWeight={500}>
+      <Typography fontWeight={500} variant="h4">
         {t("title")}
       </Typography>
       <Divider />
@@ -25,9 +26,7 @@ export const StudyingSetGrid = () => {
             <SetSkeleton />
           </>
         ) : null}
-        {studySets.list.data?.map((studySet) => (
-          <StudySetElement key={studySet.id} studySet={studySet} />
-        ))}
+        {studySets.list.data?.map((studySet) => <StudySetElement key={studySet.id} studySet={studySet} />)}
       </SetsWrap>
       <StudySetCreateDialog />
       <Grow in>

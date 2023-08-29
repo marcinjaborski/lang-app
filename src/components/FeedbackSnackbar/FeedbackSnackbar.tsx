@@ -7,7 +7,7 @@ export const FeedbackSnackbar = () => {
   const severity = useAppSelector((state) => state.feedback.severity);
 
   return (
-    <Snackbar open={message !== ""} autoHideDuration={5000} onClose={() => dispatch(closeSnackbar())}>
+    <Snackbar autoHideDuration={5000} open={message !== ""} onClose={() => dispatch(closeSnackbar())}>
       <Alert severity={severity} onClose={() => dispatch(closeSnackbar())}>
         {message}
       </Alert>

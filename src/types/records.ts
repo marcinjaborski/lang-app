@@ -1,5 +1,6 @@
 import { AppLanguage } from "@src/i18n/types";
 import { Record } from "pocketbase";
+
 import { Language } from "./types";
 
 export type UpdateRecord<R> = {
@@ -52,7 +53,7 @@ export type Term = Record & {
 export type Settings = Record & {
   userLanguage: AppLanguage;
   separator: string;
-  theme: {};
+  theme: null;
   defaultBaseLang: Language;
   defaultTargetLang: Language;
   user: string;
@@ -103,7 +104,7 @@ export type TagToCreate = {
 export type SettingsToCreate = {
   userLanguage?: AppLanguage;
   separator?: string;
-  theme?: {};
+  theme?: null;
   defaultBaseLang?: Language;
   defaultTargetLang?: Language;
 };
