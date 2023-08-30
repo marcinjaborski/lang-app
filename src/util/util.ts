@@ -43,3 +43,7 @@ export const getAllNoteTerms = (editor: Editor): TermElement[] => {
   });
   return noteTerms.map(([noteTerm]) => noteTerm);
 };
+
+export const mapLanguageToFlag = (lang: Language) => {
+  return (lang === "en" ? "gb" : lang).toUpperCase();
+};

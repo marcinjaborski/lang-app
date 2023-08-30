@@ -1,10 +1,11 @@
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import CreateIcon from "@mui/icons-material/Create";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Button, CardActions, IconButton, Menu, MenuItem, Typography } from "@mui/material";
 import { TextWithNewLines } from "@src/components";
 import { Note } from "@src/types";
-import { serialize } from "@src/util";
+import { mapLanguageToFlag, serialize } from "@src/util";
 import { Draggable } from "react-beautiful-dnd";
+import ReactCountryFlag from "react-country-flag";
 
 import { Excerpt, NoteCardStyled, NoteProgress, StyledCardContent } from "./NoteCard.styled";
 import { useNoteCard } from "./useNoteCard";
@@ -35,9 +36,11 @@ export const NoteCard = (props: NoteCardProps) => {
             <Excerpt>{note.excerpt || <TextWithNewLines>{fallbackExcerpt}</TextWithNewLines>}</Excerpt>
           </StyledCardContent>
           <CardActions>
+            <ReactCountryFlag countryCode={mapLanguageToFlag(note.baseLang)} svg />
             <Button fullWidth size="small" onClick={() => navigate(`/note/${note.id}`)}>
-              <ExpandMoreIcon htmlColor="black" />
+              <CreateIcon htmlColor="gray" />
             </Button>
+            <ReactCountryFlag countryCode={mapLanguageToFlag(note.targetLang)} svg />
           </CardActions>
         </NoteCardStyled>
       )}
