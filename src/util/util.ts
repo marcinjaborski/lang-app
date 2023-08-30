@@ -1,6 +1,6 @@
-import { DeeplResponse, Language, Note, Term, UNDERSTANDING } from "@src/types";
+import { DeeplResponse, isTermElement, Language, Note, Term, TermElement, UNDERSTANDING } from "@src/types";
 import { pb } from "@src/util";
-import { Node } from "slate";
+import { Editor, Node } from "slate";
 
 import { axiosDeepl } from "./axios";
 
@@ -34,4 +34,12 @@ export const getProgress = (terms: Term[] = []) => {
   const cumulativeUnderstanding = terms.reduce((acc, curr) => acc + curr.understanding, 0);
   const totalUnderstanding = terms.length * UNDERSTANDING.FINAL;
   return Math.floor((cumulativeUnderstanding / totalUnderstanding) * 100);
+};
+
+export const getAllNoteTerms = (editor: Editor): TermElement[] => {
+  const [...noteTerms] = Editor.nodes<TermElement>(editor, {
+    match: (node) => isTermElement(node),
+    at: Editor.range(editor, []),
+  });
+  return noteTerms.map(([noteTerm]) => noteTerm);
 };

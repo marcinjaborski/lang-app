@@ -1,5 +1,4 @@
 import { useEditorContext, useNoteRepository, useSettings, useTermRepository } from "@src/hooks";
-import { useNotePage } from "@src/pages";
 import {
   closeCreateTermDialog,
   setTermDialogBase,
@@ -11,14 +10,13 @@ import { NoteUrlParams } from "@src/types";
 import { translate, ZERO_WIDTH_SPACE } from "@src/util";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
-import { Editor, Text, Transforms } from "slate";
+import { Transforms } from "slate";
 import { ReactEditor } from "slate-react";
 
 export const useCreateTermDialog = () => {
   const { t } = useTranslation("createTermDialog");
   const noteEditorState = useAppSelector((state) => state.noteEditor);
-  const open = noteEditorState.createDialogOpen || noteEditorState.updateDialogOpen;
-  const type = noteEditorState.updateDialogOpen ? "update" : "create";
+  const open = noteEditorState.createDialogOpen;
   const baseLang = useAppSelector((state) => state.noteDrawer.baseLang);
   const targetLang = useAppSelector((state) => state.noteDrawer.targetLang);
   const dispatch = useAppDispatch();
@@ -29,8 +27,6 @@ export const useCreateTermDialog = () => {
   const notes = useNoteRepository();
   const editor = useEditorContext();
   const params = useParams<NoteUrlParams>();
-  const termId = useAppSelector((state) => state.noteEditor.contextTermId);
-  const { onSave: saveNote } = useNotePage();
 
   const onClose = () => {
     dispatch(closeCreateTermDialog());
@@ -40,36 +36,20 @@ export const useCreateTermDialog = () => {
 
   const onCreate = () => {
     if (!params.id) return;
+    terms.create.mutate(
+      { base, translation, note: params.id },
+      {
+        onSuccess({ id }) {
+          Transforms.insertNodes(editor, { type: "term", id, text: `${base}${separator}${translation}` });
+          ReactEditor.focus(editor);
+          Transforms.insertNodes(editor, { type: "text", text: ZERO_WIDTH_SPACE });
+          Transforms.move(editor, { distance: 1, unit: "character" });
+          Transforms.insertNodes(editor, { type: "text", text: " " });
+          notes.update.mutate({ id: params.id!, record: { content: JSON.stringify(editor.children) } });
+        },
+      },
+    );
 
-    if (type === "update") {
-      terms.update.mutate(
-        { id: termId, record: { base, translation } },
-        {
-          onSuccess(term) {
-            const [selectedTerm] = Editor.nodes(editor, {
-              match: (n) => Text.isText(n) && n.type === "term" && n.id === term.id,
-              at: Editor.range(editor, []),
-            });
-            Transforms.insertText(editor, `${term.base}${separator}${term.translation}`, { at: selectedTerm[1] });
-            saveNote(editor.children);
-          },
-        },
-      );
-    } else {
-      terms.create.mutate(
-        { base, translation, note: params.id },
-        {
-          onSuccess({ id }) {
-            Transforms.insertNodes(editor, { type: "term", id, text: `${base}${separator}${translation}` });
-            ReactEditor.focus(editor);
-            Transforms.insertNodes(editor, { type: "text", text: ZERO_WIDTH_SPACE });
-            Transforms.move(editor, { distance: 1, unit: "character" });
-            Transforms.insertNodes(editor, { type: "text", text: " " });
-            notes.update.mutate({ id: params.id!, record: { content: JSON.stringify(editor.children) } });
-          },
-        },
-      );
-    }
     onClose();
   };
 
@@ -78,5 +58,5 @@ export const useCreateTermDialog = () => {
     dispatch(setTermDialogTranslation(translation));
   };
 
-  return { t, open, type, dispatch, separator, onCreate, onTranslate, onClose, base, translation };
+  return { t, open, dispatch, separator, onCreate, onTranslate, onClose, base, translation };
 };

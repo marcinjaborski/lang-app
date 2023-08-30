@@ -10,6 +10,7 @@ import {
   useAppSelector,
 } from "@src/store";
 import { NoteToCreate, NoteUrlParams } from "@src/types";
+import { getAllNoteTerms } from "@src/util";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { createEditor, Descendant } from "slate";
@@ -67,6 +68,7 @@ export const useNotePage = () => {
       shared: drawerState.shared.map((user) => user.id),
     };
     notes.update.mutate({ id: params.id!, record: newNote });
+    notes.updateTerms.mutate(getAllNoteTerms(editor));
   };
 
   return { editor, notes, onOpenDrawer, onSave };

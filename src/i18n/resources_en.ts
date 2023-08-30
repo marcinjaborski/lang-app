@@ -89,13 +89,11 @@ export const en = {
   },
   createTermDialog: {
     title: "Create term",
-    titleUpdate: "Update term",
     base: "Base",
     translation: "Translation",
     translate: "Translate",
     cancel: "Cancel",
     create: "Create",
-    update: "Update",
   },
   noteToolbar: {
     term: "Create term",

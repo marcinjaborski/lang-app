@@ -1,4 +1,3 @@
-export * from "./ContextMenu/ContextMenu";
 export * from "./CreateTermDIalog/CreateTermDialog";
 export * from "./Drawer/Drawer";
 export * from "./Element/Element";

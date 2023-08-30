@@ -1,8 +1,8 @@
 import { Element, Leaf } from "@src/features/editor";
 import { useEditorContext, useEmptyElement, useFormatters, useNoteRepository, useTranslateText } from "@src/hooks";
 import { changeTitle, useAppDispatch, useAppSelector } from "@src/store";
-import { ElementType, isShortcut, isTermElement, NoteUrlParams } from "@src/types";
-import { isNoteShared, ZERO_WIDTH_SPACE } from "@src/util";
+import { isShortcut, NoteUrlParams, TextElement } from "@src/types";
+import { getAllNoteTerms, isNoteShared, ZERO_WIDTH_SPACE } from "@src/util";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
@@ -20,8 +20,10 @@ export const useNoteEditor = () => {
   const params = useParams<NoteUrlParams>();
   const emptyElement = useEmptyElement();
   const notes = useNoteRepository();
+
   const debounceSave = useDebouncedCallback(() => {
-    notes.update.mutate({ id: params.id!, record: { content: JSON.stringify(editor.children) } });
+    notes.update.mutate({ id: params.id!, record: { title, content: JSON.stringify(editor.children) } });
+    notes.updateTerms.mutate(getAllNoteTerms(editor));
   }, 10000);
 
   const readonly = isNoteShared(notes.view.data);
@@ -58,8 +60,8 @@ export const useNoteEditor = () => {
     });
     if (!list) return false;
 
-    const currentNode = Editor.node(editor, selection.focus)[0] as unknown as { type: ElementType; text: string };
-    if (currentNode?.text !== "" || currentNode?.type !== "list-item") return false;
+    const currentNode = Editor.node(editor, selection.focus)[0] as TextElement;
+    if (currentNode?.text !== "") return false;
 
     const [path] = list[1];
     Transforms.removeNodes(editor);
@@ -76,24 +78,8 @@ export const useNoteEditor = () => {
     return Editor.string(editor, prevNode[1]).at(-1) === ZERO_WIDTH_SPACE;
   };
 
-  const willInsertCharacter = (key: string) => {
-    return key.length === 1 || key === "Enter" || key === "Backspace";
-  };
-
-  const isInsideTerm = () => {
-    const { selection } = editor;
-    if (!selection) return false;
-    const [node] = Editor.node(editor, selection);
-    return isTermElement(node);
-  };
-
   const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     debounceSave();
-
-    if (willInsertCharacter(event.key) && isInsideTerm()) {
-      event.preventDefault();
-      return;
-    }
 
     if (event.key === "Backspace" && preventDeletingZeroWidthSpace()) {
       event.preventDefault();

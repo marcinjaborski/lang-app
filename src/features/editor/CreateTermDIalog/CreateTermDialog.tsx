@@ -5,12 +5,11 @@ import { setTermDialogBase, setTermDialogTranslation } from "@src/store";
 import { useCreateTermDialog } from "./useCreateTermDialog";
 
 export const CreateTermDialog = () => {
-  const { t, open, type, dispatch, separator, onCreate, onTranslate, onClose, base, translation } =
-    useCreateTermDialog();
+  const { t, open, dispatch, separator, onCreate, onTranslate, onClose, base, translation } = useCreateTermDialog();
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>{type === "create" ? t("title") : t("titleUpdate")}</DialogTitle>
+      <DialogTitle>{t("title")}</DialogTitle>
       <DialogContent sx={{ display: "flex", alignItems: "flex-end", gap: 2 }}>
         <TextField
           label={t("base")}
@@ -29,7 +28,7 @@ export const CreateTermDialog = () => {
       <DialogActions>
         <Button onClick={onClose}>{t("cancel")}</Button>
         <Button onClick={onTranslate}>{t("translate")}</Button>
-        <Button onClick={onCreate}>{type === "create" ? t("create") : t("update")}</Button>
+        <Button onClick={onCreate}>{t("create")}</Button>
       </DialogActions>
     </Dialog>
   );

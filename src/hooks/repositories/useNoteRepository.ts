@@ -1,6 +1,6 @@
 import { showSuccess, useAppDispatch } from "@src/store";
-import { Note, NoteToCreate, NoteUrlParams, UpdateRecord } from "@src/types";
-import { pb, pbError } from "@src/util";
+import { Note, NoteToCreate, NoteUrlParams, TermElement, UpdateRecord } from "@src/types";
+import { pb, PB_CUSTOM_ROUTES, pbError } from "@src/util";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
@@ -57,6 +57,17 @@ export const useNoteRepository = () => {
     },
   );
 
+  const updateTerms = useMutation<void, pbError, TermElement[]>(
+    (terms) => {
+      return pb.send(`${PB_CUSTOM_ROUTES}/updateNoteTerms`, { method: "POST", body: { note: params.id, terms } });
+    },
+    {
+      async onSuccess() {
+        await queryClient.invalidateQueries("list-terms");
+      },
+    },
+  );
+
   const deleteMutation = useMutation(
     (id: string) => {
       return pb.collection("notes").delete(id);
@@ -69,5 +80,5 @@ export const useNoteRepository = () => {
     },
   );
 
-  return { listShared, view, list, create, update, delete: deleteMutation };
+  return { listShared, view, list, create, update, updateTerms, delete: deleteMutation };
 };

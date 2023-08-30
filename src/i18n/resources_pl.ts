@@ -91,13 +91,11 @@ export const pl: Resource = {
   },
   createTermDialog: {
     title: "Stwórz słówko",
-    titleUpdate: "Zaktualizuj słówko",
     base: "Słówko",
     translation: "Tłumaczenie",
     translate: "Przetłumacz",
     cancel: "Anuluj",
     create: "Utwórz",
-    update: "Zaktualizuj",
   },
   noteToolbar: {
     term: "Stwórz słówko",
