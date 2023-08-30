@@ -7,8 +7,8 @@ type TextWithNewLinesProps = {
 export const TextWithNewLines = ({ children }: TextWithNewLinesProps) => {
   return (
     <>
-      {children.split("\n").map((line) => (
-        <Fragment key={line}>
+      {children.split("\n").map((line, index) => (
+        <Fragment key={line + index}>
           {line}
           <br />
         </Fragment>

@@ -140,12 +140,18 @@ export const en = {
     result: "You got {{result}} right",
     endQuiz: "End attempt",
     shared: "Shared",
+    noTerms: "There are no terms in this study set",
     shareDialog: {
       title: "Share study set",
       shareTo: "Username",
       share: "Share",
       close: "Close",
       noUser: "User was not found",
+    },
+    deleteDialog: {
+      title: "Are you sure you want to delete this set?",
+      cancel: "Cancel",
+      delete: "Delete",
     },
   },
   studySetCreate: {

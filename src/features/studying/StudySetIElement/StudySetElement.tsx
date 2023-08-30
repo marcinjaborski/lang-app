@@ -38,16 +38,19 @@ export const StudySetElement = ({ studySet }: StudySetElementProps) => {
     shareTo,
     shared,
     shareDialogOpen,
+    deleteDialogOpen,
     optionsMenuOpen,
     terms,
     optionsAnchor,
     setOptionsAnchor,
     setShareTo,
     setShareDialogOpen,
+    setDeleteDialogOpen,
     onKeyDown,
     onShare,
     onShareDialogClose,
     onMenuClose,
+    onDelete,
   } = useStudySetElement(studySet);
 
   return (
@@ -57,6 +60,7 @@ export const StudySetElement = ({ studySet }: StudySetElementProps) => {
       </Options>
       <Menu anchorEl={optionsAnchor} open={optionsMenuOpen} onClick={onMenuClose} onClose={onMenuClose}>
         <MenuItem onClick={() => setShareDialogOpen(true)}>{t("shareDialog.share")}</MenuItem>
+        <MenuItem onClick={() => setDeleteDialogOpen(true)}>{t("deleteDialog.delete")}</MenuItem>
       </Menu>
       <Dialog open={shareDialogOpen} onClose={onShareDialogClose}>
         <DialogTitle>{t("shareDialog.title")}</DialogTitle>
@@ -87,25 +91,36 @@ export const StudySetElement = ({ studySet }: StudySetElementProps) => {
           <Button onClick={onShareDialogClose}>{t("shareDialog.close")}</Button>
         </DialogActions>
       </Dialog>
+      <Dialog open={deleteDialogOpen} onClose={() => setDeleteDialogOpen(false)}>
+        <DialogTitle>{t("deleteDialog.title")}</DialogTitle>
+        <DialogActions>
+          <Button onClick={() => setDeleteDialogOpen(false)}>{t("deleteDialog.cancel")}</Button>
+          <Button onClick={onDelete}>{t("deleteDialog.delete")}</Button>
+        </DialogActions>
+      </Dialog>
       <Typography align="center" variant="h6">
         {title}
       </Typography>
       <Tooltip
         title={
-          <Box fontSize={18}>
-            {terms?.map((term) => (
-              <Box
-                key={term.id}
-                sx={{
-                  textDecoration: term.understanding === UNDERSTANDING.FINAL ? "line-through" : "",
-                  textDecorationColor: ({ palette }) => palette.primary.main,
-                  textDecorationThickness: 3,
-                }}
-              >
-                {term.base}
-              </Box>
-            ))}
-          </Box>
+          terms?.length ? (
+            <Box fontSize={18}>
+              {terms?.map((term) => (
+                <Box
+                  key={term.id}
+                  sx={{
+                    textDecoration: term.understanding === UNDERSTANDING.FINAL ? "line-through" : "",
+                    textDecorationColor: ({ palette }) => palette.primary.main,
+                    textDecorationThickness: 3,
+                  }}
+                >
+                  {term.base}
+                </Box>
+              ))}
+            </Box>
+          ) : (
+            <Typography>{t("noTerms")}</Typography>
+          )
         }
       >
         <Typography align="center" variant="caption">

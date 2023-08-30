@@ -142,12 +142,18 @@ export const pl: Resource = {
     result: "{{result}} poprawnych odpowiedzi",
     endQuiz: "Sprawdź odpowiedzi",
     shared: "Udostępione",
+    noTerms: "Ten zestaw nie zawiera żadnych słówek",
     shareDialog: {
       title: "Udostępnij zestaw",
       shareTo: "Nazwa użytkownika",
       share: "Udostępnij",
       close: "Zamknij",
       noUser: "Nie znaleziono użytkownika",
+    },
+    deleteDialog: {
+      title: "Czy na pewno chcesz usunąć ten zestaw?",
+      cancel: "Anuluj",
+      delete: "Usuń",
     },
   },
   studySetCreate: {

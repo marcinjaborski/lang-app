@@ -10,6 +10,7 @@ export const useStudySetElement = (studySet: StudySet) => {
   const [optionsAnchor, setOptionsAnchor] = useState<HTMLElement | null>(null);
   const optionsMenuOpen = !!optionsAnchor;
   const [shareDialogOpen, setShareDialogOpen] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [shareTo, setShareTo] = useState("");
   const studySets = useStudySetRepository();
   const { getByUsername } = useUserRepository();
@@ -45,6 +46,10 @@ export const useStudySetElement = (studySet: StudySet) => {
     await onShare();
   };
 
+  const onDelete = () => {
+    studySets.delete.mutate(id);
+  };
+
   return {
     t,
     id,
@@ -53,15 +58,18 @@ export const useStudySetElement = (studySet: StudySet) => {
     shareTo,
     optionsMenuOpen,
     shareDialogOpen,
+    deleteDialogOpen,
     terms,
     shared,
     optionsAnchor,
     setOptionsAnchor,
     setShareDialogOpen,
+    setDeleteDialogOpen,
     setShareTo,
     onShare,
     onShareDialogClose,
     onMenuClose,
     onKeyDown,
+    onDelete,
   };
 };
