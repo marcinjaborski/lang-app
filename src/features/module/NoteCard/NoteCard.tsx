@@ -17,7 +17,8 @@ type NoteCardProps = {
 
 export const NoteCard = (props: NoteCardProps) => {
   const { note, index } = props;
-  const { t, progress, anchorEl, openedMenu, onMenuOpen, onMenuClose, navigate, onDelete } = useNoteCard(note);
+  const { t, progress, anchorEl, baseLang, targetLang, openedMenu, onMenuOpen, onMenuClose, navigate, onDelete } =
+    useNoteCard(note);
   const fallbackExcerpt = serialize(note.content);
 
   return (
@@ -36,11 +37,11 @@ export const NoteCard = (props: NoteCardProps) => {
             <Excerpt>{note.excerpt || <TextWithNewLines>{fallbackExcerpt}</TextWithNewLines>}</Excerpt>
           </StyledCardContent>
           <CardActions>
-            <ReactCountryFlag countryCode={mapLanguageToFlag(note.baseLang)} svg />
+            <ReactCountryFlag countryCode={mapLanguageToFlag(baseLang)} svg />
             <Button fullWidth size="small" onClick={() => navigate(`/note/${note.id}`)}>
               <CreateIcon htmlColor="gray" />
             </Button>
-            <ReactCountryFlag countryCode={mapLanguageToFlag(note.targetLang)} svg />
+            <ReactCountryFlag countryCode={mapLanguageToFlag(targetLang)} svg />
           </CardActions>
         </NoteCardStyled>
       )}
