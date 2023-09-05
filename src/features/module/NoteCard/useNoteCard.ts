@@ -1,6 +1,6 @@
 import { useNoteRepository, useSettings, useTermRepository } from "@src/hooks";
 import { Note } from "@src/types";
-import { getProgress } from "@src/util";
+import { DEFAULT_BASE_LANG, DEFAULT_TRANSLATION_LANG, getProgress } from "@src/util";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -15,8 +15,8 @@ export const useNoteCard = (note: Note) => {
 
   const noteTerms = terms.list.data?.filter((term) => term.note === note.id);
   const progress = getProgress(noteTerms);
-  const baseLang = note.baseLang || settings?.baseLang;
-  const targetLang = note.targetLang || settings?.targetLang;
+  const baseLang = note.baseLang || settings?.baseLang || DEFAULT_BASE_LANG;
+  const targetLang = note.targetLang || settings?.targetLang || DEFAULT_TRANSLATION_LANG;
 
   const openedMenu = !!anchorEl;
   const onMenuOpen = (event: React.MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget);

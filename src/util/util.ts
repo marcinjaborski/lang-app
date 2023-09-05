@@ -45,7 +45,7 @@ export const getAllNoteTerms = (editor: Editor): TermElement[] => {
 };
 
 export const mapLanguageToFlag = (lang: Language) => {
-  return (lang === "en" ? "gb" : lang).toUpperCase();
+  return (lang === "en" ? "gb" : lang || "").toUpperCase();
 };
 
 export const pairs = <T>(arr: T[]): T[][] => {
