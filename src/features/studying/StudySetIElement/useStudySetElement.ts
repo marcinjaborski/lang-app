@@ -4,6 +4,7 @@ import { StudySet, User } from "@src/types";
 import { getProgress } from "@src/util";
 import { KeyboardEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 export const useStudySetElement = (studySet: StudySet) => {
   const { t } = useTranslation("study");
@@ -15,6 +16,7 @@ export const useStudySetElement = (studySet: StudySet) => {
   const studySets = useStudySetRepository();
   const { getByUsername } = useUserRepository();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { id, title } = studySet;
   const terms = studySet.expand.terms || [];
   const shared = studySet.expand.shared || [];
@@ -62,6 +64,7 @@ export const useStudySetElement = (studySet: StudySet) => {
     terms,
     shared,
     optionsAnchor,
+    navigate,
     setOptionsAnchor,
     setShareDialogOpen,
     setDeleteDialogOpen,

@@ -20,6 +20,7 @@ import {
   Typography,
 } from "@mui/material";
 import { StudySet, UNDERSTANDING } from "@src/types";
+import { FULL_PROGRESS } from "@src/util";
 import { Link } from "react-router-dom";
 
 import { Card, Options } from "./StudySetElement.styled";
@@ -42,6 +43,7 @@ export const StudySetElement = ({ studySet }: StudySetElementProps) => {
     optionsMenuOpen,
     terms,
     optionsAnchor,
+    navigate,
     setOptionsAnchor,
     setShareTo,
     setShareDialogOpen,
@@ -131,12 +133,12 @@ export const StudySetElement = ({ studySet }: StudySetElementProps) => {
       <Link to={`/flashcards/${id}`}>
         <Button>{t("flashcards")}</Button>
       </Link>
-      <Link to={`/quiz/${id}`}>
-        <Button>{t("quiz")}</Button>
-      </Link>
-      <Link to={`/matchGame/${id}`}>
-        <Button>{t("matchGame")}</Button>
-      </Link>
+      <Button disabled={progress === FULL_PROGRESS} onClick={() => navigate(`/quiz/${id}`)}>
+        {t("quiz")}
+      </Button>
+      <Button disabled={progress === FULL_PROGRESS} onClick={() => navigate(`/matchGame/${id}`)}>
+        {t("matchGame")}
+      </Button>
     </Card>
   );
 };

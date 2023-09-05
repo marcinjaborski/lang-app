@@ -11,6 +11,9 @@ export const Card = styled(Paper)(({ theme }) => ({
   a: {
     alignSelf: "center",
   },
+  button: {
+    alignSelf: "center",
+  },
 }));
 
 export const Options = styled(IconButton)(({ theme }) => ({
