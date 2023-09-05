@@ -48,7 +48,7 @@ export const theme = createTheme({
           position: "fixed",
           right: theme.spacing(2),
           bottom: theme.spacing(2),
-          "@media (max-width: 600px)": {
+          [theme.breakpoints.down("sm")]: {
             bottom: theme.spacing(12),
           },
         }),

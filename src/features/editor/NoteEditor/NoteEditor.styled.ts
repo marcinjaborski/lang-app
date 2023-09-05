@@ -6,6 +6,9 @@ export const NoteEditorStyled = styled("div")(({ theme }) => ({
   marginTop: theme.spacing(1),
   display: "flex",
   flexDirection: "column",
+  [theme.breakpoints.down("sm")]: {
+    width: "95%",
+  },
 }));
 
 export const EditableStyled = styled(Editable)(({ theme }) => ({

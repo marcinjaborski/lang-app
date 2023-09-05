@@ -7,6 +7,10 @@ export const GameWrap = styled("div")(({ theme }) => ({
   width: "100%",
   margin: theme.spacing(5),
   gap: theme.spacing(1),
+  [theme.breakpoints.down("sm")]: {
+    height: "100%",
+    width: `calc(100% - ${theme.spacing(10)})`,
+  },
 }));
 
 export const GameBoard = styled(Paper)(({ theme }) => ({
@@ -14,6 +18,9 @@ export const GameBoard = styled(Paper)(({ theme }) => ({
   overflow: "hidden",
   position: "relative",
   flex: "1 1 0",
+  [theme.breakpoints.down("sm")]: {
+    width: "200vw",
+  },
 }));
 
 export const Term = styled("div")(({ theme }) => ({

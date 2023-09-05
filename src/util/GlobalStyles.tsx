@@ -24,8 +24,10 @@ export const inputGlobalStyles = (
       },
       "#root": {
         display: "flex",
-        "@media (max-width: 600px)": {
+        [theme.breakpoints.down("sm")]: {
           flexDirection: "column-reverse",
+          height: "calc(100vh - 90px)",
+          overflowY: "auto",
         },
         main: {
           flexGrow: 1,

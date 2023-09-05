@@ -10,7 +10,7 @@ export const ToolbarWrap = styled(AppBar)<WithComponent<AppBarProps>>`
   flex-direction: column;
   justify-content: space-between;
 
-  @media (max-width: 600px) {
+  ${({ theme }) => theme.breakpoints.down("sm")} {
     width: 100vw;
     height: fit-content;
     flex-direction: row;
