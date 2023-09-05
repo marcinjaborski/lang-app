@@ -4,5 +4,6 @@ export * from "./useEditorContext";
 export * from "./useEmptyElement";
 export * from "./useFormatters";
 export * from "./useInsertTerm";
+export * from "./useQuestions";
 export * from "./useSettings";
 export * from "./useTranslateText";

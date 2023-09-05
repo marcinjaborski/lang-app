@@ -47,3 +47,24 @@ export const getAllNoteTerms = (editor: Editor): TermElement[] => {
 export const mapLanguageToFlag = (lang: Language) => {
   return (lang === "en" ? "gb" : lang).toUpperCase();
 };
+
+export const pairs = <T>(arr: T[]): T[][] => {
+  const result: T[][] = [];
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      result.push([arr[i], arr[j]]);
+    }
+  }
+  return result;
+};
+
+export const areElementsOverlapping = (el1: Element, el2: Element) => {
+  const rect1 = el1.getBoundingClientRect();
+  const rect2 = el2.getBoundingClientRect();
+  return !(
+    rect1.right < rect2.left ||
+    rect1.left > rect2.right ||
+    rect1.bottom < rect2.top ||
+    rect1.top > rect2.bottom
+  );
+};

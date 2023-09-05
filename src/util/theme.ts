@@ -48,6 +48,9 @@ export const theme = createTheme({
           position: "fixed",
           right: theme.spacing(2),
           bottom: theme.spacing(2),
+          "@media (max-width: 600px)": {
+            bottom: theme.spacing(12),
+          },
         }),
       },
     },

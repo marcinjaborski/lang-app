@@ -118,6 +118,7 @@ export const pl: Resource = {
     updated: "Zapisano",
     deleted: "Usunięto",
     updatedTags: "Zaktualizowano tagi",
+    understandingUpdated: "Zrozumienie słówek zostało zaktualizowane",
     "Failed to create record.": "Nie można było utworzyć",
     "Failed to authenticate.": "Ten użytkownik nie istnieje",
     "You are not allowed to perform this request.": "Nie możesz wykonać tej operacji",
@@ -143,6 +144,7 @@ export const pl: Resource = {
     endQuiz: "Sprawdź odpowiedzi",
     shared: "Udostępione",
     noTerms: "Ten zestaw nie zawiera żadnych słówek",
+    matchGame: "Dopasuj",
     shareDialog: {
       title: "Udostępnij zestaw",
       shareTo: "Nazwa użytkownika",

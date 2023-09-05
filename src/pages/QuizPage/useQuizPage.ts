@@ -1,5 +1,4 @@
-import { useTermRepository } from "@src/hooks";
-import { useQuestions } from "@src/hooks/useQuestions";
+import { useQuestions, useTermRepository } from "@src/hooks";
 import { isNotNullable, Question } from "@src/types";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";

@@ -134,6 +134,9 @@ export const StudySetElement = ({ studySet }: StudySetElementProps) => {
       <Link to={`/quiz/${id}`}>
         <Button>{t("quiz")}</Button>
       </Link>
+      <Link to={`/matchGame/${id}`}>
+        <Button>{t("matchGame")}</Button>
+      </Link>
     </Card>
   );
 };

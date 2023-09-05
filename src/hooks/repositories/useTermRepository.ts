@@ -40,9 +40,16 @@ export const useTermRepository = () => {
     },
   );
 
-  const updateUnderstanding = useMutation<void, pbError, string[]>((terms) => {
-    return pb.send(`${PB_CUSTOM_ROUTES}/updateUnderstanding`, { method: "POST", body: { terms } });
-  });
+  const updateUnderstanding = useMutation<void, pbError, string[]>(
+    (terms) => {
+      return pb.send(`${PB_CUSTOM_ROUTES}/updateUnderstanding`, { method: "POST", body: { terms } });
+    },
+    {
+      onSuccess() {
+        dispatch(showSuccess(t("understandingUpdated")));
+      },
+    },
+  );
 
   const deleteMutation = useMutation<boolean, pbError, string>(
     (id) => {

@@ -2,6 +2,7 @@ export * from "./FlashcardsPage/FlashcardsPage";
 export * from "./Home/Home";
 export * from "./Login/Login";
 export * from "./Login/Login.styled";
+export * from "./MatchGamePage/MatchGamePage";
 export * from "./NotePage/NotePage";
 export * from "./NotePage/useNotePage";
 export * from "./NotFound/NotFound";

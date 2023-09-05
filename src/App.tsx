@@ -1,6 +1,16 @@
 import { FeedbackSnackbar, Navbar } from "@src/components";
 import { useSettings } from "@src/hooks";
-import { FlashcardsPage, Home, Login, NotePage, NotFound, QuizPage, Settings, StudyingSetGrid } from "@src/pages";
+import {
+  FlashcardsPage,
+  Home,
+  Login,
+  MatchGamePage,
+  NotePage,
+  NotFound,
+  QuizPage,
+  Settings,
+  StudyingSetGrid,
+} from "@src/pages";
 import { setLastAccessedNote, useAppDispatch } from "@src/store";
 import { pb } from "@src/util";
 import { useEffect } from "react";
@@ -34,6 +44,7 @@ export const App = () => {
             <Route element={<StudyingSetGrid />} path="/study" />
             <Route element={<FlashcardsPage />} path="/flashcards/:id" />
             <Route element={<QuizPage />} path="/quiz/:id" />
+            <Route element={<MatchGamePage />} path="/matchGame/:id" />
             <Route element={<Settings />} path="/settings" />
           </>
         ) : null}

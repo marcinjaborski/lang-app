@@ -116,6 +116,7 @@ export const en = {
     updated: "Updated",
     deleted: "Deleted",
     updatedTags: "Tags updated",
+    understandingUpdated: "Terms understanding was updated",
     "Failed to create record.": "Could not create",
     "Failed to authenticate.": "The user does not exists",
     "You are not allowed to perform this request.": "You are not allowed to perform this operation",
@@ -141,6 +142,7 @@ export const en = {
     endQuiz: "End attempt",
     shared: "Shared",
     noTerms: "There are no terms in this study set",
+    matchGame: "Match",
     shareDialog: {
       title: "Share study set",
       shareTo: "Username",
