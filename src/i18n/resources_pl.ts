@@ -4,6 +4,7 @@ export const pl: Resource = {
   navbar: {
     login: "Zaloguj",
     logout: "Wyloguj",
+    profile: "Profil",
     settings: "Ustawienia",
     home: "Strona główna",
     newNote: "Stwórz nową notatkę",
@@ -41,6 +42,12 @@ export const pl: Resource = {
     "Failed to authenticate.": "Nazwa użytkownika lub hasło są nieprawidłowe",
     "Failed to create record.": "Email lub nazwa użytkownika są już w użyciu",
     "You are not allowed to perform this request.": "Nie możesz wykonać tej operacji",
+  },
+  profile: {
+    points: "{{points}} punktów",
+    public: "Profil publiczny",
+    newFriend: "Nowy znajomy",
+    error: "Nie można było pobrać profilu użytkownika",
   },
   notFound: {
     title: "Oops! Nie znaleziono strony",
@@ -119,6 +126,10 @@ export const pl: Resource = {
     deleted: "Usunięto",
     updatedTags: "Zaktualizowano tagi",
     understandingUpdated: "Zrozumienie słówek zostało zaktualizowane",
+    avatarChanged: "Awatar został zaktualizowany",
+    avatarError: "Nie można było zaktualizować awataru",
+    profileUpdate: "Profil zapisany",
+    profileError: "Nie można było zapisać profilu",
     "Failed to create record.": "Nie można było utworzyć",
     "Failed to authenticate.": "Ten użytkownik nie istnieje",
     "You are not allowed to perform this request.": "Nie możesz wykonać tej operacji",

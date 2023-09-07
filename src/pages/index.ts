@@ -6,6 +6,7 @@ export * from "./MatchGamePage/MatchGamePage";
 export * from "./NotePage/NotePage";
 export * from "./NotePage/useNotePage";
 export * from "./NotFound/NotFound";
+export * from "./ProfilePage/ProfilePage";
 export * from "./QuizPage/QuizPage";
 export * from "./Settings/Settings";
 export * from "./StudyingSetGrid/StudyingSetGrid";

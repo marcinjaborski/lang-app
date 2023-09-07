@@ -1,5 +1,5 @@
 import { AppLanguage } from "@src/i18n/types";
-import { Record } from "pocketbase";
+import { BaseModel, Record } from "pocketbase";
 
 import { Language } from "./types";
 
@@ -8,8 +8,14 @@ export type UpdateRecord<R> = {
   record: Partial<R>;
 };
 
-export type User = Record & {
+export type User = BaseModel & {
   username: string;
+  avatar: string | null;
+  public: boolean;
+  friends: string[];
+  expand: {
+    friends?: User[];
+  };
 };
 
 export type SerializableUser = Pick<User, "id" | "username">;

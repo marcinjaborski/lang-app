@@ -1,4 +1,6 @@
+import { User } from "@src/types";
 import { pb, pbError } from "@src/util";
+import { RecordAuthResponse } from "pocketbase";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useMutation } from "react-query";
@@ -18,9 +20,9 @@ export const useLoginTab = () => {
     formState: { errors },
   } = useForm<LoginTabFormData>();
 
-  const mutation = useMutation(
-    ({ username, password }: LoginTabFormData) => {
-      return pb.collection("users").authWithPassword(username, password);
+  const mutation = useMutation<RecordAuthResponse<User>, pbError, LoginTabFormData>(
+    ({ username, password }) => {
+      return pb.collection("users").authWithPassword(username, password, {}, { expand: "friends" });
     },
     {
       onSuccess() {
@@ -34,5 +36,5 @@ export const useLoginTab = () => {
     mutation.mutate(data);
   });
 
-  return { t, register, errors, onSubmit, ...mutation, error: mutation.error as pbError };
+  return { t, register, errors, onSubmit, ...mutation };
 };

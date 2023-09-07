@@ -29,6 +29,9 @@ export const Navbar = () => {
 
   const menuItems = isLogged
     ? [
+        <MenuItem key="profile" onClick={() => navigate("/profile")}>
+          {t("profile")}
+        </MenuItem>,
         <MenuItem key="settings" onClick={() => navigate("/settings")}>
           {t("settings")}
         </MenuItem>,

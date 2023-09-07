@@ -2,6 +2,7 @@ export const en = {
   navbar: {
     login: "Log in",
     logout: "Log out",
+    profile: "Profile",
     settings: "Settings",
     home: "Home",
     newNote: "Create new note",
@@ -39,6 +40,12 @@ export const en = {
     "Failed to authenticate.": "Credentials invalid",
     "Failed to create record.": "Email or username is already in use",
     "You are not allowed to perform this request.": "You are not allowed to perform this operation",
+  },
+  profile: {
+    points: "{{points}} points",
+    public: "Public profile",
+    newFriend: "New friend",
+    error: "Could not get user profile",
   },
   notFound: {
     title: "Oops! Page not found",
@@ -117,6 +124,10 @@ export const en = {
     deleted: "Deleted",
     updatedTags: "Tags updated",
     understandingUpdated: "Terms understanding was updated",
+    avatarChanged: "Avatar changed successfully",
+    avatarError: "Could not update avatar",
+    profileUpdate: "Profile saved",
+    profileError: "Could not update profile",
     "Failed to create record.": "Could not create",
     "Failed to authenticate.": "The user does not exists",
     "You are not allowed to perform this request.": "You are not allowed to perform this operation",

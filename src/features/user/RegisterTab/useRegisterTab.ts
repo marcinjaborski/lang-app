@@ -1,4 +1,5 @@
 import { useLoginTab } from "@src/features/user/LoginTab/useLoginTab";
+import { User } from "@src/types";
 import { pb, pbError } from "@src/util";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -21,8 +22,8 @@ export const useRegisterTab = () => {
   } = useForm<RegisterTabFormData>();
   const { mutate: login } = useLoginTab();
 
-  const mutation = useMutation(
-    (data: RegisterTabFormData) => {
+  const mutation = useMutation<User, pbError, RegisterTabFormData>(
+    (data) => {
       return pb.collection("users").create(data);
     },
     {
@@ -36,5 +37,5 @@ export const useRegisterTab = () => {
     mutation.mutate(data);
   });
 
-  return { t, register, watch, errors, onSubmit, ...mutation, error: mutation.error as pbError };
+  return { t, register, watch, errors, onSubmit, ...mutation };
 };

@@ -7,6 +7,7 @@ import {
   MatchGamePage,
   NotePage,
   NotFound,
+  ProfilePage,
   QuizPage,
   Settings,
   StudyingSetGrid,
@@ -45,6 +46,7 @@ export const App = () => {
             <Route element={<FlashcardsPage />} path="/flashcards/:id" />
             <Route element={<QuizPage />} path="/quiz/:id" />
             <Route element={<MatchGamePage />} path="/matchGame/:id" />
+            <Route element={<ProfilePage />} path="/profile" />
             <Route element={<Settings />} path="/settings" />
           </>
         ) : null}
