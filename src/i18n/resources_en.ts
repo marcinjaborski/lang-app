@@ -154,6 +154,7 @@ export const en = {
     shared: "Shared",
     noTerms: "There are no terms in this study set",
     matchGame: "Match",
+    leaderboards: "Leaderboards",
     shareDialog: {
       title: "Share study set",
       shareTo: "Username",
@@ -183,5 +184,12 @@ export const en = {
     selectModule: "Select module from list",
     selectNote: "Select note from list",
     noTerms: "Cannot create set without terms",
+  },
+  leaderboards: {
+    title: "Leaderboards",
+    user: "User",
+    game: "Game",
+    date: "Date",
+    score: "Score",
   },
 };

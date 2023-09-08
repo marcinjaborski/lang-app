@@ -156,6 +156,7 @@ export const pl: Resource = {
     shared: "Udostępione",
     noTerms: "Ten zestaw nie zawiera żadnych słówek",
     matchGame: "Dopasuj",
+    leaderboards: "Tabela wyników",
     shareDialog: {
       title: "Udostępnij zestaw",
       shareTo: "Nazwa użytkownika",
@@ -185,5 +186,12 @@ export const pl: Resource = {
     selectModule: "Wybierz moduł z listy",
     selectNote: "Wybierz notatkę z listy",
     noTerms: "Nie można stworzyć zestawu bez słówek",
+  },
+  leaderboards: {
+    title: "Wyniki",
+    user: "Użytkownik",
+    game: "Gra",
+    date: "Data",
+    score: "Wynik",
   },
 };

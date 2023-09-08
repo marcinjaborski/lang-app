@@ -1,6 +1,6 @@
 import AddIcon from "@mui/icons-material/Add";
 import { Divider, Fab, Grow, Typography } from "@mui/material";
-import { StudySetCreateDialog, StudySetElement } from "@src/features/studying";
+import { LeaderboardPopup, StudySetCreateDialog, StudySetElement } from "@src/features/studying";
 import { useStudySetRepository } from "@src/hooks";
 import { openStudyDialog, useAppDispatch } from "@src/store";
 import { useTranslation } from "react-i18next";
@@ -29,6 +29,7 @@ export const StudyingSetGrid = () => {
         {studySets.list.data?.map((studySet) => <StudySetElement key={studySet.id} studySet={studySet} />)}
       </SetsWrap>
       <StudySetCreateDialog />
+      <LeaderboardPopup />
       <Grow in>
         <Fab color="primary" onClick={() => dispatch(openStudyDialog())}>
           <AddIcon />

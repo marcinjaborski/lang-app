@@ -1,5 +1,5 @@
 import { useStudySetRepository, useUserRepository } from "@src/hooks";
-import { showError, useAppDispatch } from "@src/store";
+import { setLeaderboardsStudySetId, showError, useAppDispatch } from "@src/store";
 import { StudySet, User } from "@src/types";
 import { getProgress } from "@src/util";
 import { KeyboardEvent, useState } from "react";
@@ -52,6 +52,10 @@ export const useStudySetElement = (studySet: StudySet) => {
     studySets.delete.mutate(id);
   };
 
+  const openLeaderboardsPopup = () => {
+    dispatch(setLeaderboardsStudySetId(studySet.sharedId));
+  };
+
   return {
     t,
     id,
@@ -74,5 +78,6 @@ export const useStudySetElement = (studySet: StudySet) => {
     onMenuClose,
     onKeyDown,
     onDelete,
+    openLeaderboardsPopup,
   };
 };

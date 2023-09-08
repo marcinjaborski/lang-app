@@ -53,6 +53,7 @@ export const StudySetElement = ({ studySet }: StudySetElementProps) => {
     onShareDialogClose,
     onMenuClose,
     onDelete,
+    openLeaderboardsPopup,
   } = useStudySetElement(studySet);
 
   return (
@@ -139,6 +140,7 @@ export const StudySetElement = ({ studySet }: StudySetElementProps) => {
       <Button disabled={progress === FULL_PROGRESS} onClick={() => navigate(`/matchGame/${id}`)}>
         {t("matchGame")}
       </Button>
+      <Button onClick={openLeaderboardsPopup}>{t("leaderboards")}</Button>
     </Card>
   );
 };
