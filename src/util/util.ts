@@ -86,3 +86,7 @@ export const getAvatarColor = (string: string) => {
 
   return color;
 };
+
+export const calculateScore = (time: number, correct: number) => {
+  return Math.round(100 * Math.pow(Math.E, -0.01 * time) * correct);
+};

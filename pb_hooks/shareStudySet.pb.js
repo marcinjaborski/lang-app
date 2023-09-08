@@ -22,6 +22,7 @@ routerAdd("PATCH", "/hooks/shareStudySet", (c) => {
   const studySetForm = new RecordUpsertForm($app, newStudySet);
   studySetForm.loadData({
     title: originalStudySet.get("title"),
+    sharedId: originalStudySet.get("sharedId"),
     owner: user,
     terms: newTerms,
   });

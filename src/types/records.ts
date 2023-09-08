@@ -75,9 +75,22 @@ export type StudySet = Record & {
   title: string;
   owner: string;
   shared: string[];
+  sharedId: string;
   expand: {
     shared?: User[];
     terms?: Term[];
+  };
+};
+
+export type ScoreGameType = "quiz" | "match";
+
+export type Score = Record & {
+  user: string;
+  game: ScoreGameType;
+  score: number;
+  studySetSharedId: string;
+  expand: {
+    user?: User;
   };
 };
 
@@ -119,6 +132,12 @@ export type StudySetToCreate = {
   title: string;
   terms: string[];
   shared: string[];
+};
+
+export type ScoreToCreate = {
+  game: ScoreGameType;
+  score: number;
+  studySetSharedId: string;
 };
 
 export const UNDERSTANDING = {

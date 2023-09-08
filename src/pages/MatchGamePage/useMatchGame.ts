@@ -1,5 +1,5 @@
-import { useQuestions, useTermRepository } from "@src/hooks";
-import { areElementsOverlapping, pairs } from "@src/util";
+import { useQuestions, useScoreRepository, useStudySetRepository, useTermRepository } from "@src/hooks";
+import { areElementsOverlapping, calculateScore, pairs } from "@src/util";
 import _ from "lodash";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -15,6 +15,10 @@ export const useMatchGame = () => {
   const [mounted, setMounted] = useState(false);
   const buttonDisabled = !Object.values(overlapped).every((value) => value === 1) || result !== null;
   const terms = useTermRepository();
+  const scores = useScoreRepository();
+  const studySets = useStudySetRepository();
+
+  const startTime = useMemo(() => performance.now(), []);
 
   const [maxX, maxY] = useMemo(() => {
     if (!boardRef.current) return [0, 0];
@@ -59,6 +63,7 @@ export const useMatchGame = () => {
 
   const onEnd = () => {
     if (!boardRef.current || !questions) return;
+    const elapsedTime = performance.now() - startTime;
     let score = 0;
     const newValid: Record<string, boolean> = {};
     const words = [...boardRef.current.children];
@@ -81,6 +86,13 @@ export const useMatchGame = () => {
     setResult(score);
     setValid(newValid);
     terms.updateUnderstanding.mutate(termsToUpdate);
+    if (studySets.view.data) {
+      scores.create.mutate({
+        game: "match",
+        studySetSharedId: studySets.view.data.sharedId,
+        score: calculateScore(Math.round(elapsedTime) / 1000, termsToUpdate.length / questions.length),
+      });
+    }
   };
 
   return { t, result, words, overlapped, boardRef, valid, buttonDisabled, randomizePosition, handleOverlap, onEnd };

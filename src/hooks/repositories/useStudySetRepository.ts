@@ -28,6 +28,7 @@ export const useStudySetRepository = () => {
     (studySet) => {
       return pb.collection("studySets").create({
         ...studySet,
+        sharedId: crypto.randomUUID(),
         owner: pb.authStore.model!.id,
       });
     },
