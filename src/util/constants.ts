@@ -9,4 +9,3 @@ export const DEFAULT_LANG = "en" as AppLanguage;
 export const DEFAULT_BASE_LANG = "en" as Language;
 export const DEFAULT_TRANSLATION_LANG = "es" as Language;
 export const DEFAULT_SEPARATOR = " > ";
-export const FULL_PROGRESS = 100;

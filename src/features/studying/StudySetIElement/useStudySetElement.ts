@@ -1,6 +1,6 @@
 import { useStudySetRepository, useUserRepository } from "@src/hooks";
 import { setLeaderboardsStudySetId, showError, useAppDispatch } from "@src/store";
-import { StudySet, User } from "@src/types";
+import { StudySet, TermUnderstanding, User } from "@src/types";
 import { getProgress } from "@src/util";
 import { KeyboardEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -21,6 +21,13 @@ export const useStudySetElement = (studySet: StudySet) => {
   const terms = studySet.expand.terms || [];
   const shared = studySet.expand.shared || [];
   const progress = getProgress(terms);
+
+  const mapColorUnderstanding: Record<TermUnderstanding, string> = {
+    0: "tomato",
+    "1": "orange",
+    "2": "yellow",
+    "3": "lime",
+  };
 
   const onMenuClose = () => setOptionsAnchor(null);
 
@@ -69,6 +76,7 @@ export const useStudySetElement = (studySet: StudySet) => {
     shared,
     optionsAnchor,
     navigate,
+    mapColorUnderstanding,
     setOptionsAnchor,
     setShareDialogOpen,
     setDeleteDialogOpen,

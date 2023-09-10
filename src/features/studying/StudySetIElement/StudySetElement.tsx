@@ -19,8 +19,7 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import { StudySet, UNDERSTANDING } from "@src/types";
-import { FULL_PROGRESS } from "@src/util";
+import { StudySet } from "@src/types";
 import { Link } from "react-router-dom";
 
 import { Card, Options } from "./StudySetElement.styled";
@@ -44,6 +43,7 @@ export const StudySetElement = ({ studySet }: StudySetElementProps) => {
     terms,
     optionsAnchor,
     navigate,
+    mapColorUnderstanding,
     setOptionsAnchor,
     setShareTo,
     setShareDialogOpen,
@@ -112,9 +112,7 @@ export const StudySetElement = ({ studySet }: StudySetElementProps) => {
                 <Box
                   key={term.id}
                   sx={{
-                    textDecoration: term.understanding === UNDERSTANDING.FINAL ? "line-through" : "",
-                    textDecorationColor: ({ palette }) => palette.primary.main,
-                    textDecorationThickness: 3,
+                    color: mapColorUnderstanding[term.understanding],
                   }}
                 >
                   {term.base}
@@ -134,12 +132,8 @@ export const StudySetElement = ({ studySet }: StudySetElementProps) => {
       <Link to={`/flashcards/${id}`}>
         <Button>{t("flashcards")}</Button>
       </Link>
-      <Button disabled={progress === FULL_PROGRESS} onClick={() => navigate(`/quiz/${id}`)}>
-        {t("quiz")}
-      </Button>
-      <Button disabled={progress === FULL_PROGRESS} onClick={() => navigate(`/matchGame/${id}`)}>
-        {t("matchGame")}
-      </Button>
+      <Button onClick={() => navigate(`/quiz/${id}`)}>{t("quiz")}</Button>
+      <Button onClick={() => navigate(`/matchGame/${id}`)}>{t("matchGame")}</Button>
       <Button onClick={openLeaderboardsPopup}>{t("leaderboards")}</Button>
     </Card>
   );
