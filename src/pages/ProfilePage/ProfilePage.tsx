@@ -31,6 +31,7 @@ import { useProfilePage } from "./useProfilePage";
 export const ProfilePage = () => {
   const {
     t,
+    getPoints,
     dispatch,
     currentUser,
     friendValue,
@@ -68,7 +69,7 @@ export const ProfilePage = () => {
         {currentUser.username}
       </Typography>
       <Typography align="center" variant="h5">
-        {t("points", { points: 0 })}
+        {t("points", { points: getPoints(currentUser?.id) })}
       </Typography>
       <FormControlLabel
         control={<Switch checked={currentUser.public} onChange={onPublicChange} />}
@@ -102,7 +103,7 @@ export const ProfilePage = () => {
             </Avatar>
             <Stack>
               <Typography>{friend.username}</Typography>
-              <Typography variant="body2">{t("points", { points: 0 })}</Typography>
+              <Typography variant="body2">{t("points", { points: getPoints(friend.id) })}</Typography>
             </Stack>
             <IconButton onClick={() => onDeleteFriend(friend.id)}>
               <DeleteIcon />

@@ -1,4 +1,4 @@
-import { useUserRepository } from "@src/hooks";
+import { useScoreRepository, useUserRepository } from "@src/hooks";
 import { useAppDispatch } from "@src/store";
 import { ChangeEvent, KeyboardEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -8,6 +8,13 @@ export const useProfilePage = () => {
   const { t } = useTranslation("profile");
   const dispatch = useAppDispatch();
   const [friendValue, setFriendValue] = useState("");
+  const scores = useScoreRepository();
+
+  const getPoints = (userId: string = "") =>
+    scores.list.data?.reduce((acc, score) => {
+      if (score.user !== userId) return acc;
+      return acc + score.score;
+    }, 0);
 
   const onFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -45,6 +52,7 @@ export const useProfilePage = () => {
 
   return {
     t,
+    getPoints,
     currentUser,
     friendValue,
     setFriendValue,

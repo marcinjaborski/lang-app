@@ -51,4 +51,5 @@ export const FriendChip = styled("div")(({ theme }) => ({
   gap: theme.spacing(1),
   backgroundColor: theme.palette.grey.A400,
   borderRadius: "9999px",
+  alignItems: "center",
 }));

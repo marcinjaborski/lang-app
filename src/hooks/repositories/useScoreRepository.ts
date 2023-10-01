@@ -12,7 +12,7 @@ export const useScoreRepository = () => {
 
   const list = useQuery(["list-scores", studySetSharedId], () => {
     return pb.collection(COLLECTION).getFullList<Score>({
-      filter: `studySetSharedId = "${studySetSharedId}"`,
+      ...(studySetSharedId && { filter: `studySetSharedId = "${studySetSharedId}"` }),
       expand: "user",
       sort: "-score",
     });
