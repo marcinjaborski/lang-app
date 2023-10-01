@@ -18,6 +18,7 @@ export const en = {
     update: "Change name",
     newNoteName: "Note",
     shared: "Shared notes",
+    nonEmptyModule: "Cannot delete module with notes in it",
   },
   login: {
     loginTabTitle: "Login",
@@ -38,7 +39,7 @@ export const en = {
     confirmPasswordNoMatch: "Password do not match",
     registerButton: "Sign up",
     "Failed to authenticate.": "Credentials invalid",
-    "Failed to create record.": "Email or username is already in use",
+    "Failed to create record.": "Could not create account, try different username or email",
     "You are not allowed to perform this request.": "You are not allowed to perform this operation",
   },
   profile: {

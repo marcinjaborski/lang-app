@@ -1,5 +1,5 @@
 import { useModuleRepository, useNoteRepository } from "@src/hooks";
-import { openDialog, useAppDispatch } from "@src/store";
+import { openDialog, showError, useAppDispatch } from "@src/store";
 import { Module } from "@src/types";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -37,6 +37,7 @@ export const useNoteShelf = () => {
   const onDelete = (module: Module) => {
     const numberOfNotes = module.expand["notes(module)"]?.length;
     if (numberOfNotes && numberOfNotes > 0) {
+      dispatch(showError(t("nonEmptyModule")));
       return;
     }
     modules.delete.mutate(module.id);

@@ -10,7 +10,7 @@ import {
   TableRow,
 } from "@mui/material";
 import { useScoreRepository } from "@src/hooks";
-import { setLeaderboardsStudySetId, useAppDispatch, useAppSelector } from "@src/store";
+import { closeLeaderboardsPopup, useAppDispatch, useAppSelector } from "@src/store";
 import { useTranslation } from "react-i18next";
 
 export const LeaderboardPopup = () => {
@@ -24,7 +24,7 @@ export const LeaderboardPopup = () => {
   });
 
   const onClose = () => {
-    dispatch(setLeaderboardsStudySetId(null));
+    dispatch(closeLeaderboardsPopup());
   };
 
   return (

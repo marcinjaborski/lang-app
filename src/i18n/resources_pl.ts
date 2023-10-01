@@ -20,6 +20,7 @@ export const pl: Resource = {
     update: "Zmień nazwę",
     newNoteName: "Notatka",
     shared: "Udostępnione notatki",
+    nonEmptyModule: "Nie można usunąć modułu z notatkami",
   },
   login: {
     loginTabTitle: "Logowanie",
@@ -40,7 +41,7 @@ export const pl: Resource = {
     confirmPasswordNoMatch: "Hasła się nie zgadzają",
     registerButton: "Zarejestruj się",
     "Failed to authenticate.": "Nazwa użytkownika lub hasło są nieprawidłowe",
-    "Failed to create record.": "Email lub nazwa użytkownika są już w użyciu",
+    "Failed to create record.": "Nie udało się stworzyć konta, spróbuj inną nazwę użytwkonika lub email",
     "You are not allowed to perform this request.": "Nie możesz wykonać tej operacji",
   },
   profile: {

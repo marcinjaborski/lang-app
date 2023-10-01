@@ -41,7 +41,7 @@ export const useStudySetElement = (studySet: StudySet) => {
     try {
       user = await getByUsername(shareTo);
     } catch (e) {
-      dispatch(showError("noUser"));
+      dispatch(showError(t("shareDialog.noUser")));
     }
     if (!user) return;
     const newShared = [...shared.map((user) => user.id), user.id];

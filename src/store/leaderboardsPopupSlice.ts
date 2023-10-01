@@ -18,8 +18,11 @@ export const leaderboardsSlice = createSlice({
       state.open = typeof payload === "string";
       state.studySetSharedId = payload;
     },
+    closeLeaderboardsPopup(state) {
+      state.open = false;
+    },
   },
 });
 
-export const { setLeaderboardsStudySetId } = leaderboardsSlice.actions;
+export const { setLeaderboardsStudySetId, closeLeaderboardsPopup } = leaderboardsSlice.actions;
 export const { reducer: leaderboardsPopup } = leaderboardsSlice;
