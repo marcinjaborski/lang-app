@@ -13,16 +13,17 @@ import { useNoteCard } from "./useNoteCard";
 type NoteCardProps = {
   index: number;
   note: Note;
+  isDraggable?: boolean;
 };
 
 export const NoteCard = (props: NoteCardProps) => {
-  const { note, index } = props;
+  const { note, index, isDraggable = true } = props;
   const { t, progress, anchorEl, baseLang, targetLang, openedMenu, onMenuOpen, onMenuClose, navigate, onDelete } =
     useNoteCard(note);
   const fallbackExcerpt = serialize(note.content);
 
   return (
-    <Draggable draggableId={note.id} index={index}>
+    <Draggable draggableId={note.id} index={index} isDragDisabled={!isDraggable}>
       {(provided) => (
         <NoteCardStyled ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
           <StyledCardContent>

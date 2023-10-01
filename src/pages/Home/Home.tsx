@@ -35,8 +35,8 @@ export const Home = () => {
       ) : null}
       <DragDropContext onDragEnd={onDragEnd}>
         {modules?.map((module) => <NoteShelf key={module.id} module={module} />)}
+        {notes.listShared.data?.length ? <SharedNoteShelf notes={notes.listShared.data} /> : null}
       </DragDropContext>
-      {notes.listShared.data?.length ? <SharedNoteShelf notes={notes.listShared.data} /> : null}
       <Grow in>
         <Fab color="primary" onClick={openCreateModuleDialog}>
           <AddIcon />
