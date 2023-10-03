@@ -98,6 +98,7 @@ export type NoteToCreate = {
   title: string;
   module: string;
   shared?: string[];
+  "shared-": string;
   content?: string;
   excerpt?: string;
   baseLang?: Language;
