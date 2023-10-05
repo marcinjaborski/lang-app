@@ -10,6 +10,8 @@ export const useQuizPage = () => {
   const [answered, setAnswered] = useState<Record<string, string>>({});
   const questions = useQuestions();
   const [result, setResult] = useState<number | null>(null);
+  const [timeTaken, setTimeTaken] = useState(0);
+  const [points, setPoints] = useState(0);
   const terms = useTermRepository();
   const studySets = useStudySetRepository();
   const scores = useScoreRepository();
@@ -25,13 +27,17 @@ export const useQuizPage = () => {
         if (question?.term.translation === value) return question.term.id;
       })
       .filter(isNotNullable);
+    const timeInSeconds = Number((Math.round(elapsedTime) / 1000).toFixed(2));
+    const score = calculateScore(timeInSeconds, answeredCorrectly.length / questions.length);
+    setTimeTaken(timeInSeconds);
     setResult(answeredCorrectly.length);
+    setPoints(score);
     terms.updateUnderstanding.mutate(answeredCorrectly);
     if (studySets.view.data) {
       scores.create.mutate({
         game: "quiz",
         studySetSharedId: studySets.view.data.sharedId,
-        score: calculateScore(Math.round(elapsedTime) / 1000, answeredCorrectly.length / questions.length),
+        score,
       });
     }
   };
@@ -43,5 +49,5 @@ export const useQuizPage = () => {
     return null;
   };
 
-  return { t, page, setPage, questions, result, answered, setAnswered, onEnd, getAnswerColor };
+  return { t, page, setPage, questions, result, answered, setAnswered, onEnd, getAnswerColor, timeTaken, points };
 };

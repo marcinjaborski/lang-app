@@ -151,6 +151,8 @@ export const en = {
     flashcardsHeader: "Flashcard {{current}} of {{all}}",
     quiz: "Quiz",
     result: "You got {{result}} right",
+    timeTaken: "Time taken: {{timeTaken}}s",
+    points: "Points: {{points}}",
     endQuiz: "End attempt",
     shared: "Shared",
     noTerms: "There are no terms in this study set",

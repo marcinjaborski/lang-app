@@ -153,6 +153,8 @@ export const pl: Resource = {
     flashcardsHeader: "Fiszka {{current}} z {{all}}",
     quiz: "Quiz",
     result: "{{result}} poprawnych odpowiedzi",
+    timeTaken: "Czas: {{timeTaken}}s",
+    points: "Punkty : {{points}}",
     endQuiz: "Sprawdź odpowiedzi",
     shared: "Udostępione",
     noTerms: "Ten zestaw nie zawiera żadnych słówek",

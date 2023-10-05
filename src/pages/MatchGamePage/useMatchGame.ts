@@ -12,6 +12,8 @@ export const useMatchGame = () => {
   const [overlapped, setOverlapped] = useState<Record<string, number>>({});
   const [valid, setValid] = useState<Record<string, boolean>>({});
   const [result, setResult] = useState<number | null>(null);
+  const [timeTaken, setTimeTaken] = useState(0);
+  const [points, setPoints] = useState(0);
   const [mounted, setMounted] = useState(false);
   const buttonDisabled = !Object.values(overlapped).every((value) => value === 1) || result !== null;
   const terms = useTermRepository();
@@ -64,7 +66,7 @@ export const useMatchGame = () => {
   const onEnd = () => {
     if (!boardRef.current || !questions) return;
     const elapsedTime = performance.now() - startTime;
-    let score = 0;
+    let right = 0;
     const newValid: Record<string, boolean> = {};
     const words = [...boardRef.current.children];
     const wordsPairs = pairs(words);
@@ -77,23 +79,40 @@ export const useMatchGame = () => {
         (term.base === word1.innerHTML && term.translation === word2.innerHTML) ||
         (term.base === word2.innerHTML && term.translation === word1.innerHTML);
       if (isCorrect) {
-        score++;
+        right++;
         termsToUpdate.push(term.id);
       }
       newValid[word1.innerHTML] = isCorrect;
       newValid[word2.innerHTML] = isCorrect;
     });
-    setResult(score);
+    const timeInSeconds = Number((Math.round(elapsedTime) / 1000).toFixed(2));
+    const score = calculateScore(timeInSeconds, termsToUpdate.length / questions.length);
+    setResult(right);
+    setTimeTaken(timeInSeconds);
     setValid(newValid);
+    setPoints(score);
     terms.updateUnderstanding.mutate(termsToUpdate);
     if (studySets.view.data) {
       scores.create.mutate({
         game: "match",
         studySetSharedId: studySets.view.data.sharedId,
-        score: calculateScore(Math.round(elapsedTime) / 1000, termsToUpdate.length / questions.length),
+        score,
       });
     }
   };
 
-  return { t, result, words, overlapped, boardRef, valid, buttonDisabled, randomizePosition, handleOverlap, onEnd };
+  return {
+    t,
+    result,
+    words,
+    overlapped,
+    boardRef,
+    valid,
+    buttonDisabled,
+    randomizePosition,
+    handleOverlap,
+    onEnd,
+    timeTaken,
+    points,
+  };
 };
