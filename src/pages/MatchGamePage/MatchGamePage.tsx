@@ -6,13 +6,31 @@ import { GameBoard, GameWrap, Term } from "./MatchGamePage.styled";
 import { useMatchGame } from "./useMatchGame";
 
 export const MatchGamePage = () => {
-  const { t, result, valid, words, overlapped, boardRef, buttonDisabled, randomizePosition, handleOverlap, onEnd } =
-    useMatchGame();
+  const {
+    t,
+    result,
+    valid,
+    words,
+    overlapped,
+    boardRef,
+    buttonDisabled,
+    randomizePosition,
+    handleOverlap,
+    onEnd,
+    timeTaken,
+    points,
+  } = useMatchGame();
 
   return (
     <GameWrap>
-      <Typography align="center" variant="h3">
+      <Typography align="center" gutterBottom variant="h3">
         {result === null ? t("matchGame") : t("result", { result })}
+      </Typography>
+      <Typography align="center" display={result === null ? "none" : "block"} variant="h4">
+        {t("timeTaken", { timeTaken })}
+      </Typography>
+      <Typography align="center" display={result === null ? "none" : "block"} variant="h4">
+        {t("points", { points })}
       </Typography>
       <GameBoard elevation={5} ref={boardRef}>
         {words && boardRef.current

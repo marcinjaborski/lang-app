@@ -75,7 +75,13 @@ export const useNoteEditor = () => {
     if (!selection) return false;
     const prevNode = Editor.previous(editor, { at: selection });
     if (!prevNode) return false;
-    return Editor.string(editor, prevNode[1]).at(-1) === ZERO_WIDTH_SPACE;
+    const isZeroWidthSpaceDeleting = Editor.string(editor, prevNode[1]).at(-1) === ZERO_WIDTH_SPACE;
+    if (isZeroWidthSpaceDeleting) {
+      Transforms.move(editor, { distance: 1, unit: "character", reverse: true });
+      Editor.deleteBackward(editor, { unit: "character" });
+      Transforms.move(editor, { distance: 1, unit: "character" });
+    }
+    return isZeroWidthSpaceDeleting;
   };
 
   const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {

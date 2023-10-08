@@ -1,4 +1,4 @@
-import { useNoteRepository, useSettings, useTermRepository } from "@src/hooks";
+import { useNoteRepository, useSettings, useTermRepository, useUserRepository } from "@src/hooks";
 import { Note } from "@src/types";
 import { DEFAULT_BASE_LANG, DEFAULT_TRANSLATION_LANG, getProgress } from "@src/util";
 import React, { useState } from "react";
@@ -13,6 +13,7 @@ export const useNoteCard = (note: Note) => {
   const notes = useNoteRepository();
   const terms = useTermRepository();
   const settings = useSettings();
+  const { currentUser } = useUserRepository();
 
   const noteTerms = terms.list.data?.filter((term) => term.note === note.id);
   const progress = getProgress(noteTerms);
@@ -22,7 +23,14 @@ export const useNoteCard = (note: Note) => {
   const openedMenu = !!anchorEl;
   const onMenuOpen = (event: React.MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget);
   const onMenuClose = () => setAnchorEl(null);
-  const onDelete = (id: string) => notes.delete.mutate(id);
+  const onDelete = (id: string) => {
+    if (!currentUser) return;
+    if (note.owner === currentUser.id) {
+      notes.delete.mutate(id);
+      return;
+    }
+    notes.update.mutate({ id, record: { "shared-": currentUser.id } });
+  };
 
   return {
     t,

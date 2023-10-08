@@ -5,7 +5,8 @@ import { QuestionPaper, Wrap } from "./QuizPage.styled";
 import { useQuizPage } from "./useQuizPage";
 
 export const QuizPage = () => {
-  const { t, page, setPage, questions, result, answered, setAnswered, getAnswerColor, onEnd } = useQuizPage();
+  const { t, page, setPage, questions, result, answered, setAnswered, getAnswerColor, onEnd, points, timeTaken } =
+    useQuizPage();
 
   if (questions === null)
     return (
@@ -21,6 +22,12 @@ export const QuizPage = () => {
     <Wrap>
       <Typography align="center" gutterBottom variant="h3" visibility={result === null ? "hidden" : "visible"}>
         {t("result", { result })}
+      </Typography>
+      <Typography align="center" gutterBottom variant="h4" visibility={result === null ? "hidden" : "visible"}>
+        {t("timeTaken", { timeTaken })}
+      </Typography>
+      <Typography align="center" gutterBottom variant="h4" visibility={result === null ? "hidden" : "visible"}>
+        {t("points", { points })}
       </Typography>
       <QuestionPaper>
         <Typography variant="h4">{base}</Typography>
