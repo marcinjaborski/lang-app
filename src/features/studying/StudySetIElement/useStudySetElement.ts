@@ -1,6 +1,6 @@
 import { useStudySetRepository, useUserRepository } from "@src/hooks";
-import { setLeaderboardsStudySetId, showError, useAppDispatch } from "@src/store";
-import { StudySet, TermUnderstanding, User } from "@src/types";
+import { setLeaderboardsStudySetId, useAppDispatch } from "@src/store";
+import { StudySet, TermUnderstanding } from "@src/types";
 import { getProgress } from "@src/util";
 import { KeyboardEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -37,12 +37,7 @@ export const useStudySetElement = (studySet: StudySet) => {
   };
 
   const onShare = async () => {
-    let user: User | null = null;
-    try {
-      user = await getByUsername(shareTo);
-    } catch (e) {
-      dispatch(showError(t("shareDialog.noUser")));
-    }
+    const user = await getByUsername(shareTo);
     if (!user) return;
     const newShared = [...shared.map((user) => user.id), user.id];
     studySets.update.mutate({ id, record: { shared: newShared } });

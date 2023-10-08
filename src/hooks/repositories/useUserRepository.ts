@@ -9,7 +9,18 @@ export const useUserRepository = () => {
   const { t } = useTranslation("feedback");
   const dispatch = useAppDispatch();
 
-  const getByUsername = (username: string) => pb.collection("users").getFirstListItem<User>(`username="${username}"`);
+  const getByUsername = async (username: string) => {
+    if (username === currentUser?.username) {
+      dispatch(showError(t("currentUserUsername")));
+      return null;
+    }
+    try {
+      return await pb.collection("users").getFirstListItem<User>(`username="${username}"`);
+    } catch (e) {
+      dispatch(showError(t("noUser")));
+      return null;
+    }
+  };
 
   const updateAvatar = useMutation(
     (file: File) => {

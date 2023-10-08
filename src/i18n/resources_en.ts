@@ -19,6 +19,12 @@ export const en = {
     newNoteName: "Note",
     shared: "Shared notes",
     nonEmptyModule: "Cannot delete module with notes in it",
+    shareNote: "Share",
+    shareNoteDialog: {
+      title: "Share note",
+      close: "Close",
+      username: "Username",
+    },
   },
   login: {
     loginTabTitle: "Login",
@@ -84,7 +90,6 @@ export const en = {
     module: "Module",
     excerpt: "Excerpt",
     share: "Share to",
-    noUser: "Could not find the user",
     save: "Save",
   },
   noteEditor: {
@@ -129,6 +134,8 @@ export const en = {
     avatarError: "Could not update avatar",
     profileUpdate: "Profile saved",
     profileError: "Could not update profile",
+    noUser: "Could not find the user",
+    currentUserUsername: "This is your own username",
     "Failed to create record.": "Could not create",
     "Failed to authenticate.": "The user does not exists",
     "You are not allowed to perform this request.": "You are not allowed to perform this operation",
@@ -161,7 +168,6 @@ export const en = {
       shareTo: "Username",
       share: "Share",
       close: "Close",
-      noUser: "User was not found",
     },
     deleteDialog: {
       title: "Are you sure you want to delete this set?",

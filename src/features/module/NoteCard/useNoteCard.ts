@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 export const useNoteCard = (note: Note) => {
   const { t } = useTranslation("home");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [shareDialogOpen, setShareDialogOpen] = useState(false);
   const navigate = useNavigate();
   const notes = useNoteRepository();
   const terms = useTermRepository();
@@ -23,5 +24,18 @@ export const useNoteCard = (note: Note) => {
   const onMenuClose = () => setAnchorEl(null);
   const onDelete = (id: string) => notes.delete.mutate(id);
 
-  return { t, progress, anchorEl, baseLang, targetLang, openedMenu, onMenuOpen, onMenuClose, navigate, onDelete };
+  return {
+    t,
+    progress,
+    anchorEl,
+    baseLang,
+    targetLang,
+    shareDialogOpen,
+    setShareDialogOpen,
+    openedMenu,
+    onMenuOpen,
+    onMenuClose,
+    navigate,
+    onDelete,
+  };
 };

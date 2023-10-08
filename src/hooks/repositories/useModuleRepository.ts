@@ -11,7 +11,7 @@ export const useModuleRepository = () => {
 
   const list = useQuery<Module[]>("list-modules", () => {
     return pb.collection("modules").getFullList<Module>({
-      expand: "notes(module)",
+      expand: "notes(module),notes(module).shared",
     });
   });
 

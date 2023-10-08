@@ -32,6 +32,7 @@ export const useProfilePage = () => {
 
   const onAddFriend = async () => {
     const newFriend = await getByUsername(friendValue);
+    if (!newFriend) return;
     updateUser.mutate(
       { "friends+": newFriend.id },
       {

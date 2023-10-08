@@ -21,6 +21,12 @@ export const pl: Resource = {
     newNoteName: "Notatka",
     shared: "Udostępnione notatki",
     nonEmptyModule: "Nie można usunąć modułu z notatkami",
+    shareNote: "Udostępnij",
+    shareNoteDialog: {
+      title: "Udostępnij notatkę",
+      close: "Zamknij",
+      username: "Nazwa użytkownika",
+    },
   },
   login: {
     loginTabTitle: "Logowanie",
@@ -86,7 +92,6 @@ export const pl: Resource = {
     module: "Moduł",
     excerpt: "Opis",
     share: "Udostępnij",
-    noUser: "Nie znaleziono użytkownika",
     save: "Zapisz",
   },
   noteEditor: {
@@ -131,6 +136,8 @@ export const pl: Resource = {
     avatarError: "Nie można było zaktualizować awataru",
     profileUpdate: "Profil zapisany",
     profileError: "Nie można było zapisać profilu",
+    noUser: "Nie znaleziono użytkownika",
+    currentUserUsername: "To jest twoja nazwa użytkownika",
     "Failed to create record.": "Nie można było utworzyć",
     "Failed to authenticate.": "Ten użytkownik nie istnieje",
     "You are not allowed to perform this request.": "Nie możesz wykonać tej operacji",
@@ -163,7 +170,6 @@ export const pl: Resource = {
       shareTo: "Nazwa użytkownika",
       share: "Udostępnij",
       close: "Zamknij",
-      noUser: "Nie znaleziono użytkownika",
     },
     deleteDialog: {
       title: "Czy na pewno chcesz usunąć ten zestaw?",
