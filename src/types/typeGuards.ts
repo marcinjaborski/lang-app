@@ -1,4 +1,6 @@
 import {
+  AppColor,
+  appColors,
   ElementType,
   elementTypes,
   HeadingType,
@@ -40,4 +42,8 @@ export const isTextAlignOption = (option: string): option is TextAlignOption => 
 
 export const isHeadingType = (type: string): type is HeadingType => {
   return (headingTypes as readonly string[]).includes(type);
+};
+
+export const isAppColor = (color: string | null): color is AppColor => {
+  return color !== null && (appColors as readonly string[]).includes(color);
 };

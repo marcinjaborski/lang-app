@@ -1,8 +1,8 @@
 import { useSettings, useSettingsRepository, useTagsRepository } from "@src/hooks";
 import { AppLanguage } from "@src/i18n/types";
-import { showError, useAppDispatch } from "@src/store";
-import { TagToCreate } from "@src/types";
-import { DEFAULT_BASE_LANG, DEFAULT_LANG, DEFAULT_SEPARATOR, DEFAULT_TRANSLATION_LANG } from "@src/util";
+import { setAppColor, showError, useAppDispatch, useAppSelector } from "@src/store";
+import { AppColor, TagToCreate } from "@src/types";
+import { DEFAULT_BASE_LANG, DEFAULT_LANG, DEFAULT_SEPARATOR, DEFAULT_TRANSLATION_LANG, LOCAL_STORAGE } from "@src/util";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +13,7 @@ export const useSettingsPage = () => {
   const settingsRepository = useSettingsRepository();
   const tagsRepository = useTagsRepository();
   const [language, setLanguage] = useState(DEFAULT_LANG);
+  const appColor = useAppSelector((state) => state.globals.appColor);
   const [baseLang, setBaseLang] = useState(DEFAULT_BASE_LANG);
   const [targetLang, setTargetLang] = useState(DEFAULT_TRANSLATION_LANG);
   const [separator, setSeparator] = useState(DEFAULT_SEPARATOR);
@@ -46,6 +47,12 @@ export const useSettingsPage = () => {
   const onLangChange = async (event: ChangeEvent<HTMLInputElement>) => {
     setLanguage(event.target.value as AppLanguage);
     await i18n.changeLanguage(event.target.value);
+  };
+
+  const onAppColorChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const color = event.target.value as AppColor;
+    dispatch(setAppColor(color));
+    localStorage.setItem(LOCAL_STORAGE.APP_COLOR, color);
   };
 
   const onCreateTag = async () => {
@@ -107,6 +114,8 @@ export const useSettingsPage = () => {
     onSave,
     language,
     setLanguage,
+    appColor,
+    onAppColorChange,
     baseLang,
     setBaseLang,
     targetLang,

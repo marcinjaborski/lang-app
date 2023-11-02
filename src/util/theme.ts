@@ -1,27 +1,8 @@
-import { createTheme } from "@mui/material";
+import { createTheme, ThemeOptions } from "@mui/material";
 
 const borderRadius = 16;
 
-export const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#1abc9c",
-    },
-    secondary: {
-      main: "#facf5a",
-    },
-    background: {
-      default: "#F0EBE3",
-      paper: "#dce5d3",
-    },
-    white: {
-      main: "#EEEEEE",
-    },
-    text: {
-      primary: "#2b2c34",
-      secondary: "#2b2c34",
-    },
-  },
+const themeSharedOptions: ThemeOptions = {
   typography: {
     fontFamily: ["Montserrat"].join(","),
   },
@@ -55,7 +36,78 @@ export const theme = createTheme({
       },
     },
   },
+};
+
+const GREEN = createTheme({
+  palette: {
+    primary: {
+      main: "#1abc9c",
+    },
+    secondary: {
+      main: "#facf5a",
+    },
+    background: {
+      default: "#F0EBE3",
+      paper: "#dce5d3",
+    },
+    white: {
+      main: "#EEEEEE",
+    },
+    text: {
+      primary: "#2b2c34",
+      secondary: "#2b2c34",
+    },
+  },
+  ...themeSharedOptions,
 });
+
+const ORANGE = createTheme({
+  palette: {
+    primary: {
+      main: "#ED7D31",
+    },
+    secondary: {
+      main: "#6C5F5B",
+    },
+    background: {
+      default: "#4F4A45",
+      paper: "#6C5F5B",
+    },
+    white: {
+      main: "#EEEEEE",
+    },
+    text: {
+      primary: "#e9e9ef",
+      secondary: "#c7c7cb",
+    },
+  },
+  ...themeSharedOptions,
+});
+
+const BEIGE = createTheme({
+  palette: {
+    primary: {
+      main: "#3C2A21",
+    },
+    secondary: {
+      main: "#1A120B",
+    },
+    background: {
+      default: "#D5CEA3",
+      paper: "#E5E5CB",
+    },
+    white: {
+      main: "#EEEEEE",
+    },
+    text: {
+      primary: "#2b2c34",
+      secondary: "#2b2c34",
+    },
+  },
+  ...themeSharedOptions,
+});
+
+export const themes = { GREEN, ORANGE, BEIGE };
 
 declare module "@mui/material/styles" {
   interface Palette {

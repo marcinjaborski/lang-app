@@ -145,6 +145,12 @@ export const pl: Resource = {
   settings: {
     title: "Ustawienia",
     userLanguage: "Język aplikacji",
+    appColor: "Kolor aplikacji",
+    appColors: {
+      GREEN: "Zielony",
+      ORANGE: "Pomarańczowy",
+      BEIGE: "Beżowy",
+    },
     separator: "Rozdzielacz słówka",
     defaultBaseLang: "Domyślny język bazowy",
     defaultTargetLang: "Domyślny język tłumaczeń",

@@ -3,6 +3,9 @@ import React from "react";
 export const languages = ["pl", "en", "fr", "es", "it", "de"] as const;
 export type Language = (typeof languages)[number];
 
+export const appColors = ["GREEN", "ORANGE", "BEIGE"] as const;
+export type AppColor = (typeof appColors)[number];
+
 export const shortcuts = ["b", "i", "u", "t", "l", "e", "r", "j"] as const;
 export type Shortcut = (typeof shortcuts)[number];
 

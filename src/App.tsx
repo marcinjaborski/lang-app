@@ -1,3 +1,4 @@
+import { ThemeProvider } from "@mui/material";
 import { FeedbackSnackbar, Navbar } from "@src/components";
 import { useSettings } from "@src/hooks";
 import {
@@ -12,8 +13,9 @@ import {
   Settings,
   StudyingSetGrid,
 } from "@src/pages";
-import { setLastAccessedNote, useAppDispatch } from "@src/store";
-import { pb } from "@src/util";
+import { setAppColor, setLastAccessedNote, useAppDispatch, useAppSelector } from "@src/store";
+import { AppColor, isAppColor } from "@src/types";
+import { inputGlobalStyles, LOCAL_STORAGE, pb, themes } from "@src/util";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Route, Routes } from "react-router-dom";
@@ -23,6 +25,7 @@ export const App = () => {
   const isLogged = pb.authStore.isValid;
   const appLang = useSettings()?.language;
   const dispatch = useAppDispatch();
+  const appColor = useAppSelector((state) => state.globals.appColor);
 
   useEffect(() => {
     i18n.changeLanguage(appLang).then();
@@ -33,8 +36,14 @@ export const App = () => {
     if (lastAccessedNote) dispatch(setLastAccessedNote(lastAccessedNote));
   }, []);
 
+  useEffect(() => {
+    const appColor = localStorage.getItem(LOCAL_STORAGE.APP_COLOR);
+    if (isAppColor(appColor)) dispatch(setAppColor(appColor as AppColor));
+  }, []);
+
   return (
-    <>
+    <ThemeProvider theme={themes[appColor]}>
+      {inputGlobalStyles}
       <Navbar />
       <Routes>
         <Route element={isLogged ? <Home /> : <Login />} path="/" />
@@ -53,6 +62,6 @@ export const App = () => {
         <Route element={<NotFound />} path="*" />
       </Routes>
       <FeedbackSnackbar />
-    </>
+    </ThemeProvider>
   );
 };

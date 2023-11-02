@@ -143,6 +143,12 @@ export const en = {
   settings: {
     title: "User settings",
     userLanguage: "App language",
+    appColor: "Theme",
+    appColors: {
+      GREEN: "Green",
+      ORANGE: "Orange",
+      BEIGE: "Beige",
+    },
     separator: "Term separator",
     defaultBaseLang: "Default language for base",
     defaultTargetLang: "Default language for translations",

@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { LanguageSelect } from "@src/components";
 import { TagChip } from "@src/features/settings";
-import { Language } from "@src/types";
+import { appColors, Language } from "@src/types";
 import ReactCountryFlag from "react-country-flag";
 
 import { SaveButton, SettingsContainer, SettingsStyled, SpinnerWrap, TagsWrap } from "./Settings.styled";
@@ -49,6 +49,13 @@ export const Settings = () => {
               <MenuItem value="pl">
                 <ReactCountryFlag countryCode="PL" svg />
               </MenuItem>
+            </TextField>
+            <TextField label={t("appColor")} select value={state.appColor} onChange={state.onAppColorChange}>
+              {appColors.map((color) => (
+                <MenuItem key={color} value={color}>
+                  {t(`appColors.${color}`)}
+                </MenuItem>
+              ))}
             </TextField>
             <TextField
               label={t("separator")}
