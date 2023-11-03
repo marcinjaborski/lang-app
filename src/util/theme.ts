@@ -87,7 +87,7 @@ const ORANGE = createTheme({
 const BEIGE = createTheme({
   palette: {
     primary: {
-      main: "#3C2A21",
+      main: "#60514b",
     },
     secondary: {
       main: "#1A120B",
